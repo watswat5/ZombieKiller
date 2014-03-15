@@ -29,7 +29,7 @@ namespace ZombieKiller
 		
 		public override void FireWeapon ()
 		{
-			Collide.AddBullet = new Bullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
 			BulletCount++;
 		}
 	}

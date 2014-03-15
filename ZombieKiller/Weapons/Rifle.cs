@@ -30,10 +30,10 @@ namespace ZombieKiller
 		//Four bullets as one. Easy penetration effect.
 		public override void FireWeapon ()
 		{
-			Collide.AddBullet = new Bullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
-			Collide.AddBullet = new Bullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
-			Collide.AddBullet = new Bullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
-			Collide.AddBullet = new Bullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
 			BulletCount++;
 			
 		}

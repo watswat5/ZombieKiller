@@ -11,31 +11,15 @@ using Sce.PlayStation.Core.Audio;
 namespace ZombieKiller
 {
 	//Projectile
-	public class Bullet : Creature
+	public class RubberBullet : Bullet
 	{
 		private bool turning;
 		private int numOfBounces;
 		private const int MAX_BOUNCES = 3;
 		
-		private int damage;
-		public int Damage
+		public RubberBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, new Texture2D("/Application/Assets/Bullets/bullet.png", false))
 		{
-			get { return damage;}
-			set { damage = value;}
-		}
-		
-		public Bullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, new Texture2D("/Application/Assets/Weapons/bullet.png", false), col)
-		{
-			p.Rotation = rot;
-			p.Center = new Vector2 (0.5f, 1f);
-			p.Scale.X = 0.15f;
-			p.Scale.Y = 0.30f;
-			//p.SetColor(new Vector4((float)rnd.NextDouble(), (float)rnd.NextDouble(), (float)rnd.NextDouble(), (1)));
-			RunSpeed = speed;
-			IsAlive = true;
-			turning = false;
-			numOfBounces = 0;
-			this.damage = damage;
+			
 		}
 		
 		public override void Update (long EllapsedTime)
@@ -66,9 +50,9 @@ namespace ZombieKiller
 			p.Position.Y -= (float)Math.Cos (p.Rotation) * RunSpeed;
 		}
 		
-		public virtual void HurtEnemy (Enemy e)
+		public override void OnHurt ()
 		{
-			
+			IsAlive = false;
 		}
 		
 		public override void Render ()

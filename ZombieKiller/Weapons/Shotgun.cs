@@ -32,8 +32,8 @@ namespace ZombieKiller
 			
 			for (int i = -2; i < 3; i++) {
 				float newRot = (float)((p.Rotation) + Math.PI * i * spread / 12);
-				b = new Bullet (Graphics, p.Position, newRot, Collide, (int)RunSpeed, Damage);
-				b.Texture = new Texture2D ("/Application/Assets/Weapons/shotgunpellet.png", false);
+				b = new RubberBullet (Graphics, p.Position, newRot, Collide, (int)RunSpeed, Damage);
+				b.Texture = new Texture2D ("/Application/Assets/Bullets/shotgunpellet.png", false);
 				b.Scale = new Vector2 (0.2f, 0.2f);
 				Collide.AddBullet = b;
 			}

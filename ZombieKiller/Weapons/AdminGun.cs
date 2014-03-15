@@ -33,7 +33,7 @@ namespace ZombieKiller
 		{
 			//This is why it's the "AdminGun"- on game servers, only administrators should have one.
 			for (int i = 0; i < 24; i++) {
-				Collide.AddBullet = new Bullet (Graphics, p.Position, p.Rotation + (float)(3.14159 / 24) * 2 * i, Collide, (int)RunSpeed, Damage);
+				Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation + (float)(3.14159 / 24) * 2 * i, Collide, (int)RunSpeed, Damage);
 			}
 		}
 		

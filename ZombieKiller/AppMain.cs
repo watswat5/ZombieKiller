@@ -195,14 +195,14 @@ namespace ZombieKiller
 		public static void UpdatePlaying (GamePadData gamePadData)
 		{
 		
+			collisions.Update (DeltaTime);
+			player.Update (DeltaTime);
+			
 			enemyCount = collisions.enemyCount;
 			player.GPData = gamePadData;
 			
 			if((gamePadData.ButtonsDown & GamePadButtons.Circle) != 0)
 				SpawnEnemies();	
-			
-			player.Update (DeltaTime);
-			collisions.Update (DeltaTime);
 			
 			if (!cheated)
 				Cheater (gamePadData);

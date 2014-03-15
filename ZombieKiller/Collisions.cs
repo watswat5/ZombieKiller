@@ -15,6 +15,7 @@ namespace ZombieKiller
 	{
 		private GraphicsContext graphics;
 		private List<Bullet> bullets;
+		private List<Bullet> tempBullets;
 		private List<Enemy> enemies;
 		private List<Explosion> explosions;
 		private List<Item> items;
@@ -47,6 +48,10 @@ namespace ZombieKiller
 
 		public Bullet AddBullet {
 			set { bullets.Add (value);}	
+		}
+		
+		public Bullet AddTempBullet {
+			set { tempBullets.Add (value);}	
 		}
 
 		public Enemy AddEnemy {
@@ -84,6 +89,7 @@ namespace ZombieKiller
 			enemies = new List<Enemy> ();
 			explosions = new List<Explosion> ();
 			items = new List<Item>();
+			tempBullets = new List<Bullet>();
 			
 			NeedCleanUp = false;
 			hurtTimer = 0;
@@ -100,6 +106,7 @@ namespace ZombieKiller
 		
 		public void Update (long TimeChange)
 		{
+			tempBullets = new List<Bullet>();
 			NeedCleanUp = false;
 			//Collision detection between enemies and bullets
 			foreach (Bullet b in bullets) {
@@ -107,7 +114,7 @@ namespace ZombieKiller
 					if (e.IsAlive) {
 						if (IsColliding (b, e)) {
 							e.OnHurt (b);
-							
+							b.OnHurt();
 							if(!e.IsAlive)
 							{
 								//Play sound
@@ -164,6 +171,11 @@ namespace ZombieKiller
 				}
 			}
 			
+			foreach(Bullet b in tempBullets)
+			{
+				bullets.Add(b);
+			}
+			
 			foreach (Bullet b in bullets) {
 				b.Update (TimeChange);
 			}	
@@ -175,6 +187,11 @@ namespace ZombieKiller
 			}
 			
 			if (NeedCleanUp) {
+//				for(int i = tempBullets.Count - 1; i >= 0; i--)
+//				{
+//					if(tempBullets[i].IsAlive == false)
+//						tempBullets.RemoveAt(i);
+//				}
 				for (int i = bullets.Count - 1; i >= 0; i--) {
 					if (bullets [i].IsAlive == false)
 						bullets.RemoveAt (i);

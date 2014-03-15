@@ -38,7 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
-    <Compile Include="Bullet.cs" />
     <Compile Include="Collisions.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="Player.cs" />
@@ -62,6 +61,10 @@
     <Compile Include="Items\ShotObject.cs" />
     <Compile Include="Items\RifleObject.cs" />
     <Compile Include="Items\MGObject.cs" />
+    <Compile Include="Bullets\Bullet.cs" />
+    <Compile Include="Bullets\RubberBullet.cs" />
+    <Compile Include="Bullets\GenericBullet.cs" />
+    <Compile Include="Bullets\ExplosiveBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -81,6 +84,8 @@
     <Folder Include="Assets\Weapons\" />
     <Folder Include="Assets\Enemies\" />
     <Folder Include="Assets\Player\" />
+    <Folder Include="Bullets\" />
+    <Folder Include="Assets\Bullets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\background.png" />
@@ -99,7 +104,6 @@
     <Content Include="Assets\Sounds\rifle.wav" />
     <Content Include="Assets\Sounds\shotgun.wav" />
     <Content Include="Assets\Sounds\zombiehurt.wav" />
-    <Content Include="Assets\Weapons\bullet.png" />
     <Content Include="Assets\Weapons\machinegun.png" />
     <Content Include="Assets\Weapons\machinegunammo.png" />
     <Content Include="Assets\Weapons\rifle.png" />
@@ -107,7 +111,6 @@
     <Content Include="Assets\Weapons\rifleammo.png" />
     <Content Include="Assets\Weapons\shotgun.png" />
     <Content Include="Assets\Weapons\shotgunammo.png" />
-    <Content Include="Assets\Weapons\shotgunpellet.png" />
     <Content Include="Assets\Enemies\aneurism.png" />
     <Content Include="Assets\Enemies\blade.png" />
     <Content Include="Assets\Enemies\bluegreen.png" />
@@ -123,10 +126,13 @@
     <Content Include="Assets\Player\healthempty.png" />
     <Content Include="Assets\Player\player.png" />
     <Content Include="Assets\Player\reloading.png" />
-    <Content Include="Assets\Weapons\swag.png" />
     <Content Include="Assets\controls.png" />
     <Content Include="Assets\Items\mgobject.png" />
     <Content Include="Assets\Items\shotgunobj.png" />
     <Content Include="Assets\Items\rifleobj.png" />
+    <Content Include="Assets\Bullets\bullet.png" />
+    <Content Include="Assets\Bullets\rocket.png" />
+    <Content Include="Assets\Bullets\shotgunpellet.png" />
+    <Content Include="Assets\Bullets\swag.png" />
   </ItemGroup>
 </Project>

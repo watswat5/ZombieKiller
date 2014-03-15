@@ -69,7 +69,6 @@ namespace ZombieKiller
 		public override void OnHurt (Bullet b)
 		{
 			//Destroy enemy and bullet, add death sprite
-			b.IsAlive = false;
 			if(Health > b.Damage)
 				Health -= b.Damage;
 			else
