@@ -30,7 +30,7 @@ namespace ZombieKiller
 			p.Center = new Vector2 (0.5f, 1f);
 			p.Scale.X = 0.15f;
 			p.Scale.Y = 0.30f;
-			p.SetColor(new Vector4((float)rnd.NextDouble(), (float)rnd.NextDouble(), (float)rnd.NextDouble(), (1)));
+			//p.SetColor(new Vector4((float)rnd.NextDouble(), (float)rnd.NextDouble(), (float)rnd.NextDouble(), (1)));
 			RunSpeed = speed;
 			IsAlive = true;
 			turning = false;
