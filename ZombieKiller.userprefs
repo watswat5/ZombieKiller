@@ -1,0 +1,52 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Weapons\Shotgun.cs">
+    <Files>
+      <File FileName="ZombieKiller\Collisions.cs" Line="171" Column="27" />
+      <File FileName="ZombieKiller\Enemies\Enemy.cs" Line="98" Column="30" />
+      <File FileName="ZombieKiller\Enemies\Blade.cs" Line="70" Column="4" />
+      <File FileName="ZombieKiller\Enemies\Zombie.cs" Line="70" Column="4" />
+      <File FileName="ZombieKiller\Enemies\Boomer.cs" Line="80" Column="4" />
+      <File FileName="ZombieKiller\Bullet.cs" Line="30" Column="36" />
+      <File FileName="ZombieKiller\Weapons\Rifle.cs" Line="36" Column="100" />
+      <File FileName="ZombieKiller\Weapons\Weapon.cs" Line="53" Column="26" />
+      <File FileName="ZombieKiller\Weapons\AdminGun.cs" Line="36" Column="133" />
+      <File FileName="ZombieKiller\Weapons\MachineGun.cs" Line="32" Column="100" />
+      <File FileName="ZombieKiller\Weapons\Shotgun.cs" Line="58" Column="4" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="ZombieKiller" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Items" expanded="True" />
+            </Node>
+            <Node name="Enemies" expanded="True" />
+            <Node name="Items" expanded="True" />
+            <Node name="Weapons" expanded="True">
+              <Node name="Shotgun.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True">
+          <Node name="ZombieKiller" expanded="True">
+            <Node name="ZombieKiller" expanded="True">
+              <Node name="ZombieKiller.Creature" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>Instance</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

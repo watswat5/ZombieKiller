@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A5A58933-8929-4C0D-9ACA-CC6AE1BAEEAE}</ProjectGuid>
+    <ProjectTypeGuids>{69878862-DA7D-4DC6-B0A1-50D8FAB4242F};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ZombieKiller</RootNamespace>
+    <AssemblyName>ZombieKiller</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Sce.PlayStation.Core" />
+    <Reference Include="Sce.PlayStation.HighLevel.UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppMain.cs" />
+    <Compile Include="Bullet.cs" />
+    <Compile Include="Collisions.cs" />
+    <Compile Include="Explosion.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Sprite.cs" />
+    <Compile Include="Weapons\AdminGun.cs" />
+    <Compile Include="Weapons\MachineGun.cs" />
+    <Compile Include="Weapons\Rifle.cs" />
+    <Compile Include="Weapons\Shotgun.cs" />
+    <Compile Include="Weapons\Weapon.cs" />
+    <Compile Include="Enemies\Zombie.cs" />
+    <Compile Include="Enemies\Enemy.cs" />
+    <Compile Include="Enemies\Blade.cs" />
+    <Compile Include="Enemies\Boomer.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\Health.cs" />
+    <Compile Include="Items\RifleAmmo.cs" />
+    <Compile Include="Items\MGAmmo.cs" />
+    <Compile Include="Items\ShotgunAmmo.cs" />
+    <Compile Include="Creature.cs" />
+    <Compile Include="Items\ShotgunItem.cs" />
+    <Compile Include="Items\ShotObject.cs" />
+    <Compile Include="Items\RifleObject.cs" />
+    <Compile Include="Items\MGObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ShaderProgram Include="shaders\Sprite.fcg" />
+    <ShaderProgram Include="shaders\Sprite.vcg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PsmMetadata Include="app.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Assets\" />
+    <Folder Include="Weapons\" />
+    <Folder Include="Enemies\" />
+    <Folder Include="Items\" />
+    <Folder Include="Assets\Items\" />
+    <Folder Include="Assets\Sounds\" />
+    <Folder Include="Assets\Weapons\" />
+    <Folder Include="Assets\Enemies\" />
+    <Folder Include="Assets\Player\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\background.png" />
+    <Content Include="Assets\paused.png" />
+    <Content Include="Assets\title.png" />
+    <Content Include="Assets\deadscreen.png" />
+    <Content Include="Assets\Items\healthpack.png" />
+    <Content Include="Assets\Items\machinegunammopack.png" />
+    <Content Include="Assets\Items\rifleammopack.png" />
+    <Content Include="Assets\Items\shotgunammopack.png" />
+    <Content Include="Assets\Sounds\bg.mp3" />
+    <Content Include="Assets\Sounds\bladehurt.wav" />
+    <Content Include="Assets\Sounds\boomerhurt.wav" />
+    <Content Include="Assets\Sounds\hurt.wav" />
+    <Content Include="Assets\Sounds\machinegun.wav" />
+    <Content Include="Assets\Sounds\rifle.wav" />
+    <Content Include="Assets\Sounds\shotgun.wav" />
+    <Content Include="Assets\Sounds\zombiehurt.wav" />
+    <Content Include="Assets\Weapons\bullet.png" />
+    <Content Include="Assets\Weapons\machinegun.png" />
+    <Content Include="Assets\Weapons\machinegunammo.png" />
+    <Content Include="Assets\Weapons\rifle.png" />
+    <Content Include="Assets\Weapons\rifle2.png" />
+    <Content Include="Assets\Weapons\rifleammo.png" />
+    <Content Include="Assets\Weapons\shotgun.png" />
+    <Content Include="Assets\Weapons\shotgunammo.png" />
+    <Content Include="Assets\Weapons\shotgunpellet.png" />
+    <Content Include="Assets\Enemies\aneurism.png" />
+    <Content Include="Assets\Enemies\blade.png" />
+    <Content Include="Assets\Enemies\bluegreen.png" />
+    <Content Include="Assets\Enemies\boomer.png" />
+    <Content Include="Assets\Enemies\deadblade.png" />
+    <Content Include="Assets\Enemies\deadboomer.png" />
+    <Content Include="Assets\Enemies\deadzombie.png" />
+    <Content Include="Assets\Enemies\dummy.png" />
+    <Content Include="Assets\Enemies\explode.png" />
+    <Content Include="Assets\Enemies\rainbow.png" />
+    <Content Include="Assets\Enemies\zombie.png" />
+    <Content Include="Assets\Player\health.png" />
+    <Content Include="Assets\Player\healthempty.png" />
+    <Content Include="Assets\Player\player.png" />
+    <Content Include="Assets\Player\reloading.png" />
+    <Content Include="Assets\Weapons\swag.png" />
+    <Content Include="Assets\controls.png" />
+    <Content Include="Assets\Items\mgobject.png" />
+    <Content Include="Assets\Items\shotgunobj.png" />
+    <Content Include="Assets\Items\rifleobj.png" />
+  </ItemGroup>
+</Project>
