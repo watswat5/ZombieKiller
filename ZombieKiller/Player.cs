@@ -68,7 +68,7 @@ namespace ZombieKiller
 			healthEmpty.Position = new Vector3(gc.Screen.Rectangle.Width - 400, 0f, 0f);
 			
 			weapons = new List<Weapon>();
-			weapons.Add (new Shotgun(gc, Collide, p.Position, p.Rotation));
+			weapons.Add (new AdminGun(gc, Collide, p.Position, p.Rotation));
 			currentWeapon = weapons[weaponSelect];
 		}
 		

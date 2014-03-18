@@ -20,7 +20,8 @@ namespace ZombieKiller
 			Rifle,
 			MachineGun,
 			ShotGun,
-			RPG
+			RPG,
+			AdminGun
 		};
 		private WeaponType type;
 
@@ -47,8 +48,8 @@ namespace ZombieKiller
 		}
 		
 		private int damage;
-		public int Damage
-		{
+
+		public int Damage {
 			get { return damage;}
 			set { damage = value;}
 		}
@@ -76,10 +77,11 @@ namespace ZombieKiller
 		//Firing sound effect
 		private Sound fire;
 		private SoundPlayer firePlayer;
-		public SoundPlayer FirePlayer
-		{
+
+		public SoundPlayer FirePlayer {
 			get { return firePlayer;}	
 		}
+
 		private Sound effect;
 		
 		//Texture and Sprite for ammo bar

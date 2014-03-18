@@ -68,6 +68,7 @@
     <Compile Include="Weapons\RPG.cs" />
     <Compile Include="Items\RPGObject.cs" />
     <Compile Include="Items\RPGAmmo.cs" />
+    <Compile Include="Bullets\BoidBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />

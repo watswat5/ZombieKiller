@@ -12,34 +12,44 @@ namespace ZombieKiller
 {
 	public class AdminGun : Weapon
 	{
-		//Fires five bullets in a spread out pattern. Only attainable via cheating.
+		//Fires a circle of boids.
+		//Each boid does massive damage to enemies while following the player.
+		//An effective shield for tough situations.
 		public AdminGun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/machinegun.png", false))
 		{
-			this.bulletsPerSecond = 2;
+			bulletsPerSecond = 1;
 
-			p.Center = new Vector2(0.5f, 1.0f);
-			p.Scale = new Vector2(1f, 1f);
+			p.Center = new Vector2 (0.5f, 1.0f);
+			p.Scale = new Vector2 (1f, 1f);
 			
-			MaxBulletsInClip = 100;
+			MaxBulletsInClip = 1;
 			
-			ReloadTime = 1;
+			ReloadTime = 10000;
 			
 			RunSpeed = 20;
 			
 			Damage = 20;
+			
+			Type = Weapon.WeaponType.AdminGun;
 		}
 		
 		public override void FireWeapon ()
 		{
-			//This is why it's the "AdminGun"- on game servers, only administrators should have one.
 			for (int i = 0; i < 24; i++) {
-				Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation + (float)(3.14159 / 24) * 2 * i, Collide, (int)RunSpeed, Damage);
+				Vector3 pos = p.Position;
+				float rot = p.Rotation + (float)(3.14159 / 24) * 2 * i;
+				pos.X += (float)(Math.Sin (rot)) * RunSpeed;
+				pos.Y -= (float)(Math.Cos (rot)) * RunSpeed;
+				Collide.AddBullet = new BoidBullet (Graphics, pos, rot, Collide, (int)RunSpeed, Damage);
 			}
+			bullets++;
 		}
 		
 		public override void Render ()
 		{
-			p.Render ();	
+			p.Render ();
+			if (bullets > 0)
+				reloadSprite.Render ();
 		}
 	}
 }
