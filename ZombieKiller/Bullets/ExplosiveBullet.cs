@@ -20,7 +20,7 @@ namespace ZombieKiller
 		{
 			shrapnel = 16;
 			shrapnelDmg = 2;
-			p.Scale = new Vector2 (.6f, 1.2f);
+			p.Scale = new Vector2 (.4f, .8f);
 		}
 		
 		public override void Update (long EllapsedTime)
@@ -36,7 +36,7 @@ namespace ZombieKiller
 		{
 			for (int i = 0; i < shrapnel; i++) {
 				float rot = (float)(((float)i * 2f * Math.PI) / shrapnel);
-				Collide.AddTempBullet = new RubberBullet (Graphics, p.Position, rot, Collide, (int)RunSpeed, shrapnelDmg);
+				Collide.AddTempBullet = new ExplosiveBullet (Graphics, p.Position, rot, Collide, (int)RunSpeed, shrapnelDmg);
 			}
 			IsAlive = false;
 		}

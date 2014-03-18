@@ -10,24 +10,23 @@ using Sce.PlayStation.Core.Input;
 namespace ZombieKiller
 {
 	//Grabbable Item (IE. Health)
-	public class MGAmmo : Item
+	public class RPGAmmo : Item
 	{
-		public MGAmmo (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Items/machinegunammopack.png", false), col)
+		public RPGAmmo (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Items/rpgammo.png", false), col)
 		{
-			StatEffectValue = 30;
-			ItemClass = Item.ItemType.MGAmmo;
+			StatEffectValue = 1;
+			ItemClass = Item.ItemType.RPGAmmo;
 		}
 		
 		public override void PlayerCollide (Player p)
 		{
 			//Checks if current weapon is same as ammo type
-			if(p.currentWeapon.Type == Weapon.WeaponType.MachineGun && p.currentWeapon.bullets > 0)
+			if(p.currentWeapon.Type == Weapon.WeaponType.RPG && p.currentWeapon.bullets > 0)
 			{
 				if(p.currentWeapon.bullets - StatEffectValue > 0)
 					p.currentWeapon.bullets -= StatEffectValue;
 				else
 					p.currentWeapon.bullets = 0;
-
 				this.IsAlive = false;
 			}
 		}

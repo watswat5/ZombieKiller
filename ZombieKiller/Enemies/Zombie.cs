@@ -74,27 +74,7 @@ namespace ZombieKiller
 			Explode.p.Position = p.Position;
 			Collide.AddExplosion = (Explode);	
 			
-			//Odds of dropping an item
-			int drop = rnd.Next (0, 40);
-			//Item drop
-			switch (drop) {
-			case 0:
-				Collide.AddItem = new Health (Graphics, p.Position, Collide);
-				break;
-				
-			case 1:
-				Collide.AddItem = new MGAmmo (Graphics, p.Position, Collide);
-				break;
-				
-			case 2:
-				Collide.AddItem = new RifleAmmo (Graphics, p.Position, Collide);
-				break;
-				
-			case 3:
-				Collide.AddItem = new ShotgunAmmo (Graphics, p.Position, Collide);
-				break;
-				
-			}	
+			Drop ();
 		}
 	}
 }

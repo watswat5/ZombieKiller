@@ -88,6 +88,37 @@ namespace ZombieKiller
 			this.explode = new Explosion (gc, position, col, explode);
 		}
 		
+		public virtual void Drop()
+		{
+			
+			//Odds of dropping an item
+			int drop = rnd.Next(0, 80);
+			//Item drop
+			switch(drop)
+			{
+			case 0:
+				Collide.AddItem = new Health(Graphics, p.Position, Collide);
+				break;
+				
+			case 1:
+				Collide.AddItem = new MGAmmo(Graphics, p.Position, Collide);
+				break;
+				
+			case 2:
+				Collide.AddItem = new RifleAmmo(Graphics, p.Position, Collide);
+				break;
+				
+			case 3:
+				Collide.AddItem = new ShotgunAmmo(Graphics, p.Position, Collide);
+				break;
+				
+			case 4:
+				Collide.AddItem = new RPGAmmo(Graphics, p.Position, Collide);
+				break;
+				
+			}	
+		}
+		
 		//Method run if enemy collides with player
 		public abstract void HurtPlayer (Player plr);
 		

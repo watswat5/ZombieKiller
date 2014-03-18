@@ -105,7 +105,8 @@ namespace ZombieKiller
 			collisions.AddItem = mgo;
 			mgo = new RifleObject (graphics, new Vector3 (150, 150, 0), collisions);
 			collisions.AddItem = mgo;
-			
+			mgo = new RPGObject (graphics, new Vector3 (80, 80, 0), collisions);
+			collisions.AddItem = mgo;
 			//Creating weapons
 //			weapons = new List<Weapon> ();
 //			weaponSelect = 0;

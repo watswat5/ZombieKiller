@@ -20,7 +20,7 @@ namespace ZombieKiller
 			Rifle,
 			MachineGun,
 			ShotGun,
-			Pistol
+			RPG
 		};
 		private WeaponType type;
 

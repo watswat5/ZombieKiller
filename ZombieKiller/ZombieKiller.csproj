@@ -66,6 +66,8 @@
     <Compile Include="Bullets\GenericBullet.cs" />
     <Compile Include="Bullets\ExplosiveBullet.cs" />
     <Compile Include="Weapons\RPG.cs" />
+    <Compile Include="Items\RPGObject.cs" />
+    <Compile Include="Items\RPGAmmo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -136,5 +138,8 @@
     <Content Include="Assets\Bullets\shotgunpellet.png" />
     <Content Include="Assets\Bullets\swag.png" />
     <Content Include="Assets\Weapons\cannon.png" />
+    <Content Include="Assets\Items\cannonobject.png" />
+    <Content Include="Assets\Items\rpgammo.png" />
+    <Content Include="Assets\Weapons\rocketammo.png" />
   </ItemGroup>
 </Project>
