@@ -20,23 +20,23 @@ namespace ZombieKiller
 		{
 			shrapnel = 16;
 			shrapnelDmg = 2;
-			p.Scale = new Vector2(.6f, 1.2f);
+			p.Scale = new Vector2 (.6f, 1.2f);
 		}
 		
 		public override void Update (long EllapsedTime)
 		{
-			if(!Collide.IsOnScreen(this))
-				IsAlive = false;;
+			if (!Collide.IsOnScreen (this))
+				IsAlive = false;
+			;
 			p.Position.X += (float)Math.Sin (p.Rotation) * RunSpeed;
 			p.Position.Y -= (float)Math.Cos (p.Rotation) * RunSpeed;
 		}
 		
 		public override void OnHurt ()
 		{
-			for(int i = 0; i < shrapnel; i++)
-			{
-				float rot = (float)(((float)i * 2f * Math.PI)/shrapnel);
-				Collide.AddTempBullet = new RubberBullet(Graphics, p.Position, rot, Collide, (int)RunSpeed, shrapnelDmg);
+			for (int i = 0; i < shrapnel; i++) {
+				float rot = (float)(((float)i * 2f * Math.PI) / shrapnel);
+				Collide.AddTempBullet = new RubberBullet (Graphics, p.Position, rot, Collide, (int)RunSpeed, shrapnelDmg);
 			}
 			IsAlive = false;
 		}

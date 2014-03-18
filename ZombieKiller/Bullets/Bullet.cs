@@ -14,8 +14,8 @@ namespace ZombieKiller
 	public abstract class Bullet : Creature
 	{
 		private int damage;
-		public int Damage
-		{
+
+		public int Damage {
 			get { return damage;}
 			set { damage = value;}
 		}

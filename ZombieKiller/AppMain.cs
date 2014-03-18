@@ -36,16 +36,7 @@ namespace ZombieKiller
 		//Cheat code variables
 		private static bool cheated;
 		private static long up1, up2, down1, down2, left1, right1, left2, right2, circle, cross;
-		
 		private static Player player;
-		
-//		private static Weapon wep;
-//		private static Weapon wep2;
-//		private static Weapon wep3;
-//		private static Weapon wep4;
-//		
-//		private static int weaponSelect;
-//		private static List<Weapon> weapons;
 		
 		//Limits maximum enemies due to memory limitations
 		private const int MAX_ENEMIES = 60;
@@ -84,7 +75,7 @@ namespace ZombieKiller
 			menu = new Sprite (graphics, new Texture2D ("/Application/Assets/title.png", false));
 			dead = new Sprite (graphics, new Texture2D ("/Application/Assets/deadscreen.png", false));
 			bg = new Sprite (graphics, new Texture2D ("/Application/Assets/background.png", false));
-			controls = new Sprite(graphics, new Texture2D("/Application/Assets/controls.png", false));
+			controls = new Sprite (graphics, new Texture2D ("/Application/Assets/controls.png", false));
 			
 			//Music
 			Bgm bgm = new Bgm ("/Application/Assets/Sounds/bg.mp3");
@@ -105,14 +96,14 @@ namespace ZombieKiller
 			//Collision Detection for Enemies and Bullets
 			collisions = new Collisions (graphics);
 			//Player
-			player = new Player (graphics, new Vector3(20,20,0), collisions); 
+			player = new Player (graphics, new Vector3 (20, 20, 0), collisions); 
 			collisions.P = player;
 			
-			Item mgo = new ShotObject(graphics, new Vector3(200,200,0), collisions);
+			Item mgo = new ShotObject (graphics, new Vector3 (200, 200, 0), collisions);
 			collisions.AddItem = mgo;
-			mgo = new MGObject(graphics, new Vector3(100,100,0), collisions);
+			mgo = new MGObject (graphics, new Vector3 (100, 100, 0), collisions);
 			collisions.AddItem = mgo;
-			mgo = new RifleObject(graphics, new Vector3(150,150,0), collisions);
+			mgo = new RifleObject (graphics, new Vector3 (150, 150, 0), collisions);
 			collisions.AddItem = mgo;
 			
 			//Creating weapons
@@ -156,11 +147,11 @@ namespace ZombieKiller
 				Enemy e;
 				int type = rnd.Next (0, 4);
 				if (type == 0) {
-					e = new Blade (graphics, new Vector3(400 + rnd.Next (-200, 100), 300 + rnd.Next (-200, 200), 0), collisions);	
+					e = new Blade (graphics, new Vector3 (400 + rnd.Next (-200, 100), 300 + rnd.Next (-200, 200), 0), collisions);	
 				} else if (type == 1 || type == 2) {
-					e = new Zombie (graphics, new Vector3(400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), collisions);
+					e = new Zombie (graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), collisions);
 				} else {
-					e = new Boomer (graphics, new Vector3(400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), collisions);		
+					e = new Boomer (graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), collisions);		
 				}
 				e.Player = player;
 				collisions.AddEnemy = e;
@@ -201,8 +192,8 @@ namespace ZombieKiller
 			enemyCount = collisions.enemyCount;
 			player.GPData = gamePadData;
 			
-			if((gamePadData.ButtonsDown & GamePadButtons.Circle) != 0)
-				SpawnEnemies();	
+			if ((gamePadData.ButtonsDown & GamePadButtons.Circle) != 0)
+				SpawnEnemies ();	
 			
 			if (!cheated)
 				Cheater (gamePadData);
@@ -242,8 +233,7 @@ namespace ZombieKiller
 				NewGame ();
 				currentState = GameState.Playing;
 				bgMusic.Volume = .25f;
-			}else if((gamePadData.ButtonsDown & GamePadButtons.Square) != 0)
-			{
+			} else if ((gamePadData.ButtonsDown & GamePadButtons.Square) != 0) {
 				currentState = GameState.Controls;
 			}
 		}

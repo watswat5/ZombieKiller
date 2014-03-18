@@ -14,6 +14,8 @@ namespace ZombieKiller
 	//All subtypes of creature can collide with each other.
 	public abstract class Creature
 	{
+		//Variables
+		#region
 		public static Random rnd = new Random();
 		//Graphics
 		private GraphicsContext graphics;
@@ -94,7 +96,8 @@ namespace ZombieKiller
 		public Texture2D Texture {
 			set { p.Texture = value;}	
 		}
-
+		#endregion
+		
 		public Creature (GraphicsContext gc, Vector3 position, Texture2D tex, Collisions col)
 		{
 			graphics = gc;

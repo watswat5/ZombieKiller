@@ -25,8 +25,7 @@ namespace ZombieKiller
 		public override void Update (long EllapsedTime)
 		{
 			//Bullets bounce around screen before dying.
-			if(numOfBounces < MAX_BOUNCES)
-			{
+			if (numOfBounces < MAX_BOUNCES) {
 				//Detects if bullet is off screen or turning
 				if (!Collide.IsOnScreen (this) && !turning) {
 					numOfBounces++;
@@ -43,7 +42,7 @@ namespace ZombieKiller
 					//Stops turning if bullet is on screen
 				} else if (Collide.IsOnScreen (this) && turning)
 					turning = false;
-			}else
+			} else
 				IsAlive = false;
 			
 			p.Position.X += (float)Math.Sin (p.Rotation) * RunSpeed;

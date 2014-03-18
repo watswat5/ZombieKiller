@@ -16,8 +16,8 @@ namespace ZombieKiller
 		public Shotgun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/shotgunammo.png", false))
 		{
 			this.bulletsPerSecond = 1;
-			p.Center = new Vector2(0.5f, 1.0f);
-			p.Scale = new Vector2(1f, 1f);
+			p.Center = new Vector2 (0.5f, 1.0f);
+			p.Scale = new Vector2 (1f, 1f);
 			MaxBulletsInClip = 2;
 			ReloadTime = 2000;
 			RunSpeed = 10;
@@ -44,17 +44,16 @@ namespace ZombieKiller
 		public override void Render ()
 		{
 			p.Render ();
-			if(BulletCount !=MaxBulletsInClip)
-			{
+			if (BulletCount != MaxBulletsInClip) {
 				for (int i = 0; i < MaxBulletsInClip - BulletCount; i++) {
 					ammo = new Sprite (Graphics, AmmoTex);
-					ammo.Scale = new Vector2(.8f, .8f);
+					ammo.Scale = new Vector2 (.8f, .8f);
 					ammo.Position.X = (Graphics.Screen.Rectangle.Width - 400) + (i * p.Width - 10);
 					ammo.Position.Y = 40;
 					ammo.Render ();
 				}
-			}else
-				reloadSprite.Render();
+			} else
+				reloadSprite.Render ();
 		}
 	}
 }

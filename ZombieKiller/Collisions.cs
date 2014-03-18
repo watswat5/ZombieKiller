@@ -13,6 +13,8 @@ namespace ZombieKiller
 	//Handles collisions between all objects.
 	public class Collisions
 	{
+		//Variables
+		#region
 		private GraphicsContext graphics;
 		private List<Bullet> bullets;
 		private List<Bullet> tempBullets;
@@ -25,8 +27,8 @@ namespace ZombieKiller
 		
 		//Player
 		private Player player;
-		public Player P
-		{
+
+		public Player P {
 			get { return player;}
 			set { player = value;}
 		}
@@ -81,15 +83,15 @@ namespace ZombieKiller
 				i++;
 			return i;
 		}
-		
+		#endregion
 		public Collisions (GraphicsContext g)
 		{
 			graphics = g;
 			bullets = new List<Bullet> ();
 			enemies = new List<Enemy> ();
 			explosions = new List<Explosion> ();
-			items = new List<Item>();
-			tempBullets = new List<Bullet>();
+			items = new List<Item> ();
+			tempBullets = new List<Bullet> ();
 			
 			NeedCleanUp = false;
 			hurtTimer = 0;
@@ -106,7 +108,7 @@ namespace ZombieKiller
 		
 		public void Update (long TimeChange)
 		{
-			tempBullets = new List<Bullet>();
+			tempBullets = new List<Bullet> ();
 			NeedCleanUp = false;
 			//Collision detection between enemies and bullets
 			foreach (Bullet b in bullets) {
@@ -114,9 +116,8 @@ namespace ZombieKiller
 					if (e.IsAlive) {
 						if (IsColliding (b, e)) {
 							e.OnHurt (b);
-							b.OnHurt();
-							if(!e.IsAlive)
-							{
+							b.OnHurt ();
+							if (!e.IsAlive) {
 								//Play sound
 								deathPlayer = e.Death.CreatePlayer ();
 								deathPlayer.Play ();
@@ -134,7 +135,7 @@ namespace ZombieKiller
 			foreach (Enemy e in enemies) {
 				if (hurtTimer > 500) {
 					if (IsColliding (e, player)) {
-						Console.WriteLine("HIT");
+						Console.WriteLine ("HIT");
 						e.HurtPlayer (player);
 						player.hurtPlayer.Play ();
 						hurtTimer = 0;
@@ -144,11 +145,9 @@ namespace ZombieKiller
 			}
 			
 			//Collision detection between Player and Items
-			foreach(Item i in items)
-			{
-				if(IsColliding(i, player))
-				{
-					i.PlayerCollide(player);
+			foreach (Item i in items) {
+				if (IsColliding (i, player)) {
+					i.PlayerCollide (player);
 					NeedCleanUp = true;
 				}
 			}
@@ -164,16 +163,14 @@ namespace ZombieKiller
 //			}
 			
 			foreach (Enemy e in enemies) {
-				if (e.IsAlive == false)
-				{
+				if (e.IsAlive == false) {
 					NeedCleanUp = true;
 					break;
 				}
 			}
 			
-			foreach(Bullet b in tempBullets)
-			{
-				bullets.Add(b);
+			foreach (Bullet b in tempBullets) {
+				bullets.Add (b);
 			}
 			
 			foreach (Bullet b in bullets) {
@@ -204,9 +201,9 @@ namespace ZombieKiller
 					if (explosions [i].IsAlive == false)
 						explosions.RemoveAt (i);
 				}
-				for(int i = items.Count - 1; i >= 0; i--){
-					if(!items[i].IsAlive)
-						items.RemoveAt(i);
+				for (int i = items.Count - 1; i >= 0; i--) {
+					if (!items [i].IsAlive)
+						items.RemoveAt (i);
 				}
 			}
 			
@@ -252,8 +249,8 @@ namespace ZombieKiller
 				
 		public void Render (long TimeChange)
 		{
-			foreach(Item i in items){
-				i.Render();	
+			foreach (Item i in items) {
+				i.Render ();	
 			}
 			foreach (Bullet b in bullets) {
 				b.Render ();
