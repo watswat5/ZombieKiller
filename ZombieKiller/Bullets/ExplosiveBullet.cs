@@ -36,7 +36,7 @@ namespace ZombieKiller
 		{
 			for (int i = 0; i < shrapnel; i++) {
 				float rot = (float)(((float)i * 2f * Math.PI) / shrapnel);
-				Collide.AddTempBullet = new ExplosiveBullet (Graphics, p.Position, rot, Collide, (int)RunSpeed, shrapnelDmg);
+				Collide.AddTempBullet = new RubberBullet (Graphics, p.Position, rot, Collide, (int)RunSpeed, shrapnelDmg);
 			}
 			IsAlive = false;
 		}

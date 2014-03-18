@@ -15,7 +15,7 @@ namespace ZombieKiller
 		public RPGObject (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Items/cannonobject.png", false), col)
 		{
 			StatEffectValue = 1;
-			ItemClass = Item.ItemType.MGObject;
+			ItemClass = Item.ItemType.RPGObject;
 			p.Width = 88;
 			p.Height = 54;
 			p.Scale = new Vector2(.6f,.6f);
@@ -27,7 +27,7 @@ namespace ZombieKiller
 			bool hasGun = false;
 			for(int i = 0; i < p.Weapons.Count; i++)
 			{
-				Weapon w = p.Weapons[i] as MachineGun;
+				Weapon w = p.Weapons[i] as RPG;
 				if(w != null)
 				{
 					hasGun = true;
