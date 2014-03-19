@@ -142,5 +142,8 @@
     <Content Include="Assets\Items\cannonobject.png" />
     <Content Include="Assets\Items\rpgammo.png" />
     <Content Include="Assets\Weapons\rocketammo.png" />
+    <Content Include="Assets\Items\shieldammo.png" />
+    <Content Include="Assets\Weapons\shield.png" />
+    <Content Include="Assets\Bullets\boid.png" />
   </ItemGroup>
 </Project>

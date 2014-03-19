@@ -30,6 +30,11 @@ namespace ZombieKiller
 				this.IsAlive = false;
 			}
 		}
+		
+		public override Item Clone()
+		{
+			return new RifleAmmo(Graphics, p.Position, Collide);
+		}
 	}
 }
 

@@ -22,7 +22,7 @@ namespace ZombieKiller
 			set { plr = value;}
 		}
 		
-		public BoidBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, new Texture2D("/Application/Assets/Bullets/bullet.png", false))
+		public BoidBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, new Texture2D("/Application/Assets/Bullets/boid.png", false))
 		{
 			vel = new Vector3(0,0,0);
 			plr = Collide.P;
@@ -34,7 +34,7 @@ namespace ZombieKiller
 			Vector3 diff = Vector3.Subtract (Plr.p.Position, p.Position);
 			
 			if (diff.Length () > 1) {
-				vel += Vector3.Normalize (diff) / 5;
+				vel += Vector3.Normalize (diff) / 1;
 			}
             
 			if ((vel.X != 0) || (vel.Y != 0)) {

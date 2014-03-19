@@ -35,6 +35,8 @@ namespace ZombieKiller
 			p.Center = new Vector2 (.5f, .5f);
 		}
 		
+		public abstract Item Clone();
+		
 		//Method to run when player picks item up
 		public abstract void PlayerCollide(Player p);
 		

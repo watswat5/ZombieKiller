@@ -54,6 +54,11 @@ namespace ZombieKiller
 				this.IsAlive = false;
 			}
 		}
+		
+		public override Item Clone()
+		{
+			return new MGObject(Graphics, p.Position, Collide);
+		}
 	}
 }
 

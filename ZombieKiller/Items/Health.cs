@@ -12,11 +12,12 @@ namespace ZombieKiller
 	//Grabbable Item (IE. Health)
 	public class Health : Item
 	{
+		private static float dropChance = 0.1f;
+		
 		public Health (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Items/healthpack.png", false), col)
 		{
 			StatEffectValue = 2;
 			ItemClass = Item.ItemType.Health;
-			
 		}
 		
 		public override void PlayerCollide(Player p)
@@ -29,6 +30,11 @@ namespace ZombieKiller
 				else
 					p.Health = p.MAX_HEALTH;
 			}
+		}
+		
+		public override Item Clone()
+		{
+			return new Health(Graphics, p.Position, Collide);
 		}
 		
 	}

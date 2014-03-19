@@ -15,7 +15,7 @@ namespace ZombieKiller
 		//Fires a circle of boids.
 		//Each boid does massive damage to enemies while following the player.
 		//An effective shield for tough situations.
-		public AdminGun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/machinegun.png", false))
+		public AdminGun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shield.png", false), new Texture2D("/Application/Assets/items/shieldammo.png", false))
 		{
 			bulletsPerSecond = 1;
 
@@ -29,6 +29,8 @@ namespace ZombieKiller
 			RunSpeed = 20;
 			
 			Damage = 20;
+			
+			AmmoScale = new Vector2(0.8f, 0.8f);
 			
 			Type = Weapon.WeaponType.AdminGun;
 		}
@@ -45,12 +47,12 @@ namespace ZombieKiller
 			bullets++;
 		}
 		
-		public override void Render ()
-		{
-			p.Render ();
-			if (bullets > 0)
-				reloadSprite.Render ();
-		}
+//		public override void Render ()
+//		{
+//			p.Render ();
+//			if (bullets > 0)
+//				reloadSprite.Render ();
+//		}
 	}
 }
 

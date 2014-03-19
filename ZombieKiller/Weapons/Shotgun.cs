@@ -53,7 +53,11 @@ namespace ZombieKiller
 					ammo.Render ();
 				}
 			} else
-				reloadSprite.Render ();
+			{
+				reloadSprite.Width = (((ReloadTime - ReloadTimer) * Width *2)/ReloadTime);
+				reloadSprite.SetTextureCoord(0,0, reloadSprite.Width, 100);
+				reloadSprite.Render(); 
+			}
 		}
 	}
 }

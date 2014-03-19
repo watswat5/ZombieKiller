@@ -1,24 +1,33 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Weapons\MachineGun.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Enemies\Enemy.cs">
     <Files>
-      <File FileName="ZombieKiller\Bullets\RubberBullet.cs" Line="20" Column="200" />
-      <File FileName="ZombieKiller\Bullets\GenericBullet.cs" Line="16" Column="201" />
-      <File FileName="ZombieKiller\Bullets\ExplosiveBullet.cs" Line="39" Column="46" />
-      <File FileName="ZombieKiller\Weapons\MachineGun.cs" Line="32" Column="43" />
-      <File FileName="ZombieKiller\Bullets\Bullet.cs" Line="1" Column="1" />
-      <File FileName="ZombieKiller\AppMain.cs" Line="39" Column="32" />
-      <File FileName="ZombieKiller\Collisions.cs" Line="95" Column="4" />
-      <File FileName="ZombieKiller\Creature.cs" Line="124" Column="48" />
+      <File FileName="ZombieKiller\Enemies\Enemy.cs" Line="138" Column="5" />
+      <File FileName="ZombieKiller\Items\MGAmmo.cs" Line="19" Column="20" />
+      <File FileName="ZombieKiller\Items\MGObject.cs" Line="22" Column="20" />
+      <File FileName="ZombieKiller\Items\RifleAmmo.cs" Line="19" Column="20" />
+      <File FileName="ZombieKiller\Items\RifleObject.cs" Line="22" Column="20" />
+      <File FileName="ZombieKiller\Items\RPGAmmo.cs" Line="19" Column="20" />
+      <File FileName="ZombieKiller\Items\RPGObject.cs" Line="22" Column="20" />
+      <File FileName="ZombieKiller\Items\ShotgunAmmo.cs" Line="19" Column="20" />
+      <File FileName="ZombieKiller\Items\ShotgunItem.cs" Line="19" Column="20" />
+      <File FileName="ZombieKiller\Items\ShotObject.cs" Line="8" Column="1" />
+      <File FileName="ZombieKiller\Items\Item.cs" Line="32" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="ZombieKiller" expanded="True">
-            <Node name="Bullets" expanded="True" />
-            <Node name="Weapons" expanded="True">
-              <Node name="MachineGun.cs" selected="True" />
+            <Node name="Assets" expanded="True">
+              <Node name="Items" expanded="True" />
+              <Node name="Weapons" expanded="True" />
             </Node>
+            <Node name="Bullets" expanded="True" />
+            <Node name="Enemies" expanded="True">
+              <Node name="Enemy.cs" selected="True" />
+            </Node>
+            <Node name="Items" expanded="True" />
+            <Node name="Weapons" expanded="True" />
           </Node>
         </State>
       </Pad>

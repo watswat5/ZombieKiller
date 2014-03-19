@@ -119,6 +119,8 @@ namespace ZombieKiller
 							b.OnHurt ();
 							if (!e.IsAlive) {
 								//Play sound
+								if(deathPlayer != null)
+									deathPlayer.Stop();
 								deathPlayer = e.Death.CreatePlayer ();
 								deathPlayer.Play ();
 							}
@@ -221,16 +223,6 @@ namespace ZombieKiller
 			if (obj.p.Position.Y > graphics.Screen.Rectangle.Height)
 				return false;
 			return true;
-		}
-		
-		public void PurgeAssets ()
-		{
-			for (int i = enemies.Count - 1; i >= 0; i--)
-				enemies.RemoveAt (i);
-			for (int i = bullets.Count - 1; i >= 0; i--)
-				bullets.RemoveAt (i);
-			for (int i = explosions.Count - 1; i >= 0; i--)
-				explosions.RemoveAt (i);
 		}
 		
 		//Offscreen detection

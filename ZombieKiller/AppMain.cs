@@ -230,7 +230,6 @@ namespace ZombieKiller
 		public static void UpdateMenu (GamePadData gamePadData)
 		{
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
-				//collisions.PurgeAssets ();
 				NewGame ();
 				currentState = GameState.Playing;
 				bgMusic.Volume = .25f;

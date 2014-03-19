@@ -33,7 +33,12 @@ namespace ZombieKiller
 		//Reloading 
 		public static Sprite reloadSprite;
 		private static Texture2D reloadTex;
-		
+		private float width;
+		public float Width
+		{
+			get { return width;}
+			set { width = value;}
+		}
 		//Max bullet count
 		private int MAX_BULLETS_IN_CLIP;
 
@@ -64,6 +69,11 @@ namespace ZombieKiller
 		public int ReloadTime {
 			get { return reloadTime;}
 			set { reloadTime = value;}
+		}
+		
+		public long ReloadTimer {
+			get { return reloadTimer;}
+			set { reloadTimer = value;}
 		}
 		
 		//Current nmber of fired bullets 
@@ -121,9 +131,10 @@ namespace ZombieKiller
 			
 			reloadTex = new Texture2D ("/Application/Assets/Player/reloading.png", false);
 			reloadSprite = new Sprite (Graphics, reloadTex);
-			reloadSprite.Scale = new Vector2 (0.30f, 0.30f);
-			reloadSprite.Center = new Vector2 (0.5f, 0.5f);
-			reloadSprite.Position = new Vector3 (Graphics.Screen.Rectangle.Width - 300f, 50f, 0f);
+			reloadSprite.Scale = new Vector2 (0.5f, 0.2f);
+			//reloadSprite.Center = new Vector2 (0.5f, 0.5f);
+			reloadSprite.Position = new Vector3 (Graphics.Screen.Rectangle.Width - 400, 35f, 0f);
+			width = reloadSprite.Width;
 		}
 		
 		//Places weapon at correct position on player
@@ -204,7 +215,12 @@ namespace ZombieKiller
 					ammo.Render ();
 				}
 			} else
-				reloadSprite.Render ();
+			{
+				reloadSprite.Width = (((reloadTime - reloadTimer) * width *2)/reloadTime);
+				reloadSprite.SetTextureCoord(0,0, reloadSprite.Width, 100);
+				reloadSprite.Render(); 
+				
+			}
 		}
 	}
 }

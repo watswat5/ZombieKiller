@@ -61,6 +61,12 @@ namespace ZombieKiller
 			get { return explode;}	
 		}
 		
+		private List<KeyValuePair<string, double>> drops = new List<KeyValuePair<string, double>>();
+		public List<KeyValuePair<string, double>> Drops
+		{
+			get { return drops;}
+		}
+		
 		//Used for finding angles between Player and Enemy
 		private float deltax;
 		public float DeltaX
@@ -90,9 +96,8 @@ namespace ZombieKiller
 		
 		public virtual void Drop()
 		{
-			
 			//Odds of dropping an item
-			int drop = rnd.Next(0, 80);
+			int drop = rnd.Next(0, 101);
 			//Item drop
 			switch(drop)
 			{
@@ -117,6 +122,8 @@ namespace ZombieKiller
 				break;
 				
 			}	
+			
+			
 		}
 		
 		//Method run if enemy collides with player

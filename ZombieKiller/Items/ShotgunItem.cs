@@ -30,6 +30,11 @@ namespace ZombieKiller
 			
 			p.Weapons.Add(new Shotgun(p.Graphics, p.Collide, new Vector3(p.p.Position.X, p.p.Position.Y, 0), p.p.Rotation));
 		}
+		
+		public override Item Clone()
+		{
+			return new ShotgunItem(Graphics, p.Position, Collide);
+		}
 	}
 }
 
