@@ -14,11 +14,12 @@ namespace ZombieKiller
 	public class Zombie : Enemy
 	{
 		
-		public Zombie (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
+		public Zombie (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
 		{
+			Difficulty = d;
 			RunSpeed = 1;
-			Damage = 1;
-			Health = 3;
+			Damage = 1 * Difficulty;
+			Health = 1 * Difficulty;
 			FrameDuration = 100;
 			enemyType = Types.Zombie;
 			Death = new Sound ("/Application/Assets/Sounds/zombiehurt.wav");
@@ -26,7 +27,7 @@ namespace ZombieKiller
 		
 		public override void Update (long ElapsedTime)
 		{
-			Vector3 playerPos = this.Player.p.Position;
+			Vector3 playerPos = Collide.P.p.Position;
 			
 			//Find X and Y difference between this and the player
 			FrameTime += ElapsedTime;
@@ -41,6 +42,7 @@ namespace ZombieKiller
 			p.Position.X += (float)Math.Sin (-Rotation) * RunSpeed;;
 			p.Position.Y -= (float)Math.Cos (-Rotation) * RunSpeed;;
 			
+			//avoidNeighbors();
 			//Advance sprite sheet
 			if (FrameTime > FrameDuration) {
 				if (ActiveFrame < FrameMax - 1)
@@ -51,8 +53,34 @@ namespace ZombieKiller
 			}				
 		}
 		
+	    public void avoidNeighbors ()
+		{
+			Vector3 avoidanceVector = new Vector3 (0, 0, 0);
+			int nearNeighborCount = 0;
+			Vector3 oldVel = new Vector3((float)Math.Sin (p.Rotation), (float)Math.Cos (p.Rotation), RunSpeed);
+			Vector3 vel = Vector3.Zero;
+			foreach (Creature z in Collide.Enemies)
+			{
+				if ((z != this) && (Vector3.Distance (z.p.Position, this.p.Position) < 100))
+				{
+					nearNeighborCount++;
+					avoidanceVector += Vector3.Subtract (p.Position, z.p.Position) * 5.0f / Vector3.Distance (z.p.Position, this.p.Position);
+				}
+				
+				if (nearNeighborCount > 0) {
+					vel = oldVel * 0.8f + avoidanceVector.Normalize () * 0.2f;
+				} else {
+					vel = oldVel; 
+				}
+				p.Position.X += vel.X * 1;
+				p.Position.Y -= vel.Y * 1;
+			}
+			
+		}
+		
 		public override void HurtPlayer (Player plr)
 		{
+			plr.Alpha += Alpha;
 			if (plr.Health >= Damage)
 				plr.Health -= Damage;
 			else

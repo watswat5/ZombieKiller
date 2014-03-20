@@ -25,7 +25,7 @@ namespace ZombieKiller
 		public BoidBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, new Texture2D("/Application/Assets/Bullets/boid.png", false))
 		{
 			vel = new Vector3(0,0,0);
-			plr = Collide.P;
+			plr = col.P;
 			p.Rotation = plr.p.Rotation;
 		}
 		

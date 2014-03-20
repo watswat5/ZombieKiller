@@ -21,9 +21,11 @@ namespace ZombieKiller
 			p.Center = new Vector2 (0.5f, 0.9f);
 			p.Scale = new Vector2 (1f, 1f);
 			MaxBulletsInClip = 30;
+			MaxAmmo = 90;
+			CurrentAmmo = MaxAmmo;
 			ReloadTime = 3000;
 			RunSpeed = 10;
-			Damage = 2;
+			Damage = 1;
 			Type = Weapon.WeaponType.MachineGun;
 		}
 		

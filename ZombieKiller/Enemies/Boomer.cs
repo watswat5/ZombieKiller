@@ -15,15 +15,16 @@ namespace ZombieKiller
 	public class Boomer : Enemy
 	{
 		
-		public Boomer (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Enemies/boomer.png", false), col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
+		public Boomer (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/boomer.png", false), col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
 		{
+			Difficulty = d;
 			RunSpeed = 0.5f;
 			explode.FrameDuration = 100;
 			explode.Scale = new Vector2 (1.2f, 1.2f);
 			FrameDuration = 100;
 			enemyType = Types.Boomer;
-			Damage = 3;
-			Health = 3;
+			Damage = 3 * Difficulty;
+			Health = 1 * Difficulty;
 			Death = new Sound ("/Application/Assets/Sounds/boomerhurt.wav");
 		}
 		
@@ -56,6 +57,7 @@ namespace ZombieKiller
 		
 		public override void HurtPlayer (Player plr)
 		{
+			plr.Alpha += Alpha;
 			if (plr.Health >= Damage)
 				plr.Health -= Damage;
 			else
@@ -63,7 +65,6 @@ namespace ZombieKiller
 			this.IsAlive = false;
 			this.explode.p.Position = this.p.Position;
 			Collide.AddExplosion = this.explode;
-			
 		}
 		
 		public override void OnHurt (Bullet b)

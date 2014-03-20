@@ -39,11 +39,24 @@ namespace ZombieKiller
 		}
 		
 		//How much damage the enemy does.
+		private int diff;
+		public int Difficulty
+		{
+			get { return diff;}
+			set { diff = value;}
+		}
 		private int dmg;
 
 		public int Damage {
 			get { return dmg;}	
 			set { dmg = value;}
+		}
+		
+		private float alpha;
+		public float Alpha
+		{
+			get { return alpha;}
+			set { alpha = value;}
 		}
 		
 		//Death sound
@@ -92,6 +105,7 @@ namespace ZombieKiller
 		{
 			//Death sprite
 			this.explode = new Explosion (gc, position, col, explode);
+			alpha = .3f;
 		}
 		
 		public virtual void Drop()

@@ -18,7 +18,8 @@ namespace ZombieKiller
 			p.Center = new Vector2(0.5f, 1.0f);
 			p.Scale = new Vector2(1f, 2f);
 			this.bulletsPerSecond = 1;
-			//bulletCount = 0;
+			MaxAmmo = 15;
+			CurrentAmmo = 15;
 			MaxBulletsInClip = 5;
 			ReloadTime = 3000;
 			RunSpeed = 20;

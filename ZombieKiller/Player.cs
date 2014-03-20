@@ -18,9 +18,11 @@ namespace ZombieKiller
 		public int MAX_HEALTH = 10;
 		private Sprite healthBar;
 		private Sprite healthEmpty;
+		public Sprite DamageScreen;
 		private Sound hurt;
 		public SoundPlayer hurtPlayer;
 		private GamePadData gp;
+		private float width;
 		public GamePadData GPData
 		{
 			set { gp = value;}	
@@ -30,6 +32,20 @@ namespace ZombieKiller
 			get { return health;}	
 			set { health = value;}
 		}
+		
+		private float alpha;
+		public float Alpha
+		{
+			get { return alpha;}
+			set {
+				alpha = value;
+				if(alpha > 1.0f)
+					alpha = 1.0f;
+				if(alpha < 0.0f)
+					alpha = 0.0f;
+			}
+		}
+		
 		float newX, newY;
 		
 		private List<Weapon> weapons;
@@ -61,18 +77,23 @@ namespace ZombieKiller
 			healthBar.Scale = new Vector2(0.15f, 0.15f);
 			healthBar.Position = new Vector3(gc.Screen.Rectangle.Width - 400, 0f, 0f);
 			health = MAX_HEALTH;
+			width = healthBar.Width;
 			
 			tex = new Texture2D("/Application/Assets/Player/healthempty.png", false);
 			healthEmpty = new Sprite(Graphics, tex);
 			healthEmpty.Scale = new Vector2(0.15f, 0.15f);
 			healthEmpty.Position = new Vector3(gc.Screen.Rectangle.Width - 400, 0f, 0f);
 			
+			tex = new Texture2D("/Application/Assets/damage.png", false);
+			DamageScreen = new Sprite(Graphics, tex);
+			DamageScreen.SetColor(1,1,1,0);
+			
 			weapons = new List<Weapon>();
 			weapons.Add (new AdminGun(gc, Collide, p.Position, p.Rotation));
 			currentWeapon = weapons[weaponSelect];
 		}
 		
-		public override void Update(long ElapsedTime){
+		public void Update(long ElapsedTime, GamePadData gp){
 			FrameTime += ElapsedTime;
 			currentWeapon = weapons[weaponSelect];
 			//Weapon Selection
@@ -161,7 +182,8 @@ namespace ZombieKiller
 				//Degrees to radians
 				p.Rotation = (float)(3.14/180) * Rotation;
 			}
-			
+			Alpha -= .003f;
+			DamageScreen.SetColor(1,1,1, alpha);
 		}
 		
 		public override void Render()
@@ -173,13 +195,17 @@ namespace ZombieKiller
 			p.SetTextureCoord (CellSize * ActiveFrame, 0, CellSize * (ActiveFrame + 1) - 1, CellSize);
 			p.Render ();	
 			
+			DamageScreen.Render();
+			
 			//Renders the healthbar with a size proportionate to total health.
-			healthBar.SetTextureCoord(0, 0, (200 * (MAX_HEALTH/10f)) * health - 1, 200);
-			healthBar.Width = (200 * (MAX_HEALTH/10f)) * health - 1;
+			healthBar.SetTextureCoord(0, 0, (2000 / (MAX_HEALTH)) * health - 1, 200);
+			healthBar.Width = ((2000/MAX_HEALTH) *  health - 1);
 			healthBar.Render ();
 			
 			//Empty outline for health bar
-			healthEmpty.Render();			
+			healthEmpty.Render();	
+			
+			
 		}
 		
 	}

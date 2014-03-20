@@ -46,7 +46,21 @@ namespace ZombieKiller
 			get { return MAX_BULLETS_IN_CLIP;}	
 			set { MAX_BULLETS_IN_CLIP = value;}
 		}
-
+		
+		private int maxAmmo;
+		public int MaxAmmo
+		{
+			get { return maxAmmo;}
+			set { maxAmmo = value;}
+		}
+		
+		private int currentAmmo;
+		public int CurrentAmmo
+		{
+			get { return currentAmmo;}
+			set { currentAmmo = value;}
+		}
+		
 		public int bullets {
 			get { return bulletCount;}
 			set { bulletCount = value;}
@@ -116,7 +130,7 @@ namespace ZombieKiller
 		public Vector2 center {
 			set{ p.Center = value;}	
 		}
-
+		
 		public Weapon (GraphicsContext g, Collisions col, Vector3 position, float rot, Sound snd, Texture2D tex, Texture2D ammo) : base(g, position, tex, col)
 		{
 			effect = snd;
@@ -187,10 +201,24 @@ namespace ZombieKiller
 		//Reloading the weapon
 		public virtual void Reload (long EllapsedTime)
 		{
-			reloadTimer += EllapsedTime;
-			if (reloadTimer > reloadTime)
-				bulletCount = 0;
-			DeltaTime = 0;
+			if (currentAmmo > 0)
+			{
+				reloadTimer += EllapsedTime;
+				if (reloadTimer > reloadTime)
+				{
+					if(MaxBulletsInClip <= currentAmmo)
+					{
+						bulletCount = 0;
+						currentAmmo -= MaxBulletsInClip;
+					}
+					else
+					{
+						bulletCount -= currentAmmo;
+						currentAmmo = 0;	
+					}
+				}
+				DeltaTime = 0;
+			}
 		}
 		
 		//Firing the weapon

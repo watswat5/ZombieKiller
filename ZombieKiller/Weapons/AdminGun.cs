@@ -24,6 +24,10 @@ namespace ZombieKiller
 			
 			MaxBulletsInClip = 1;
 			
+			MaxAmmo = 1;
+			
+			CurrentAmmo = MaxAmmo;
+			
 			ReloadTime = 10000;
 			
 			RunSpeed = 20;

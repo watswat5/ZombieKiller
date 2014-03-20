@@ -69,6 +69,10 @@
     <Compile Include="Items\RPGObject.cs" />
     <Compile Include="Items\RPGAmmo.cs" />
     <Compile Include="Bullets\BoidBullet.cs" />
+    <Compile Include="Levels\Level.cs" />
+    <Compile Include="Levels\LevelOne.cs" />
+    <Compile Include="Levels\LevelTwo.cs" />
+    <Compile Include="Levels\LevelThree.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -90,9 +94,10 @@
     <Folder Include="Assets\Player\" />
     <Folder Include="Bullets\" />
     <Folder Include="Assets\Bullets\" />
+    <Folder Include="Levels\" />
+    <Folder Include="Assets\Levels\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\background.png" />
     <Content Include="Assets\paused.png" />
     <Content Include="Assets\title.png" />
     <Content Include="Assets\deadscreen.png" />
@@ -145,5 +150,8 @@
     <Content Include="Assets\Items\shieldammo.png" />
     <Content Include="Assets\Weapons\shield.png" />
     <Content Include="Assets\Bullets\boid.png" />
+    <Content Include="Assets\damage.png" />
+    <Content Include="Assets\Levels\background.png" />
+    <Content Include="Assets\Levels\test.png" />
   </ItemGroup>
 </Project>

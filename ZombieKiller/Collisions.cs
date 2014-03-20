@@ -106,7 +106,15 @@ namespace ZombieKiller
 				return false;
 		}
 		
-		public void Update (long TimeChange)
+		public void PurgeAssets()
+		{
+			for(int i = items.Count - 1; i >= 0; i--)
+			{
+				items.RemoveAt(i);	
+			}
+		}
+		
+		public void Update (long TimeChange, GamePadData gp)
 		{
 			tempBullets = new List<Bullet> ();
 			NeedCleanUp = false;
@@ -184,6 +192,7 @@ namespace ZombieKiller
 			foreach (Enemy e in enemies) {
 				e.Update (TimeChange);
 			}
+			player.Update(TimeChange, gp);
 			
 			if (NeedCleanUp) {
 //				for(int i = tempBullets.Count - 1; i >= 0; i--)
@@ -253,7 +262,7 @@ namespace ZombieKiller
 			foreach (Enemy e in enemies) {
 				e.Render ();
 			}
-			
+			player.Render();
 		}
 	}
 }

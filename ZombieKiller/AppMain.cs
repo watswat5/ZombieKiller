@@ -20,7 +20,8 @@ namespace ZombieKiller
 			Paused,
 			Dead,
 			Menu,
-			Controls
+			Controls,
+			Upgrade
 		};
 		private static GameState currentState;
 		private static GraphicsContext graphics;
@@ -33,20 +34,19 @@ namespace ZombieKiller
 		private static long EndTime;
 		private static long DeltaTime;
 		
-		//Cheat code variables
-		private static bool cheated;
-		private static long up1, up2, down1, down2, left1, right1, left2, right2, circle, cross;
-		private static Player player;
-		
 		//Limits maximum enemies due to memory limitations
 		private const int MAX_ENEMIES = 60;
-		private static int enemyCount;
 		private static Sprite bg;
 		private static BgmPlayer bgMusic;
 		private static Sprite paused;
 		private static Sprite menu;
 		private static Sprite dead;
 		private static Sprite controls;
+		
+		private static Player Plr;
+		
+		private static List<Level> levels;
+		private static int currentLevel;
 		
 		public static void Main (string[] args)
 		{
@@ -66,6 +66,7 @@ namespace ZombieKiller
 		{
 			// Set up the graphics system
 			graphics = new GraphicsContext ();
+			
 			rnd = new Random ();
 			clock = new Stopwatch ();
 			clock.Start ();
@@ -74,7 +75,7 @@ namespace ZombieKiller
 			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/paused.png", false));
 			menu = new Sprite (graphics, new Texture2D ("/Application/Assets/title.png", false));
 			dead = new Sprite (graphics, new Texture2D ("/Application/Assets/deadscreen.png", false));
-			bg = new Sprite (graphics, new Texture2D ("/Application/Assets/background.png", false));
+			//bg = new Sprite (graphics, new Texture2D ("/Application/Assets/background.png", false));
 			controls = new Sprite (graphics, new Texture2D ("/Application/Assets/controls.png", false));
 			
 			//Music
@@ -85,78 +86,27 @@ namespace ZombieKiller
 			bgMusic.Play ();
 			
 			//Set up a new game
-			NewGame ();
+			//NewGame ();
+			NewGame();
+		}
+		
+		//Generates the objects for a new game
+		public static void NewGame()
+		{
+			//New collisions object replaces any old ones, freeing memory.
+			collisions = new Collisions(graphics);
 			
 			//Load menu
 			currentState = GameState.Menu;
-		}
-		//Runs the methods neccesary to create a clean game.
-		public static void NewGame ()
-		{
-			//Collision Detection for Enemies and Bullets
-			collisions = new Collisions (graphics);
-			//Player
-			player = new Player (graphics, new Vector3 (20, 20, 0), collisions); 
-			collisions.P = player;
+			currentLevel = 0;
 			
-			Item mgo = new ShotObject (graphics, new Vector3 (200, 200, 0), collisions);
-			collisions.AddItem = mgo;
-			mgo = new MGObject (graphics, new Vector3 (100, 100, 0), collisions);
-			collisions.AddItem = mgo;
-			mgo = new RifleObject (graphics, new Vector3 (150, 150, 0), collisions);
-			collisions.AddItem = mgo;
-			mgo = new RPGObject (graphics, new Vector3 (80, 80, 0), collisions);
-			collisions.AddItem = mgo;
-			//Creating weapons
-//			weapons = new List<Weapon> ();
-//			weaponSelect = 0;
+			Plr = new Player (graphics, new Vector3 (20, 20, 0), collisions);
 			
-//			wep = new Shotgun (graphics, collisions, new Vector3(player.p.Position.X, player.p.Position.Y, 0), player.p.Rotation);
-//			wep2 = new Rifle (graphics, collisions, new Vector3(player.p.Position.X, player.p.Position.Y, 0), player.p.Rotation);
-//			wep3 = new MachineGun (graphics, collisions, new Vector3(player.p.Position.X, player.p.Position.Y, 0), player.p.Rotation);
-//			wep4 = new AdminGun (graphics, collisions, new Vector3(player.p.Position.X, player.p.Position.Y, 0), player.p.Rotation);
-//			
-//			player.Weapons.Add (wep3);
-//			player.Weapons.Add (wep2);
-//			player.Weapons.Add (wep); 
-			
-//			player.currentWeapon = player.Weapons[0];
-			
-			//Spawn initial enemies
-			enemyCount = 0;
-			SpawnEnemies ();
-			
-			cheated = false;
-			
-			//Cheat code
-			up1 = 0;
-			up2 = 0;
-			down1 = 0;
-			down2 = 0;
-			left1 = 0;
-			right1 = 0;
-			left2 = 0;
-			right2 = 0;
-			circle = 0;
-			cross = 0;	
-		}
-		
-		//Spawns enemies until the max count is reached.
-		public static void SpawnEnemies ()
-		{
-			for (int i = 0; i < MAX_ENEMIES - enemyCount; i++) {
-				Enemy e;
-				int type = rnd.Next (0, 4);
-				if (type == 0) {
-					e = new Blade (graphics, new Vector3 (400 + rnd.Next (-200, 100), 300 + rnd.Next (-200, 200), 0), collisions);	
-				} else if (type == 1 || type == 2) {
-					e = new Zombie (graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), collisions);
-				} else {
-					e = new Boomer (graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), collisions);		
-				}
-				e.Player = player;
-				collisions.AddEnemy = e;
-			}
+			levels = new List<Level>();
+			levels.Add (new LevelOne(graphics, collisions, Plr));
+			levels.Add (new LevelTwo(graphics, collisions, Plr));
+			levels.Add (new LevelThree(graphics, collisions, Plr));
+			//levels[currentLevel].Plr = Plr;	
 		}
 		
 		public static void Update ()
@@ -180,30 +130,25 @@ namespace ZombieKiller
 			case GameState.Controls:
 				UpdateControls (gamePadData);
 				break;
+			case GameState.Upgrade:
+				UpdateUpgrade(gamePadData);
+				break;
 			}
 		}
 		
 		//Update Ingame
 		public static void UpdatePlaying (GamePadData gamePadData)
 		{
-		
-			collisions.Update (DeltaTime);
-			player.Update (DeltaTime);
-			
-			enemyCount = collisions.enemyCount;
-			player.GPData = gamePadData;
-			
-			if ((gamePadData.ButtonsDown & GamePadButtons.Circle) != 0)
-				SpawnEnemies ();	
-			
-			if (!cheated)
-				Cheater (gamePadData);
+			if(levels[currentLevel].Finished)
+				currentState = GameState.Upgrade;
+			levels[currentLevel].Collide.Update (DeltaTime, gamePadData);
+			levels[currentLevel].Update();
 			
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
 				currentState = GameState.Paused;
 				bgMusic.Volume = 0.1f;
 			}
-			if (player.Health <= 0) {
+			if (levels[currentLevel].Plr.Health <= 0) {
 				currentState = GameState.Dead;
 				bgMusic.Volume = 0.1f;	
 			}
@@ -222,7 +167,7 @@ namespace ZombieKiller
 		public static void UpdateDead (GamePadData gamePadData)
 		{
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
-				currentState = GameState.Menu;
+				NewGame();
 			}
 		}
 		
@@ -230,7 +175,7 @@ namespace ZombieKiller
 		public static void UpdateMenu (GamePadData gamePadData)
 		{
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
-				NewGame ();
+				levels[currentLevel].NewGame(); 
 				currentState = GameState.Playing;
 				bgMusic.Volume = .25f;
 			} else if ((gamePadData.ButtonsDown & GamePadButtons.Square) != 0) {
@@ -247,26 +192,40 @@ namespace ZombieKiller
 			}
 		}
 		
+		//Update Upgrade Menu
+		public static void UpdateUpgrade (GamePadData gamePadData)
+		{
+			if ((gamePadData.ButtonsDown & GamePadButtons.Circle) != 0) {
+				currentState = GameState.Playing;
+				//levels[currentLevel].Collide = null;
+				currentLevel++;
+				levels[currentLevel].NewGame();
+				//levels[currentLevel].Plr = levels[currentLevel - 1].Plr;
+				bgMusic.Volume = .25f;
+			}
+		}
+		
 		//Render In game
 		public static void RenderPlaying ()
 		{
+			levels[currentLevel].Render();
+			
 			//Background
-			bg.Render ();
+			//bg.Render ();
 			
 			//This is where bullet and enemy collisions are rendered
-			collisions.Render (DeltaTime);
+			levels[currentLevel].Collide.Render (DeltaTime);
 			
-			player.Render ();
+			
 		}
 		
 		//Render Pause menu
 		public static void RenderPaused ()
 		{
-			bg.Render ();
+			levels[currentLevel].Render();
 			//This is where bullet and enemy collisions are calculated and rendered
 			collisions.Render (DeltaTime);
 			//Renders current weapon only
-			player.Render ();
 			paused.Render ();
 			
 		}
@@ -274,75 +233,81 @@ namespace ZombieKiller
 		//Render death screen
 		public static void RenderDead ()
 		{
-			bg.Render ();
+			levels[currentLevel].Render();
 			//This is where bullet and enemy collisions are calculated and rendered
-			collisions.Render (DeltaTime);
+			levels[currentLevel].Collide.Render (DeltaTime);
 			//Renders current weapon only
-			player.Render ();
 			dead.Render ();	
 		}
 		
 		//Render Main Menu
 		public static void RenderMenu ()
 		{
-			bg.Render ();
+			levels[currentLevel].p.Render ();
 			menu.Render ();			
 		}
 		//Render Controls Menu
 		public static void RenderControls ()
 		{
-			bg.Render ();
+			levels[currentLevel].p.Render ();
 			controls.Render ();			
 		}
 		
-		//Cheat code
-		public static void Cheater (GamePadData gp)
+		//Render Upgrade Menu
+		public static void RenderUpgrade ()
 		{
-			up1 += DeltaTime;
-			up2 += DeltaTime;
-			down1 += DeltaTime;
-			down2 += DeltaTime;
-			left1 += DeltaTime;
-			right1 += DeltaTime;
-			left2 += DeltaTime;
-			right2 += DeltaTime;
-			circle += DeltaTime;
-			cross += DeltaTime;
-			if ((gp.ButtonsDown & GamePadButtons.Up) != 0)
-				up1 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Up) != 0 && up1 < 500)
-				up2 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Down) != 0 && up2 < 500)
-				down1 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Down) != 0 && down1 < 500)
-				down2 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Left) != 0 && down2 < 500)
-				left1 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Right) != 0 && left1 < 500)
-				right1 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Left) != 0 && right1 < 500)
-				left2 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Right) != 0 && left2 < 500)
-				right2 = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Circle) != 0 && right2 < 500)
-				circle = 0;
-			if ((gp.ButtonsDown & GamePadButtons.Cross) != 0 && circle < 500) {
-				up1 = 1000;
-				up2 = 1000;
-				down1 = 1000;
-				down2 = 1000;
-				left1 = 1000;
-				right1 = 1000;
-				left2 = 1000;
-				right2 = 1000;
-				circle = 1000;
-				cross = 1000;
-				cheated = true;
-				Console.WriteLine ("CHEATED!");
-				//player.Weapons.Add (wep4);
-//				weaponSelect = 3;
-			}
+			levels[currentLevel].p.Render ();
+			//controls.Render ();			
 		}
+		
+		//Cheat code
+//		public static void Cheater (GamePadData gp)
+//		{
+//			up1 += DeltaTime;
+//			up2 += DeltaTime;
+//			down1 += DeltaTime;
+//			down2 += DeltaTime;
+//			left1 += DeltaTime;
+//			right1 += DeltaTime;
+//			left2 += DeltaTime;
+//			right2 += DeltaTime;
+//			circle += DeltaTime;
+//			cross += DeltaTime;
+//			if ((gp.ButtonsDown & GamePadButtons.Up) != 0)
+//				up1 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Up) != 0 && up1 < 500)
+//				up2 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Down) != 0 && up2 < 500)
+//				down1 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Down) != 0 && down1 < 500)
+//				down2 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Left) != 0 && down2 < 500)
+//				left1 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Right) != 0 && left1 < 500)
+//				right1 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Left) != 0 && right1 < 500)
+//				left2 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Right) != 0 && left2 < 500)
+//				right2 = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Circle) != 0 && right2 < 500)
+//				circle = 0;
+//			if ((gp.ButtonsDown & GamePadButtons.Cross) != 0 && circle < 500) {
+//				up1 = 1000;
+//				up2 = 1000;
+//				down1 = 1000;
+//				down2 = 1000;
+//				left1 = 1000;
+//				right1 = 1000;
+//				left2 = 1000;
+//				right2 = 1000;
+//				circle = 1000;
+//				cross = 1000;
+//				cheated = true;
+//				Console.WriteLine ("CHEATED!");
+//				//player.Weapons.Add (wep4);
+////				weaponSelect = 3;
+//			}
+//		}
 		
 		public static void Render ()
 		{
@@ -364,6 +329,9 @@ namespace ZombieKiller
 				break;
 			case GameState.Controls:
 				RenderControls ();
+				break;
+			case GameState.Upgrade:
+				RenderUpgrade ();
 				break;
 			}
 			// Present the screen

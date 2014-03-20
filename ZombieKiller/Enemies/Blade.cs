@@ -17,13 +17,14 @@ namespace ZombieKiller
 		public float rot;
 		private bool turning;
 
-		public Blade (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Enemies/blade.png", false), col, new Texture2D("/Application/Assets/Enemies/deadblade.png", false))
+		public Blade (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/blade.png", false), col, new Texture2D("/Application/Assets/Enemies/deadblade.png", false))
 		{
+			Difficulty = d;
 			RunSpeed = 3;
 			enemyType = Types.Blade;
 			rot = (float)(2 * Math.PI * rnd.NextDouble ());
-			Damage = 2;
-			Health = 3;
+			Damage = 2 * Difficulty;
+			Health = 1 * Difficulty;
 			Death = new Sound ("/Application/Assets/Sounds/bladehurt.wav");
 		}
 		
@@ -53,10 +54,11 @@ namespace ZombieKiller
 		
 		public override void HurtPlayer(Player plr)
 		{
-		if (plr.Health >= Damage)
+			plr.Alpha += Alpha;
+			if (plr.Health >= Damage)
 				plr.Health -= Damage;
 			else
-				plr.Health = 0;	
+				plr.Health = 0;
 		}
 		
 		public override void OnHurt (Bullet b)
