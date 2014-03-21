@@ -32,19 +32,20 @@ namespace ZombieKiller
 		
 		//Player
 		private Player player;
-		public Player Player
-		{
+
+		public Player Player {
 			get { return player;}
 			set { player = value;}
 		}
 		
 		//How much damage the enemy does.
 		private int diff;
-		public int Difficulty
-		{
+
+		public int Difficulty {
 			get { return diff;}
 			set { diff = value;}
 		}
+
 		private int dmg;
 
 		public int Damage {
@@ -53,8 +54,8 @@ namespace ZombieKiller
 		}
 		
 		private float alpha;
-		public float Alpha
-		{
+
+		public float Alpha {
 			get { return alpha;}
 			set { alpha = value;}
 		}
@@ -74,31 +75,39 @@ namespace ZombieKiller
 			get { return explode;}	
 		}
 		
-		private List<KeyValuePair<string, double>> drops = new List<KeyValuePair<string, double>>();
-		public List<KeyValuePair<string, double>> Drops
-		{
-			get { return drops;}
-		}
-		
 		//Used for finding angles between Player and Enemy
 		private float deltax;
-		public float DeltaX
-		{
+
+		public float DeltaX {
 			get { return deltax;}
 			set { deltax = value;}
 		}
+
 		private float deltay;
-		public float DeltaY
-		{
+
+		public float DeltaY {
 			get { return deltay;}
 			set { deltay = value;}
 		}
 		
 		private int health;
-		public int Health
-		{
+
+		public int Health {
 			get { return health;}
 			set { health = value;}
+		}
+		
+		private int val;
+
+		public int Value {
+			get { return val;}
+			set { val = value;}
+		}
+		
+		private Level currentLevel;
+		public Level CurrentLevel {
+			get { return currentLevel;}
+			set { currentLevel = value;}
 		}
 		
 		public Enemy (GraphicsContext gc, Vector3 position, Texture2D tex, Collisions col, Texture2D explode) : base(gc, position, tex, col)
@@ -108,31 +117,31 @@ namespace ZombieKiller
 			alpha = .3f;
 		}
 		
-		public virtual void Drop()
+		public virtual void Drop ()
 		{
+			Collide.P.Money += Value;
 			//Odds of dropping an item
-			int drop = rnd.Next(0, 101);
+			int drop = rnd.Next (0, 101);
 			//Item drop
-			switch(drop)
-			{
+			switch (drop) {
 			case 0:
-				Collide.AddItem = new Health(Graphics, p.Position, Collide);
+				Collide.AddItem = new Health (Graphics, p.Position, Collide);
 				break;
 				
 			case 1:
-				Collide.AddItem = new MGAmmo(Graphics, p.Position, Collide);
+				Collide.AddItem = new MGAmmo (Graphics, p.Position, Collide);
 				break;
 				
 			case 2:
-				Collide.AddItem = new RifleAmmo(Graphics, p.Position, Collide);
+				Collide.AddItem = new RifleAmmo (Graphics, p.Position, Collide);
 				break;
 				
 			case 3:
-				Collide.AddItem = new ShotgunAmmo(Graphics, p.Position, Collide);
+				Collide.AddItem = new ShotgunAmmo (Graphics, p.Position, Collide);
 				break;
 				
 			case 4:
-				Collide.AddItem = new RPGAmmo(Graphics, p.Position, Collide);
+				Collide.AddItem = new RPGAmmo (Graphics, p.Position, Collide);
 				break;
 				
 			}	
@@ -144,10 +153,10 @@ namespace ZombieKiller
 		public abstract void HurtPlayer (Player plr);
 		
 		//Method to run on collision with bullet
-		public abstract void OnHurt(Bullet b);
+		public abstract void OnHurt (Bullet b);
 		
 		//Method to run on death
-		public abstract void Die();
+		public abstract void Die ();
 	}
 }
 

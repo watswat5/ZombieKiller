@@ -7,21 +7,21 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using System.Diagnostics;
 using Sce.PlayStation.Core.Audio;
+
 //Chris Antepenko
 namespace ZombieKiller
 {
-	public class LevelTwo : Level
+	public class LevelFour : Level
 	{
-		public LevelTwo (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/test.png", false), c, 2, 20, 50, "Level One", plr)
+		public LevelFour (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/test.png", false), c, 3, 20, 50, "Level One", plr)
 		{
 			MaxEnemies = 60;
 			c.P = plr;
 		}
 		
-		public override void Update()
+		public override void Update ()
 		{
-			if(Collide.Enemies.Count <= 0)
-			{
+			if (Collide.Enemies.Count <= 0) {
 				Finished = true;	
 			}
 		}
@@ -30,11 +30,32 @@ namespace ZombieKiller
 		{
 			for (int i = 0; i < MaxEnemies - EnemyCount; i++) {
 				Enemy e;
-				e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), Collide, Difficulty);
+				int choice = rnd.Next (0, 6);
+				switch (choice	) {
+				case 0:
+					e = new Blade (Graphics, new Vector3 (400 + rnd.Next (200, 400), 0 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					break;
+				case 1:
+					e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					break;
+				case 2:
+					e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					break;
+				case 3:
+					e = new Zombie (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					break;	
+				case 4:
+					e = new Zombie (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					break;	
+				default:
+					e = new Zombie (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					break;
+				}
 				e.Player = Collide.P;
+				Collide.AddEnemy = e;
 				e.CurrentLevel = this;
 				//e.Difficulty = Difficulty;
-				Collide.AddEnemy = e;
+				
 				EnemyCount++;
 			}
 		}
@@ -87,23 +108,11 @@ namespace ZombieKiller
 					break;
 				}
 			}
-//			Item i;
-//			if(rand%10== 0)
-//				i = new MGObject(Graphics, pos, Collide);
-//			else if(rand%5 == 0)
-//				i = new MGAmmo(Graphics, pos, Collide);
-//			else
-//				return;
-//			Collide.AddItem = i;
 		}
 		
 		public override void NewGame ()
 		{
-//			//Collision Detection for Enemies and Bullets
-//			Collide = new Collisions (Graphics);
-//			//Player
-//			Collide.P = Plr;
-			Collide.PurgeAssets();
+			Collide.PurgeAssets ();
 			Item mgo = new ShotObject (Graphics, new Vector3 (200, 200, 0), Collide);
 			Collide.AddItem = mgo;
 			mgo = new MGObject (Graphics, new Vector3 (100, 100, 0), Collide);

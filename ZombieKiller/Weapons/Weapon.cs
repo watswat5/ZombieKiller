@@ -73,6 +73,20 @@ namespace ZombieKiller
 			set { damage = value;}
 		}
 		
+		private int cost;
+		public int Cost
+		{
+			get { return cost;}
+			set { cost = value;}
+		}
+		
+		private int currentLevel;
+		public int CurrentLevel
+		{
+			get { return currentLevel;}
+			set { currentLevel = value;}
+		}
+		
 		//Timing
 		private long DeltaTime;
 		public float bulletsPerSecond;
@@ -124,11 +138,32 @@ namespace ZombieKiller
 			set { ammoScale = value;}
 		}
 		
+		//Texture for upgrade screen
+		private Texture2D upgTex;
+		public Texture2D UpgradeTexture
+		{
+			get { return upgTex;}
+			set { upgTex = value;}
+		}
+		
+		private Vector2 upgScale;
+		public Vector2 UpgradeScale
+		{
+			get { return upgScale;}
+			set { upgScale = value;}
+		}
+		
 		//Each weapon can have a custom bullet
 		public Bullet b;
 			
 		public Vector2 center {
 			set{ p.Center = value;}	
+		}
+		
+		//Used for upgrades
+		public abstract string Description
+		{
+			get;
 		}
 		
 		public Weapon (GraphicsContext g, Collisions col, Vector3 position, float rot, Sound snd, Texture2D tex, Texture2D ammo) : base(g, position, tex, col)
@@ -224,10 +259,12 @@ namespace ZombieKiller
 		//Firing the weapon
 		public abstract void FireWeapon ();
 		
-		public void UIRender ()
-		{
-			UISystem.Render ();	
-		}
+		//Upgrading the Weapon
+		public abstract void Upgrade();
+		
+		public abstract string CurrentStats();
+		
+		public abstract string NextStats();
 		
 		//No sprite sheets
 		public override void Render ()

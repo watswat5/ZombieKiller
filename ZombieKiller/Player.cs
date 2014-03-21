@@ -33,6 +33,14 @@ namespace ZombieKiller
 			set { health = value;}
 		}
 		
+		private int money;
+		public int Money
+		{
+			get { return money;}
+			set { money = value;}
+		}
+		
+		//Alpha value for blood splatter effect
 		private float alpha;
 		public float Alpha
 		{
@@ -66,6 +74,8 @@ namespace ZombieKiller
 			//Basic movement values
 			RunSpeed = 2;
 			turnSpeed = 3;
+			
+			Money = 500;
 			
 			//Played when the player is hurt
 			hurt = new Sound("/Application/Assets/Sounds/hurt.wav");

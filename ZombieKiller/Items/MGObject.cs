@@ -44,13 +44,13 @@ namespace ZombieKiller
 				this.IsAlive = false;
 			}
 			
-			//Checks if current weapon is same as ammo type
-			else if(p.currentWeapon.Type == Weapon.WeaponType.MachineGun && p.currentWeapon.bullets > 0)
+			if(p.currentWeapon.Type == Weapon.WeaponType.MachineGun && p.currentWeapon.CurrentAmmo < p.currentWeapon.MaxAmmo)
 			{
-				if(p.currentWeapon.bullets - StatEffectValue > 0)
-					p.currentWeapon.bullets -= StatEffectValue;
+				if(p.currentWeapon.CurrentAmmo + StatEffectValue <= p.currentWeapon.MaxAmmo)
+					p.currentWeapon.CurrentAmmo += StatEffectValue;
 				else
-					p.currentWeapon.bullets = 0;
+					p.currentWeapon.CurrentAmmo = p.currentWeapon.MaxAmmo;
+
 				this.IsAlive = false;
 			}
 		}

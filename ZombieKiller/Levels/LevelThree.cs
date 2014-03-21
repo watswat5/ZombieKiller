@@ -7,6 +7,7 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using System.Diagnostics;
 using Sce.PlayStation.Core.Audio;
+
 //Chris Antepenko
 namespace ZombieKiller
 {
@@ -18,10 +19,9 @@ namespace ZombieKiller
 			c.P = plr;
 		}
 		
-		public override void Update()
+		public override void Update ()
 		{
-			if(Collide.Enemies.Count <= 0)
-			{
+			if (Collide.Enemies.Count <= 0) {
 				Finished = true;	
 			}
 		}
@@ -30,21 +30,68 @@ namespace ZombieKiller
 		{
 			for (int i = 0; i < MaxEnemies - EnemyCount; i++) {
 				Enemy e;
-				e = new Blade (Graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), Collide, Difficulty);
+				e = new Blade (Graphics, new Vector3 (400 + rnd.Next (200, 400), 0 + rnd.Next (20, 401), 0), Collide, Difficulty);
 				e.Player = Collide.P;
+				e.CurrentLevel = this;
 				//e.Difficulty = Difficulty;
 				Collide.AddEnemy = e;
 				EnemyCount++;
 			}
 		}
 		
+		public override void Drop(Enemy e)
+		{
+			Plr.Money += e.Value;
+			Item it;
+			int rand = rnd.Next (1, DropRange);
+			List<Vector2> drops = new List<Vector2>();
+
+			for(int i = 0; i < dropRate.Length; i++)
+			{
+				if(dropRate[i] != 0)
+				{
+					if(rand%dropRate[i] == 0)
+					{
+						drops.Add(new Vector2(i, dropRate[i]));
+					}
+				}
+			}
+			
+			int max = 0;
+			for(int i = 0; i < drops.Count; i++)
+				if(drops[i].Y > drops[max].Y)
+					max = i;
+			
+			if(drops.Count != 0)
+			{
+				int x = (int)drops[max].X;
+				switch(x)
+				{
+				case 0:
+					it = new MGObject(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				case 1:
+					it = new MGAmmo(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				case 2:
+					it = new ShotObject(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				case 3:
+					it = new ShotgunAmmo(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		
 		public override void NewGame ()
 		{
-//			//Collision Detection for Enemies and Bullets
-//			Collide = new Collisions (Graphics);
-//			//Player
-//			Collide.P = Plr;
-			Collide.PurgeAssets();
+			Collide.PurgeAssets ();
 			Item mgo = new ShotObject (Graphics, new Vector3 (200, 200, 0), Collide);
 			Collide.AddItem = mgo;
 			mgo = new MGObject (Graphics, new Vector3 (100, 100, 0), Collide);

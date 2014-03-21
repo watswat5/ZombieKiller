@@ -57,7 +57,6 @@
     <Compile Include="Items\MGAmmo.cs" />
     <Compile Include="Items\ShotgunAmmo.cs" />
     <Compile Include="Creature.cs" />
-    <Compile Include="Items\ShotgunItem.cs" />
     <Compile Include="Items\ShotObject.cs" />
     <Compile Include="Items\RifleObject.cs" />
     <Compile Include="Items\MGObject.cs" />
@@ -73,6 +72,8 @@
     <Compile Include="Levels\LevelOne.cs" />
     <Compile Include="Levels\LevelTwo.cs" />
     <Compile Include="Levels\LevelThree.cs" />
+    <Compile Include="Levels\Upgrade.cs" />
+    <Compile Include="Levels\LevelFour.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -153,5 +154,9 @@
     <Content Include="Assets\damage.png" />
     <Content Include="Assets\Levels\background.png" />
     <Content Include="Assets\Levels\test.png" />
+    <Content Include="Assets\upgrade.png" />
+    <Content Include="Assets\winner.png" />
+    <Content Include="Assets\Sounds\dead.mp3" />
+    <Content Include="Assets\Sounds\win.mp3" />
   </ItemGroup>
 </Project>

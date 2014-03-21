@@ -20,6 +20,7 @@ namespace ZombieKiller
 			RunSpeed = 1;
 			Damage = 1 * Difficulty;
 			Health = 1 * Difficulty;
+			Value = 1 * Difficulty;
 			FrameDuration = 100;
 			enemyType = Types.Zombie;
 			Death = new Sound ("/Application/Assets/Sounds/zombiehurt.wav");
@@ -102,7 +103,7 @@ namespace ZombieKiller
 			Explode.p.Position = p.Position;
 			Collide.AddExplosion = (Explode);	
 			
-			Drop ();
+			CurrentLevel.Drop(this);
 		}
 	}
 }

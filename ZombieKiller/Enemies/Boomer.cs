@@ -25,6 +25,7 @@ namespace ZombieKiller
 			enemyType = Types.Boomer;
 			Damage = 3 * Difficulty;
 			Health = 1 * Difficulty;
+			Value = 1 * Difficulty;
 			Death = new Sound ("/Application/Assets/Sounds/boomerhurt.wav");
 		}
 		
@@ -81,7 +82,7 @@ namespace ZombieKiller
 			this.IsAlive = false;
 			Explode.p.Position = p.Position;
 			Collide.AddExplosion = (Explode);	
-			Drop ();
+			CurrentLevel.Drop(this);
 		}
 		
 	}

@@ -12,19 +12,46 @@ namespace ZombieKiller
 {
 	public class Shotgun : Weapon
 	{
+		public override string Description {
+			get {
+				return "Fires a spread of bullets.\nDeals moderate damage.\nEffective on groups of moderately strong enemies.";
+			}
+		}
 		//Fires five bullets in a spread out pattern
 		public Shotgun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/shotgunammo.png", false))
 		{
 			this.bulletsPerSecond = 1;
 			p.Center = new Vector2 (0.5f, 1.0f);
 			p.Scale = new Vector2 (1f, 1f);
+			UpgradeScale = new Vector2 (2f, 2f);
 			MaxBulletsInClip = 2;
 			MaxAmmo = 20;
 			CurrentAmmo = MaxAmmo;
 			ReloadTime = 2000;
 			RunSpeed = 10;
 			Damage = 2;
+			UpgradeTexture = new Texture2D ("/Application/Assets/Items/shotgunobj.png", false);
 			Type = Weapon.WeaponType.ShotGun;
+		}
+		
+		public override string CurrentStats()
+		{
+			string stats = "Reload Speed: " + (double)ReloadTime/1000d +"\n"
+						+ "Maximum Ammo: " + MaxAmmo + "\n"
+						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
+						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Damage: " + Damage;
+			return stats;
+		}
+		
+		public override string NextStats()
+		{
+			string stats = "Reload Speed: " + (((double)ReloadTime/1000d) * 0.8d) +"\n"
+						+ "Maximum Ammo: " + (MaxAmmo + 1) + "\n"
+						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
+						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Damage: " + Damage;
+			return stats;
 		}
 		
 		//fires five bullets with a set spread
@@ -43,6 +70,11 @@ namespace ZombieKiller
 			BulletCount++;
 		}
 		
+		public override void Upgrade ()
+		{
+			
+		}
+		
 		public override void Render ()
 		{
 			p.Render ();
@@ -54,11 +86,10 @@ namespace ZombieKiller
 					ammo.Position.Y = 40;
 					ammo.Render ();
 				}
-			} else
-			{
-				reloadSprite.Width = (((ReloadTime - ReloadTimer) * Width *2)/ReloadTime);
-				reloadSprite.SetTextureCoord(0,0, reloadSprite.Width, 100);
-				reloadSprite.Render(); 
+			} else {
+				reloadSprite.Width = (((ReloadTime - ReloadTimer) * Width * 2) / ReloadTime);
+				reloadSprite.SetTextureCoord (0, 0, reloadSprite.Width, 100);
+				reloadSprite.Render (); 
 			}
 		}
 	}

@@ -25,6 +25,7 @@ namespace ZombieKiller
 			rot = (float)(2 * Math.PI * rnd.NextDouble ());
 			Damage = 2 * Difficulty;
 			Health = 1 * Difficulty;
+			Value = 2 * Difficulty;
 			Death = new Sound ("/Application/Assets/Sounds/bladehurt.wav");
 		}
 		
@@ -76,7 +77,7 @@ namespace ZombieKiller
 			Explode.p.Position = p.Position;
 			Collide.AddExplosion = (Explode);	
 			
-			Drop();
+			CurrentLevel.Drop(this);
 		}
 		
 		//No sprite sheet, just a rotation.

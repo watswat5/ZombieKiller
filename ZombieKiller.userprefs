@@ -1,35 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Weapons\Shotgun.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\AppMain.cs">
     <Files>
-      <File FileName="ZombieKiller\Enemies\Enemy.cs" Line="103" Column="5" />
-      <File FileName="ZombieKiller\Items\MGAmmo.cs" Line="18" Column="37" />
-      <File FileName="ZombieKiller\Items\MGObject.cs" Line="21" Column="35" />
-      <File FileName="ZombieKiller\Items\RifleAmmo.cs" Line="18" Column="40" />
-      <File FileName="ZombieKiller\Items\RifleObject.cs" Line="21" Column="38" />
-      <File FileName="ZombieKiller\Items\RPGAmmo.cs" Line="18" Column="38" />
-      <File FileName="ZombieKiller\Items\RPGObject.cs" Line="21" Column="35" />
-      <File FileName="ZombieKiller\Items\ShotgunAmmo.cs" Line="18" Column="39" />
-      <File FileName="ZombieKiller\Items\ShotgunItem.cs" Line="18" Column="39" />
-      <File FileName="ZombieKiller\Items\ShotObject.cs" Line="21" Column="38" />
-      <File FileName="ZombieKiller\Items\Item.cs" Line="30" Column="4" />
-      <File FileName="ZombieKiller\Items\Health.cs" Line="15" Column="42" />
-      <File FileName="ZombieKiller\Bullets\BoidBullet.cs" Line="36" Column="29" />
-      <File FileName="ZombieKiller\Weapons\Weapon.cs" Line="40" Column="25" />
-      <File FileName="ZombieKiller\Player.cs" Line="178" Column="46" />
-      <File FileName="ZombieKiller\Weapons\Shotgun.cs" Line="57" Column="77" />
+      <File FileName="ZombieKiller\Weapons\Rifle.cs" Line="54" Column="29" />
+      <File FileName="ZombieKiller\Weapons\RPG.cs" Line="54" Column="29" />
+      <File FileName="ZombieKiller\AppMain.cs" Line="247" Column="25" />
+      <File FileName="ZombieKiller\Weapons\MachineGun.cs" Line="57" Column="7" />
+      <File FileName="ZombieKiller\Weapons\AdminGun.cs" Line="23" Column="94" />
+      <File FileName="ZombieKiller\Levels\Upgrade.cs" Line="58" Column="20" />
+      <File FileName="ZombieKiller\Player.cs" Line="79" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="ZombieKiller" expanded="True">
+            <Node name="References" expanded="True" />
             <Node name="Assets" expanded="True">
               <Node name="Player" expanded="True" />
+              <Node name="Sounds" expanded="True">
+                <Node name="rifle.wav" selected="True" />
+              </Node>
             </Node>
-            <Node name="Bullets" expanded="True" />
-            <Node name="Weapons" expanded="True">
-              <Node name="Shotgun.cs" selected="True" />
-            </Node>
+            <Node name="Enemies" expanded="True" />
+            <Node name="Levels" expanded="True" />
+            <Node name="Weapons" expanded="True" />
           </Node>
         </State>
       </Pad>

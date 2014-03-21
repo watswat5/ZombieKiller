@@ -21,7 +21,7 @@ namespace ZombieKiller
 		public override void PlayerCollide (Player p)
 		{
 			//Checks if current weapon is same as ammo type
-			if(p.currentWeapon.Type == Weapon.WeaponType.MachineGun && p.currentWeapon.bullets > 0)
+			if(p.currentWeapon.Type == Weapon.WeaponType.MachineGun && p.currentWeapon.CurrentAmmo < p.currentWeapon.MaxAmmo)
 			{
 				if(p.currentWeapon.CurrentAmmo + StatEffectValue <= p.currentWeapon.MaxAmmo)
 					p.currentWeapon.CurrentAmmo += StatEffectValue;

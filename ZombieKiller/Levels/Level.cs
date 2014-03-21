@@ -77,6 +77,8 @@ namespace ZombieKiller
 			set {dropRange = value;}
 		}
 		
+		public static int[] dropRate = {20, 5, 20, 5, 100, 100, 100, 100, 100, 100};
+		
 		public Level (GraphicsContext g, Texture2D t, Collisions col, int d, int max, int drprng, string name, Player plr)
 		{
 			graphics = g;
@@ -100,23 +102,7 @@ namespace ZombieKiller
 		//Spawns enemies until the max count is reached.
 		public abstract void SpawnEnemies();
 		public abstract void NewGame();
-//		public void SpawnEnemies ()
-//		{
-//			for (int i = 0; i < maxEnemies - enemyCount; i++) {
-//				Enemy e;
-//				int type = rnd.Next (0, 4);
-//				if (type == 0) {
-//					e = new Blade (graphics, new Vector3 (400 + rnd.Next (-200, 100), 300 + rnd.Next (-200, 200), 0), col);	
-//				} else if (type == 1 || type == 2) {
-//					e = new Zombie (graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), col);
-//				} else {
-//					e = new Boomer (graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), col);		
-//				}
-//				e.Player = col.P;
-//				col.AddEnemy = e;
-//				enemyCount++;
-//			}
-//		}
+		public abstract void Drop(Enemy e);
 	}
 }
 
