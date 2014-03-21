@@ -28,7 +28,7 @@ namespace ZombieKiller
 		
 		public override void SpawnEnemies ()
 		{
-			for (int i = 0; i < MaxEnemies - EnemyCount; i++) {
+			for (int i = 0; i < MaxEnemies; i++) {
 				Enemy e;
 				e = new Blade (Graphics, new Vector3 (400 + rnd.Next (200, 400), 0 + rnd.Next (20, 401), 0), Collide, Difficulty);
 				e.Player = Collide.P;

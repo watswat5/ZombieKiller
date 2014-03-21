@@ -28,7 +28,7 @@ namespace ZombieKiller
 		
 		public override void SpawnEnemies ()
 		{
-			for (int i = 0; i < MaxEnemies - EnemyCount; i++) {
+			for (int i = 0; i < MaxEnemies; i++) {
 				Enemy e;
 				int choice = rnd.Next (0, 6);
 				switch (choice	) {
