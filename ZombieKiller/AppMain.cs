@@ -7,6 +7,7 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using System.Diagnostics;
 using Sce.PlayStation.Core.Audio;
+using Sce.PlayStation.HighLevel.UI;
 
 /*Chris Antepenko*/
 
@@ -22,7 +23,8 @@ namespace ZombieKiller
 			Menu,
 			Controls,
 			Upgrade,
-			Winner
+			Winner,
+			HighScore
 		};
 		
 		private static GameState currentState;
@@ -50,6 +52,12 @@ namespace ZombieKiller
 		
 		private static Bgm death, win, bgm;
 		
+		private static Keyboard k;
+		
+		private static List<string> highScores;
+		private static Scene s;
+		private static Label hScores;
+		
 		public static void Main (string[] args)
 		{
 			Initialize ();
@@ -69,9 +77,20 @@ namespace ZombieKiller
 			// Set up the graphics system
 			graphics = new GraphicsContext ();
 			
+			UISystem.Initialize(graphics);
+			
 			rnd = new Random ();
 			clock = new Stopwatch ();
 			clock.Start ();
+			
+			s = new Scene();
+			
+			hScores = new Label();
+			hScores.Height = 300;
+			
+			s.RootWidget.AddChildLast(hScores);
+
+			highScores = new List<string>();
 			
 			//Backgrounds for different gamestataes
 			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/paused.png", false));
@@ -89,6 +108,7 @@ namespace ZombieKiller
 			
 			win = new Bgm("/Application/Assets/Sounds/win.mp3");
 			death = new Bgm("/Application/Assets/Sounds/dead.mp3");
+			
 			//Set up a new game
 			//NewGame ();
 			NewGame ();
@@ -101,9 +121,11 @@ namespace ZombieKiller
 			collisions = new Collisions (graphics);
 			
 			Plr = new Player (graphics, new Vector3 (20, 20, 0), collisions);
-			
-			//New upgrade menu
 			upgrade = new Upgrade (graphics, Plr);
+			
+			k = new Keyboard(graphics, 337);
+
+			upgrade.Plr = Plr;
 			
 			//Init levels
 			levels = new List<Level> ();
@@ -115,6 +137,8 @@ namespace ZombieKiller
 			//Load menu
 			currentState = GameState.Menu;
 			currentLevel = 0;
+			
+			GC.Collect();
 		}
 		
 		public static void Update ()
@@ -144,7 +168,11 @@ namespace ZombieKiller
 			case GameState.Winner:
 				UpdateWinner(gamePadData);
 				break;
+			case GameState.HighScore:
+				UpdateHighScore(gamePadData);
+				break;
 			}
+			Console.WriteLine(DeltaTime);
 		}
 		
 		//Update Ingame
@@ -241,6 +269,22 @@ namespace ZombieKiller
 		{
 			if((gp.ButtonsDown & GamePadButtons.Start) != 0)
 			{
+				currentState = GameState.HighScore;	
+			}
+		}
+		
+		//Update High Score Screen
+		public static void UpdateHighScore(GamePadData gp)
+		{
+			k.Update(gp);
+			string s = "";
+			foreach(string a in highScores)
+				s = s + "\n" + a;
+			hScores.Text = s;
+			if(k.Finished)
+			{			
+				highScores.Add (k.ReturnResult());
+				
 				bgMusic.Dispose();
 				bgMusic = bgm.CreatePlayer();
 				bgMusic.Volume = 0.1f;
@@ -311,6 +355,14 @@ namespace ZombieKiller
 		public static void RenderWinner ()
 		{
 			winner.Render ();		
+		}
+		
+		//Render High Score Menu
+		public static void RenderHighScore ()
+		{
+			k.Render ();
+			UISystem.SetScene(s);
+			UISystem.Render();
 		}
 		
 		//Cheat code
@@ -389,6 +441,9 @@ namespace ZombieKiller
 				break;
 			case GameState.Winner:
 				RenderWinner();
+				break;
+			case GameState.HighScore:
+				RenderHighScore();
 				break;
 			}
 			

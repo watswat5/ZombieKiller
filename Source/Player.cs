@@ -117,7 +117,7 @@ namespace ZombieKiller
 			DamageScreen.Scale = new Vector2(2,2);
 			
 			weapons = new List<Weapon>();
-			weapons.Add (new AdminGun(gc, Collide, Position, p.Rotation));
+			weapons.Add (new AdminGun(gc, Collide, p.Position, p.Rotation));
 			currentWeapon = weapons[weaponSelect];
 		}
 		
@@ -151,7 +151,7 @@ namespace ZombieKiller
 			}
 			
 			//Updates current weapon only
-			weapons [weaponSelect].Update (Position, p.Rotation, gp, ElapsedTime);
+			weapons [weaponSelect].Update (p.Position, p.Rotation, gp, ElapsedTime);
 			
 			//New coordinates for player based on angle and player speed
 			newX = (float) Math.Sin(-Rotation * (3.14/180)) * RunSpeed;
@@ -160,12 +160,12 @@ namespace ZombieKiller
 			//forward movement
 			if((gp.Buttons & GamePadButtons.Up) != 0){
 				//right/left wall detection for forward movement
-				if((Position.X + newX < Graphics.Screen.Rectangle.Width || newX > 0) && (Position.X - newX > 0 || newX < 0))
-					Position -= new Vector3(newX, 0, 0);
+				if((p.Position.X + newX < Graphics.Screen.Rectangle.Width || newX > 0) && (p.Position.X - newX > 0 || newX < 0))
+					p.Position.X -= newX;
 				
 				//top/bottom wall detection for forward movement
-				if((Position.Y + newY < Graphics.Screen.Rectangle.Height || newY > 0) && (Position.Y - newY > 0 || newY < 0))
-					Position -= new Vector3(0, newY, 0);
+				if((p.Position.Y + newY < Graphics.Screen.Rectangle.Height || newY > 0) && (p.Position.Y - newY > 0 || newY < 0))
+					p.Position.Y -= newY;
 				
 				//Sprite sheet advancement
 				if(FrameTime >= FrameDuration){
@@ -180,12 +180,12 @@ namespace ZombieKiller
 			//Reverse movement
 			else if((gp.Buttons & GamePadButtons.Down) != 0){
 				 //right/left wall detection for reverse movement
-				if((Position.X - newX < Graphics.Screen.Rectangle.Width || newX < 0) && (Position.X + newX > 0 || newX > 0))
-					Position += new Vector3(newX, 0, 0);
+				if((p.Position.X - newX < Graphics.Screen.Rectangle.Width || newX < 0) && (p.Position.X + newX > 0 || newX > 0))
+					p.Position.X += newX;
 				
 				//top/bottom wall detection for reverse movement
-				if((Position.Y - newY < Graphics.Screen.Rectangle.Height || newY < 0) && (Position.Y + newY > 0 || newY > 0))
-					Position += new Vector3(0, newY, 0);
+				if((p.Position.Y - newY < Graphics.Screen.Rectangle.Height || newY < 0) && (p.Position.Y + newY > 0 || newY > 0))
+					p.Position.Y += newY;
 				
 				//Sprite sheet advancement
 				if(FrameTime >= FrameDuration){
@@ -198,7 +198,6 @@ namespace ZombieKiller
 			} else
 				ActiveFrame = 0;
 			
-			p.Position = Position;
 			//Rotation adjustment
 			if((gp.Buttons & GamePadButtons.Left) != 0){
 				Rotation -= turnSpeed;

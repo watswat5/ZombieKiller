@@ -74,6 +74,8 @@
     <Compile Include="Levels\LevelThree.cs" />
     <Compile Include="Levels\Upgrade.cs" />
     <Compile Include="Levels\LevelFour.cs" />
+    <Compile Include="Keyboard.cs" />
+    <Compile Include="Enemies\ZombieBoss.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -158,5 +160,12 @@
     <Content Include="Assets\winner.png" />
     <Content Include="Assets\Sounds\dead.mp3" />
     <Content Include="Assets\Sounds\win.mp3" />
+    <Content Include="Assets\key.png" />
+    <Content Include="Assets\keyboard.png" />
+    <Content Include="Assets\Levels\lava.png" />
+    <Content Include="Assets\Levels\chess.png" />
+    <Content Include="Assets\Levels\grassfield.png" />
+    <Content Include="Assets\Levels\lsd.png" />
+    <Content Include="Assets\Levels\sandlot.png" />
   </ItemGroup>
 </Project>

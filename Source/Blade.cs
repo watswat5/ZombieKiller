@@ -34,10 +34,10 @@ namespace ZombieKiller
 			//Detects if blade is off screen or turning
 			if (!Collide.IsOnScreen (this) && !turning) {
 				//Reflects rotation across X axis if enemy goes off screen to the left or right.
-				if (Position.X < 1 || Position.X > Graphics.Screen.Rectangle.Width - 1)
+				if (p.Position.X < 1 || p.Position.X > Graphics.Screen.Rectangle.Width - 1)
 					rot = -rot;
 				//Reflects rotation across Y axis if enemy goes above or below screen.
-				if (Position.Y < 1 || Position.Y > Graphics.Screen.Rectangle.Height - 1)
+				if (p.Position.Y < 1 || p.Position.Y > Graphics.Screen.Rectangle.Height - 1)
 					rot = (float)Math.PI - rot;
 				
 				//Prevents blade having seizure in the wall by turning again before it has re-entered the screen
@@ -48,8 +48,8 @@ namespace ZombieKiller
 				turning = false;
 			
 			//Calculate new position based on angle
-			Position += new Vector3((float)Math.Sin (rot) * RunSpeed, 0, 0);
-			Position -= new Vector3(0, (float)Math.Cos (rot) * RunSpeed, 0);
+			p.Position.X += (float)Math.Sin (rot) * RunSpeed;
+			p.Position.Y -= (float)Math.Cos (rot) * RunSpeed;
 			
 			if(Collide.FarOffScreen(this))
 				IsAlive = false;
@@ -76,7 +76,7 @@ namespace ZombieKiller
 		public override void Die()
 		{
 			this.IsAlive = false;
-			Explode.Position = Position;
+			Explode.p.Position = p.Position;
 			Collide.AddExplosion = (Explode);	
 			
 			CurrentLevel.Drop(this);

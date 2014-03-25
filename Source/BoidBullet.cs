@@ -48,7 +48,7 @@ namespace ZombieKiller
 				vel *= RunSpeed;
 			}
 
-			Position += vel;
+			p.Position += vel;
 			
 		}
 		

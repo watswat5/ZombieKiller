@@ -30,10 +30,10 @@ namespace ZombieKiller
 				if (!Collide.IsOnScreen (this) && !turning) {
 					numOfBounces++;
 					//Reflects rotation across X axis if enemy goes off screen to the left or right.
-					if (Position.X < 1 || Position.X > Graphics.Screen.Rectangle.Width - 1)
+					if (p.Position.X < 1 || p.Position.X > Graphics.Screen.Rectangle.Width - 1)
 						p.Rotation = -p.Rotation;
 					//Reflects rotation across Y axis if enemy goes above or below screen.
-					if (Position.Y < 1 || Position.Y > Graphics.Screen.Rectangle.Height - 1)
+					if (p.Position.Y < 1 || p.Position.Y > Graphics.Screen.Rectangle.Height - 1)
 						p.Rotation = (float)Math.PI - p.Rotation;
 					
 					//Prevents bullet having seizure in the wall by turning again before it has re-entered the screen
@@ -45,8 +45,8 @@ namespace ZombieKiller
 			} else
 				IsAlive = false;
 			
-			Position += new Vector3((float)Math.Sin (p.Rotation) * RunSpeed, 0, 0);
-			Position -= new Vector3(0, (float)Math.Cos (p.Rotation) * RunSpeed, 0);
+			p.Position.X += (float)Math.Sin (p.Rotation) * RunSpeed;
+			p.Position.Y -= (float)Math.Cos (p.Rotation) * RunSpeed;
 		}
 		
 		public override void OnHurt ()

@@ -22,8 +22,8 @@ namespace ZombieKiller
 		{
 			if(!Collide.IsOnScreen(this))
 				IsAlive = false;
-			Position += new Vector3((float)Math.Sin (p.Rotation) * RunSpeed, 0, 0);
-			Position -= new Vector3(0, (float)Math.Cos (p.Rotation) * RunSpeed, 0);
+			p.Position.X += (float)Math.Sin (p.Rotation) * RunSpeed;
+			p.Position.Y -= (float)Math.Cos (p.Rotation) * RunSpeed;
 		}
 		
 		public override void OnHurt ()

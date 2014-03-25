@@ -34,14 +34,6 @@ namespace ZombieKiller
 		//Main sprite
 		public Sprite p;
 		
-		private Vector3 pos;
-		public Vector3 Position
-		{
-			get { return pos;}
-			set { pos = value; 
-				p.Position = pos;}
-		}
-		
 		//Movement Speed
 		private float runSpeed;
 		public float RunSpeed
@@ -113,8 +105,8 @@ namespace ZombieKiller
 			
 			//Object sprite
 			p = new Sprite (graphics, tex);
-			Position = position;
-			p.Position = Position;
+			p.Position.X = position.X;
+			p.Position.Y = position.Y;
 			p.Height = FRAME_CELL_SIZE;
 			p.Width = FRAME_CELL_SIZE;
 			p.Center = new Vector2 (0.5f, 0.5f);
