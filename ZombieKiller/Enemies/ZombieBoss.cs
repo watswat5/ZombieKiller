@@ -13,6 +13,8 @@ namespace ZombieKiller
 {
 	public class ZombieBoss : Enemy
 	{
+		private Sprite healthBar;
+		private int MAX_HEALTH;
 		
 		public ZombieBoss (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
 		{
@@ -20,29 +22,35 @@ namespace ZombieKiller
 			RunSpeed = 1;
 			Damage = 2 * Difficulty;
 			Health = 60 * Difficulty;
+			MAX_HEALTH = Health;
 			Value = 20 * Difficulty;
 			FrameDuration = 100;
 			enemyType = Types.Zombie;
 			Death = new Sound ("/Application/Assets/Sounds/zombiehurt.wav");
 			p.Scale = new Vector2(2.2f, 2.2f);
+			Player = Collide.P;
+			
+			healthBar = new Sprite(Graphics, new Texture2D("/Application/Assets/Player/health.png", false));
+			healthBar.Scale = new Vector2(.47f, .2f);
+			healthBar.Position = new Vector3(0, 500, 0);
 		}
 		
 		public override void Update (long ElapsedTime)
 		{
-			Vector3 playerPos = Collide.P.p.Position;
+			Vector3 playerPos = Player.p.Position;
 			
 			//Find X and Y difference between this and the player
 			FrameTime += ElapsedTime;
-			DeltaX = (float)p.Position.X - (float)playerPos.X;
-			DeltaY = (float)p.Position.Y - (float)playerPos.Y;
+			DeltaX = (float)Position.X - (float)playerPos.X;
+			DeltaY = (float)Position.Y - (float)playerPos.Y;
 			
 			//Find rotation of zombie that looks at player
 			Rotation = (float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
 			p.Rotation = -Rotation;
 			
 			//Calculate new position based on angle
-			p.Position.X += (float)Math.Sin (-Rotation) * RunSpeed;;
-			p.Position.Y -= (float)Math.Cos (-Rotation) * RunSpeed;;
+			Position += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			Position -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
 			//avoidNeighbors();
 			//Advance sprite sheet
@@ -106,6 +114,18 @@ namespace ZombieKiller
 			
 			CurrentLevel.Drop(this);
 		}
+		
+		public override void Render()
+		{
+			p.SetTextureCoord (CellSize * ActiveFrame, 0, CellSize * (ActiveFrame + 1) - 1, CellSize);
+			p.Render ();
+			
+			//Renders the healthbar with a size proportionate to total health.
+			healthBar.SetTextureCoord(0, 0, (2000 / (MAX_HEALTH)) * Health, 200);
+			healthBar.Width = ((2000/MAX_HEALTH) *  Health - 1);
+			healthBar.Render ();
+		}
+		
 	}
 }
 

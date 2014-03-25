@@ -29,7 +29,7 @@ namespace ZombieKiller
 			MaxBulletsInClip = 5;
 			ReloadTime = 3000;
 			RunSpeed = 20;
-			Damage = 10;
+			Damage = 5;
 			AmmoScale = new Vector2 (0.1f, 0.1f);
 			UpgradeTexture = new Texture2D ("/Application/Assets/Items/rifleobj.png", false);
 			Type = Weapon.WeaponType.Rifle;

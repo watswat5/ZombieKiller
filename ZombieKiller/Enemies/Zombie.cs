@@ -22,26 +22,27 @@ namespace ZombieKiller
 			Health = 1 * Difficulty;
 			Value = 1 * Difficulty;
 			FrameDuration = 100;
+			Player = Collide.P;
 			enemyType = Types.Zombie;
 			Death = new Sound ("/Application/Assets/Sounds/zombiehurt.wav");
 		}
 		
 		public override void Update (long ElapsedTime)
 		{
-			Vector3 playerPos = Collide.P.p.Position;
+			Vector3 playerPos = Player.p.Position;
 			
 			//Find X and Y difference between this and the player
 			FrameTime += ElapsedTime;
-			DeltaX = (float)p.Position.X - (float)playerPos.X;
-			DeltaY = (float)p.Position.Y - (float)playerPos.Y;
+			DeltaX = (float)Position.X - (float)playerPos.X;
+			DeltaY = (float)Position.Y - (float)playerPos.Y;
 			
 			//Find rotation of zombie that looks at player
 			Rotation = (float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
 			p.Rotation = -Rotation;
 			
 			//Calculate new position based on angle
-			p.Position.X += (float)Math.Sin (-Rotation) * RunSpeed;;
-			p.Position.Y -= (float)Math.Cos (-Rotation) * RunSpeed;;
+			Position += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			Position -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
 			//avoidNeighbors();
 			//Advance sprite sheet

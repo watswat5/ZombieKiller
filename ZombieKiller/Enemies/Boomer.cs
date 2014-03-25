@@ -35,17 +35,17 @@ namespace ZombieKiller
 			FrameTime += ElapsedTime;
 			
 			//Get difference in x and y between player and enemy.
-			Vector3 playerPos = this.Player.p.Position;
-			DeltaX = (float)p.Position.X - (float)playerPos.X;
-			DeltaY = (float)p.Position.Y - (float)playerPos.Y;
+			Vector3 playerPos = Player.p.Position;
+			DeltaX = (float)Position.X - (float)playerPos.X;
+			DeltaY = (float)Position.Y - (float)playerPos.Y;
 			
 			//Find rotation of zombie that looks at player
 			Rotation = (float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
 			p.Rotation = -Rotation;
 			
 			//Calculate new position based on angle
-			p.Position.X -= (float)Math.Sin (Rotation) * RunSpeed;
-			p.Position.Y -= (float)Math.Cos (Rotation) * RunSpeed;
+			Position += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			Position -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
 			//Advance sprite sheet
 			if (FrameTime > FrameDuration) {
@@ -65,7 +65,7 @@ namespace ZombieKiller
 			else
 				plr.Health = 0;
 			this.IsAlive = false;
-			this.explode.p.Position = this.p.Position;
+			this.explode.p.Position = this.Position;
 			Collide.AddExplosion = this.explode;
 		}
 		
@@ -81,7 +81,7 @@ namespace ZombieKiller
 		public override void Die()
 		{
 			this.IsAlive = false;
-			Explode.p.Position = p.Position;
+			Explode.p.Position = Position;
 			Collide.AddExplosion = (Explode);	
 			CurrentLevel.Drop(this);
 		}

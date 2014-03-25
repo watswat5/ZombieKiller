@@ -16,19 +16,35 @@ namespace ZombieKiller
 		private GraphicsContext graphics;
 		private Sprite keyboard;
 		private Sprite key;
+		
+		//Every key and position
 		private KeyValuePair<Vector3, string>[,] letters;
 		
+		//Position in array
 		private int curR, curC;
+		
+		//Position on screen
 		private float height;
 		
+		//Is text entry complete?
 		private bool finished;
 		public bool Finished
 		{
 			get { return finished;}
 		}
 		
+		//Should the text be displayed while typing?
+		private bool preview;
+		public bool Preview
+		{
+			get { return preview;}
+			set { preview = value;}
+		}
+		
+		//Selected characters
 		private List<string> selections;
 		
+		//Final string
 		private string result;
 		
 		private int maxLetters;
@@ -38,8 +54,15 @@ namespace ZombieKiller
 			set { maxLetters = value;}
 		}
 		
+		//Used for preview
 		private Scene s;
 		private Label l;
+		
+		//Current input
+		public string Text
+		{
+			get { return l.Text;}	
+		}
 		
 		public Keyboard (GraphicsContext g, float h)
 		{
@@ -67,6 +90,8 @@ namespace ZombieKiller
 			letters = new KeyValuePair<Vector3, string>[3,10];
 			
 			selections = new List<string>();
+			
+			preview = true;
 			
 			InitLetters();
 		}
@@ -173,8 +198,11 @@ namespace ZombieKiller
 		{
 			keyboard.Render();	
 			key.Render();
-			UISystem.SetScene(s);
-			UISystem.Render();
+			if(preview)
+			{
+				UISystem.SetScene(s);
+				UISystem.Render();
+			}
 		}
 	}
 }

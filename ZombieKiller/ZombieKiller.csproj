@@ -76,6 +76,7 @@
     <Compile Include="Levels\LevelFour.cs" />
     <Compile Include="Keyboard.cs" />
     <Compile Include="Enemies\ZombieBoss.cs" />
+    <Compile Include="Levels\LevelFive.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
