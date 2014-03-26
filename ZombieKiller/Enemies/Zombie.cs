@@ -17,7 +17,7 @@ namespace ZombieKiller
 		public Zombie (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
 		{
 			Difficulty = d;
-			RunSpeed = 1;
+			RunSpeed = .8f;
 			Damage = 1 * Difficulty;
 			Health = 1 * Difficulty;
 			Value = 1 * Difficulty;
@@ -41,10 +41,14 @@ namespace ZombieKiller
 			//p.Rotation = -Rotation;
 			
 			//Calculate new position based on angle
-			Position -= new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
-			Position -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
+			Vector3 vel = Vector3.Zero;
+			vel -= new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			vel -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
-			//avoidNeighbors();
+			avoidNeighbors(vel);
+			
+			Position += vel;
+			
 			//Advance sprite sheet
 			if (FrameTime > FrameDuration) {
 				if (ActiveFrame < FrameMax - 1)
@@ -55,27 +59,27 @@ namespace ZombieKiller
 			}				
 		}
 		
-	    public void avoidNeighbors ()
+	    public void avoidNeighbors (Vector3 v)
 		{
 			Vector3 avoidanceVector = new Vector3 (0, 0, 0);
 			int nearNeighborCount = 0;
-			Vector3 oldVel = new Vector3((float)Math.Sin (p.Rotation), (float)Math.Cos (p.Rotation), RunSpeed);
-			Vector3 vel = Vector3.Zero;
+			//Vector3 oldVel = v;
+			//Vector3 vel = v;
+			Vector3 oldVel = v;
 			foreach (Creature z in Collide.Enemies)
 			{
 				if ((z != this) && (Vector3.Distance (z.p.Position, this.p.Position) < 100))
 				{
 					nearNeighborCount++;
-					avoidanceVector += Vector3.Subtract (p.Position, z.p.Position) * 5.0f / Vector3.Distance (z.p.Position, this.p.Position);
+					avoidanceVector += Vector3.Subtract (p.Position, z.p.Position) * 2.0f / Vector3.Distance (z.p.Position, this.p.Position);
 				}
 				
 				if (nearNeighborCount > 0) {
-					vel = oldVel * 0.8f + avoidanceVector.Normalize () * 0.2f;
+					v = oldVel * 0.9f + avoidanceVector.Normalize () * 0.5f;
 				} else {
-					vel = oldVel; 
+					v = oldVel; 
 				}
-				p.Position.X += vel.X * 1;
-				p.Position.Y -= vel.Y * 1;
+				Position += v * .01f;
 			}
 			
 		}

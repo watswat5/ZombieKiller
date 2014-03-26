@@ -45,9 +45,13 @@ namespace ZombieKiller
 			p.Rotation = -Rotation;
 			
 			//Calculate new position based on angle
-			Position += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
-			Position -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
+			Vector3 vel = Vector3.Zero;
+			vel += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			vel -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
+			avoidNeighbors(vel);
+			
+			Position += vel;
 			//Advance sprite sheet
 			if (FrameTime > FrameDuration) {
 				if (ActiveFrame < FrameMax - 1)
@@ -56,6 +60,31 @@ namespace ZombieKiller
 					ActiveFrame = 0;
 				FrameTime = 0;
 			}				
+		}
+		
+		public void avoidNeighbors (Vector3 v)
+		{
+			Vector3 avoidanceVector = new Vector3 (0, 0, 0);
+			int nearNeighborCount = 0;
+			//Vector3 oldVel = v;
+			//Vector3 vel = v;
+			Vector3 oldVel = v;
+			foreach (Creature z in Collide.Enemies)
+			{
+				if ((z != this) && (Vector3.Distance (z.p.Position, this.p.Position) < 100))
+				{
+					nearNeighborCount++;
+					avoidanceVector += Vector3.Subtract (p.Position, z.p.Position) * 1.0f / Vector3.Distance (z.p.Position, this.p.Position);
+				}
+				
+				if (nearNeighborCount > 0) {
+					v = oldVel * 0.9f + avoidanceVector.Normalize () * 0.5f;
+				} else {
+					v = oldVel; 
+				}
+				Position += v * .01f;
+			}
+			
 		}
 		
 		public override void HurtPlayer (Player plr)
