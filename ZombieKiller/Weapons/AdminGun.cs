@@ -24,10 +24,12 @@ namespace ZombieKiller
 			}
 		}
 		
-		public AdminGun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shield.png", false), new Texture2D("/Application/Assets/items/shieldammo.png", false))
+		public AdminGun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/boid.wav"), new Texture2D("/Application/Assets/Weapons/shield.png", false), new Texture2D("/Application/Assets/items/shieldammo.png", false))
 		{
 			bulletsPerSecond = 1;
 
+			FirePlayer.Volume = 1.5f;
+			
 			p.Center = new Vector2 (0.5f, 1.0f);
 			p.Scale = new Vector2 (1f, 1f);
 			
@@ -43,7 +45,7 @@ namespace ZombieKiller
 			
 			RunSpeed = 20;
 			
-			Damage = 20;
+			Damage = 5;
 			
 			Cost = 10;
 			

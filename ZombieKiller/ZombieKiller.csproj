@@ -169,5 +169,6 @@
     <Content Include="Assets\Levels\grassfield.png" />
     <Content Include="Assets\Levels\lsd.png" />
     <Content Include="Assets\Levels\sandlot.png" />
+    <Content Include="Assets\Sounds\boid.wav" />
   </ItemGroup>
 </Project>

@@ -29,7 +29,7 @@ namespace ZombieKiller
 		
 		public override void SpawnEnemies ()
 		{
-			Enemy e = new ZombieBoss (Graphics, new Vector3 (900, 500, 0), Collide, Difficulty); 
+			Enemy e = new BoomerBoss (Graphics, new Vector3 (900, 500, 0), Collide, Difficulty); 
 			Collide.AddEnemy = e;
 			e.CurrentLevel = this;
 		}

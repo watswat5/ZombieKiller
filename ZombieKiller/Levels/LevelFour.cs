@@ -105,6 +105,22 @@ namespace ZombieKiller
 					it = new ShotgunAmmo(Graphics, e.p.Position, Collide);
 					Collide.AddItem = it;
 					break;
+				case 4:
+					it = new RifleObject(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				case 5:
+					it = new RifleAmmo(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				case 6:
+					it = new RPGObject(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
+				case 7:
+					it = new RPGAmmo(Graphics, e.p.Position, Collide);
+					Collide.AddItem = it;
+					break;
 				default:
 					break;
 				}
