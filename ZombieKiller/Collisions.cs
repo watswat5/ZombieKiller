@@ -116,6 +116,9 @@ namespace ZombieKiller
 			for (int i = items.Count - 1; i >= 0; i--) {
 				items.RemoveAt (i);	
 			}
+			for (int i = bullets.Count - 1; i >= 0; i--) {
+				bullets.RemoveAt (i);	
+			}
 		}
 		
 		public void Update (long TimeChange, GamePadData gp)

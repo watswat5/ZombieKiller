@@ -15,7 +15,7 @@ namespace ZombieKiller
 	{
 		public LevelThree (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/sandlot.png", false), c, 2, 20, 50, "Level One", plr)
 		{
-			MaxEnemies = 60;
+			MaxEnemies = 30;
 			c.P = plr;
 			p.Scale = new Vector2(2f, 2f);
 		}
@@ -101,15 +101,9 @@ namespace ZombieKiller
 		public override void NewGame ()
 		{
 			Collide.PurgeAssets ();
-			Item mgo = new ShotObject (Graphics, new Vector3 (200, 200, 0), Collide);
-			Collide.AddItem = mgo;
-			mgo = new MGObject (Graphics, new Vector3 (100, 100, 0), Collide);
-			Collide.AddItem = mgo;
-			mgo = new RifleObject (Graphics, new Vector3 (150, 150, 0), Collide);
-			Collide.AddItem = mgo;
-			mgo = new RPGObject (Graphics, new Vector3 (80, 80, 0), Collide);
-			Collide.AddItem = mgo;
 	
+			Plr.Position = new Vector3(20, 20, 0);
+			
 			//Spawn initial enemies
 			EnemyCount = 0;
 			SpawnEnemies ();
