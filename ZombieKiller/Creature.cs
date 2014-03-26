@@ -98,7 +98,8 @@ namespace ZombieKiller
 		private float rotation;
 		public float Rotation {
 			get { return rotation;}	
-			set { rotation = value;}
+			set { rotation = value;
+				  p.Rotation = value;}
 		}
 		
 		public Texture2D Texture {
@@ -114,6 +115,7 @@ namespace ZombieKiller
 			//Object sprite
 			p = new Sprite (graphics, tex);
 			Position = position;
+			Rotation = 0;
 			p.Position = Position;
 			p.Height = FRAME_CELL_SIZE;
 			p.Width = FRAME_CELL_SIZE;

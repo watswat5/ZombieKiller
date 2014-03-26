@@ -37,11 +37,11 @@ namespace ZombieKiller
 			DeltaY = (float)Position.Y - (float)playerPos.Y;
 			
 			//Find rotation of zombie that looks at player
-			Rotation = (float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
-			p.Rotation = -Rotation;
+			Rotation = -(float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
+			//p.Rotation = -Rotation;
 			
 			//Calculate new position based on angle
-			Position += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			Position -= new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
 			Position -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
 			//avoidNeighbors();

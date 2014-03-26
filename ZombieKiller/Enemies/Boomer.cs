@@ -27,6 +27,7 @@ namespace ZombieKiller
 			Health = 1 * Difficulty;
 			Value = 1 * Difficulty;
 			Alpha = .5f;
+			Player = Collide.P;
 			Death = new Sound ("/Application/Assets/Sounds/boomerhurt.wav");
 		}
 		

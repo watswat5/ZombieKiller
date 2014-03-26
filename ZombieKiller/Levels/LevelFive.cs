@@ -15,9 +15,9 @@ namespace ZombieKiller
 	{
 		public LevelFive (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/grassfield.png", false), c, 3, 20, 50, "Level One", plr)
 		{
-			MaxEnemies = 1;
+			MaxEnemies = 10;
 			c.P = plr;
-			p.Scale = new Vector2(2f, 2f);
+			p.Scale = new Vector2 (2f, 2f);
 		}
 		
 		public override void Update ()
@@ -29,54 +29,48 @@ namespace ZombieKiller
 		
 		public override void SpawnEnemies ()
 		{
-				Enemy e = new ZombieBoss(Graphics, new Vector3(900, 500, 0), Collide, Difficulty); 
-				e.Player = Plr;
-				Collide.AddEnemy = e;
-				e.CurrentLevel = this;
+			Enemy e = new ZombieBoss (Graphics, new Vector3 (900, 500, 0), Collide, Difficulty); 
+			Collide.AddEnemy = e;
+			e.CurrentLevel = this;
 		}
 		
-		public override void Drop(Enemy e)
+		public override void Drop (Enemy e)
 		{
 			Plr.Money += e.Value;
 			Item it;
 			int rand = rnd.Next (1, DropRange);
-			List<Vector2> drops = new List<Vector2>();
+			List<Vector2> drops = new List<Vector2> ();
 
-			for(int i = 0; i < dropRate.Length; i++)
-			{
-				if(dropRate[i] != 0)
-				{
-					if(rand%dropRate[i] == 0)
-					{
-						drops.Add(new Vector2(i, dropRate[i]));
+			for (int i = 0; i < dropRate.Length; i++) {
+				if (dropRate [i] != 0) {
+					if (rand % dropRate [i] == 0) {
+						drops.Add (new Vector2 (i, dropRate [i]));
 					}
 				}
 			}
 			
 			int max = 0;
-			for(int i = 0; i < drops.Count; i++)
-				if(drops[i].Y > drops[max].Y)
+			for (int i = 0; i < drops.Count; i++)
+				if (drops [i].Y > drops [max].Y)
 					max = i;
 			
-			if(drops.Count != 0)
-			{
-				int x = (int)drops[max].X;
-				switch(x)
-				{
+			if (drops.Count != 0) {
+				int x = (int)drops [max].X;
+				switch (x) {
 				case 0:
-					it = new MGObject(Graphics, e.p.Position, Collide);
+					it = new MGObject (Graphics, e.p.Position, Collide);
 					Collide.AddItem = it;
 					break;
 				case 1:
-					it = new MGAmmo(Graphics, e.p.Position, Collide);
+					it = new MGAmmo (Graphics, e.p.Position, Collide);
 					Collide.AddItem = it;
 					break;
 				case 2:
-					it = new ShotObject(Graphics, e.p.Position, Collide);
+					it = new ShotObject (Graphics, e.p.Position, Collide);
 					Collide.AddItem = it;
 					break;
 				case 3:
-					it = new ShotgunAmmo(Graphics, e.p.Position, Collide);
+					it = new ShotgunAmmo (Graphics, e.p.Position, Collide);
 					Collide.AddItem = it;
 					break;
 				default:

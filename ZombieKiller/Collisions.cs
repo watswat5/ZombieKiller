@@ -19,6 +19,7 @@ namespace ZombieKiller
 		private List<Bullet> bullets;
 		private List<Bullet> tempBullets;
 		private List<Enemy> enemies;
+		private List<Enemy> tempEnemies;
 		private List<Explosion> explosions;
 		private List<Item> items;
 		private SoundPlayer deathPlayer;
@@ -60,6 +61,10 @@ namespace ZombieKiller
 			set { enemies.Add (value);}	
 		}
 		
+		public Enemy AddTempEnemy {
+			set { tempEnemies.Add (value);}	
+		}
+		
 		public Explosion AddExplosion {
 			set { explosions.Add (value);}	
 		}
@@ -92,7 +97,7 @@ namespace ZombieKiller
 			explosions = new List<Explosion> ();
 			items = new List<Item> ();
 			tempBullets = new List<Bullet> ();
-			
+			tempEnemies = new List<Enemy> ();
 			NeedCleanUp = false;
 			hurtTimer = 0;
 		}
@@ -106,11 +111,10 @@ namespace ZombieKiller
 				return false;
 		}
 		
-		public void PurgeAssets()
+		public void PurgeAssets ()
 		{
-			for(int i = items.Count - 1; i >= 0; i--)
-			{
-				items.RemoveAt(i);	
+			for (int i = items.Count - 1; i >= 0; i--) {
+				items.RemoveAt (i);	
 			}
 		}
 		
@@ -118,6 +122,7 @@ namespace ZombieKiller
 		{
 			tempBullets = new List<Bullet> ();
 			NeedCleanUp = false;
+			
 			//Collision detection between enemies and bullets
 			foreach (Bullet b in bullets) {
 				foreach (Enemy e in enemies) {
@@ -127,8 +132,8 @@ namespace ZombieKiller
 							b.OnHurt ();
 							if (!e.IsAlive) {
 								//Play sound
-								if(deathPlayer != null)
-									deathPlayer.Stop();
+								if (deathPlayer != null)
+									deathPlayer.Stop ();
 								deathPlayer = e.Death.CreatePlayer ();
 								deathPlayer.Play ();
 							}
@@ -162,27 +167,13 @@ namespace ZombieKiller
 				}
 			}
 			
-//			//Removes bullets that go offscreen
-//			foreach (var b in bullets) {
-//				if (!IsOnScreen (b)) {
-//					b.IsAlive = false;
-//					NeedCleanUp = true;
-//					Console.WriteLine("Off Screen");
-//				}
-//				
-//			}
-			
 			foreach (Enemy e in enemies) {
 				if (e.IsAlive == false) {
 					NeedCleanUp = true;
 					break;
 				}
 			}
-			
-			foreach (Bullet b in tempBullets) {
-				bullets.Add (b);
-			}
-			
+						
 			foreach (Bullet b in bullets) {
 				b.Update (TimeChange);
 			}	
@@ -192,7 +183,16 @@ namespace ZombieKiller
 			foreach (Enemy e in enemies) {
 				e.Update (TimeChange);
 			}
-			player.Update(TimeChange, gp);
+			player.Update (TimeChange, gp);
+			
+			//Add the new enemies
+			foreach (Bullet b in tempBullets) {
+				bullets.Add (b);
+			}
+			foreach (Enemy e in tempEnemies) {
+				enemies.Add (e);
+				Console.WriteLine("ADDED");
+			}
 			
 			if (NeedCleanUp) {
 //				for(int i = tempBullets.Count - 1; i >= 0; i--)
@@ -217,7 +217,7 @@ namespace ZombieKiller
 						items.RemoveAt (i);
 				}
 			}
-			
+			tempEnemies = new List<Enemy> ();
 		}
 		
 		//Screen edge detection
@@ -262,7 +262,7 @@ namespace ZombieKiller
 			foreach (Enemy e in enemies) {
 				e.Render ();
 			}
-			player.Render();
+			player.Render ();
 		}
 	}
 }

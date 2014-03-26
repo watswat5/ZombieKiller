@@ -172,7 +172,7 @@ namespace ZombieKiller
 				UpdateHighScore(gamePadData);
 				break;
 			}
-			Console.WriteLine(DeltaTime);
+			//Console.WriteLine(DeltaTime);
 		}
 		
 		//Update Ingame

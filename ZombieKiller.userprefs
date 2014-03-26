@@ -1,29 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Weapons\Rifle.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Levels\LevelFive.cs">
     <Files>
-      <File FileName="ZombieKiller\Enemies\Blade.cs" Line="45" Column="5" />
-      <File FileName="ZombieKiller\Enemies\Boomer.cs" Line="84" Column="25" />
-      <File FileName="ZombieKiller\Enemies\Zombie.cs" Line="45" Column="74" />
-      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="34" Column="44" />
-      <File FileName="ZombieKiller\Bullets\GenericBullet.cs" Line="26" Column="75" />
-      <File FileName="ZombieKiller\AppMain.cs" Line="135" Column="62" />
-      <File FileName="ZombieKiller\Creature.cs" Line="141" Column="16" />
-      <File FileName="ZombieKiller\Keyboard.cs" Line="60" Column="3" />
-      <File FileName="ZombieKiller\Levels\LevelFive.cs" Line="32" Column="86" />
-      <File FileName="ZombieKiller\Levels\Level.cs" Line="28" Column="16" />
+      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="35" Column="48" />
+      <File FileName="ZombieKiller\Enemies\BoomerBoss.cs" Line="26" Column="18" />
       <File FileName="ZombieKiller\Levels\LevelOne.cs" Line="1" Column="1" />
-      <File FileName="ZombieKiller\Player.cs" Line="234" Column="24" />
-      <File FileName="ZombieKiller\Weapons\Rifle.cs" Line="32" Column="14" />
+      <File FileName="ZombieKiller\Levels\LevelFive.cs" Line="18" Column="20" />
+      <File FileName="ZombieKiller\AppMain.cs" Line="175" Column="6" />
+      <File FileName="ZombieKiller\Collisions.cs" Line="196" Column="4" />
+      <File FileName="ZombieKiller\Enemies\Boomer.cs" Line="88" Column="4" />
+      <File FileName="ZombieKiller\Enemies\Enemy.cs" Line="1" Column="1" />
+      <File FileName="ZombieKiller\Enemies\Zombie.cs" Line="45" Column="74" />
+      <File FileName="ZombieKiller\Creature.cs" Line="141" Column="16" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="ZombieKiller" expanded="True">
             <Node name="Enemies" expanded="True" />
-            <Node name="Levels" expanded="True" />
-            <Node name="Weapons" expanded="True">
-              <Node name="Rifle.cs" selected="True" />
+            <Node name="Levels" expanded="True">
+              <Node name="LevelFive.cs" selected="True" />
             </Node>
           </Node>
         </State>
