@@ -137,10 +137,10 @@ namespace ZombieKiller
 			//Init levels
 			levels = new List<Level> ();
 			levels.Add (new LevelOne (graphics, collisions, Plr));
-			levels.Add (new LevelTwo (graphics, collisions, Plr));
-			levels.Add (new LevelThree (graphics, collisions, Plr));	
-			levels.Add (new LevelFour (graphics, collisions, Plr));	
-			levels.Add (new LevelFive (graphics, collisions, Plr));
+//			levels.Add (new LevelTwo (graphics, collisions, Plr));
+//			levels.Add (new LevelThree (graphics, collisions, Plr));	
+//			levels.Add (new LevelFour (graphics, collisions, Plr));	
+//			levels.Add (new LevelFive (graphics, collisions, Plr));
 			//Load menu
 			currentState = GameState.Menu;
 			currentLevel = 0;
@@ -295,7 +295,13 @@ namespace ZombieKiller
 		{
 			if((gp.ButtonsDown & GamePadButtons.Start) != 0)
 			{
-				currentState = GameState.HighScore;	
+				currentState = GameState.Menu;	
+				bgMusic.Dispose();
+				bgMusic = bgm.CreatePlayer();
+				bgMusic.Volume = 0.1f;
+				bgMusic.Loop = true;
+				bgMusic.Play();
+				NewGame();
 			}
 		}
 		

@@ -12,7 +12,7 @@ namespace ZombieKiller
 {
 	public class LevelOne : Level
 	{
-		public LevelOne (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/background.png", false), c, 1, 40, 50, "Level One", plr)
+		public LevelOne (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/background.png", false), c, 1, 40, 100, "Level One", plr)
 		{		
 			c.P = plr;
 			p.Scale = new Vector2(2,2);
