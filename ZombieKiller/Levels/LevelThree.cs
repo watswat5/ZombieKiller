@@ -42,60 +42,70 @@ namespace ZombieKiller
 		
 		public override void Drop(Enemy e)
 		{
-			Plr.Money += e.Value;
-			Item it;
-			int rand = rnd.Next (1, DropRange);
-			List<Vector2> drops = new List<Vector2>();
-
-			for(int i = 0; i < dropRate.Length; i++)
+			int i = 0;
+			Item j;
+			bool picked = false;
+			
+			for(int d = 0; d < dropRate.Length; d++)
 			{
-				if(dropRate[i] != 0)
+				if(!picked)
 				{
-					if(rand%dropRate[i] == 0)
+					for(int o = 0; o < dropRate[d]; o++)
 					{
-						drops.Add(new Vector2(i, dropRate[i]));
+						int n = rnd.Next (0, 101);
+						if(n == 50)
+						{
+							i = d;
+							picked = true;
+						}
 					}
 				}
 			}
+				
 			
-			int max = 0;
-			for(int i = 0; i < drops.Count; i++)
-				if(drops[i].Y > drops[max].Y)
-					max = i;
-			
-			if(drops.Count != 0)
+			switch(i)
 			{
-				int x = (int)drops[max].X;
-				switch(x)
-				{
-				case 0:
-					it = new MGObject(Graphics, e.p.Position, Collide);
-					Collide.AddItem = it;
-					break;
-				case 1:
-					it = new MGAmmo(Graphics, e.p.Position, Collide);
-					Collide.AddItem = it;
-					break;
-				case 2:
-					it = new ShotObject(Graphics, e.p.Position, Collide);
-					Collide.AddItem = it;
-					break;
-				case 3:
-					it = new ShotgunAmmo(Graphics, e.p.Position, Collide);
-					Collide.AddItem = it;
-					break;
-				case 4:
-					it = new RifleObject(Graphics, e.p.Position, Collide);
-					Collide.AddItem = it;
-					break;
-				case 5:
-					it = new RifleAmmo(Graphics, e.p.Position, Collide);
-					Collide.AddItem = it;
-					break;
-				default:
-					break;
-				}
+			case 0:
+				Console.WriteLine("NULL");
+				break;
+			case 1:
+				j = new Health(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 2:
+				j = new MGObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 3:
+				j = new MGAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 4:
+				j = new ShotObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 5:
+				j = new ShotgunAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 6:
+				j = new RifleObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 7:
+				j = new RifleAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 8:
+				j = new RPGObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 9:
+				j = new RPGAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
 			}
+			
 		}
 		
 		public override void NewGame ()

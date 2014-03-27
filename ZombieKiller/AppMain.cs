@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
-using System.Diagnostics;
 using Sce.PlayStation.Core.Audio;
 using Sce.PlayStation.HighLevel.UI;
 
@@ -54,7 +55,10 @@ namespace ZombieKiller
 		
 		private static Keyboard k;
 		
-		private static List<string> highScores;
+		private static List<HighScore> highScores;
+		private static StringWriter sw;
+		private static StreamReader sr;
+		
 		private static Scene s;
 		private static Label hScores;
 		
@@ -79,6 +83,9 @@ namespace ZombieKiller
 			
 			UISystem.Initialize(graphics);
 			
+			sw = new StringWriter();
+			//sr = new StreamReader("highscores.txt");
+			
 			rnd = new Random ();
 			clock = new Stopwatch ();
 			clock.Start ();
@@ -90,7 +97,7 @@ namespace ZombieKiller
 			
 			s.RootWidget.AddChildLast(hScores);
 
-			highScores = new List<string>();
+			highScores = new List<HighScore>();
 			
 			//Backgrounds for different gamestataes
 			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/paused.png", false));
@@ -129,16 +136,35 @@ namespace ZombieKiller
 			
 			//Init levels
 			levels = new List<Level> ();
-			//levels.Add (new LevelOne (graphics, collisions, Plr));
-			//levels.Add (new LevelTwo (graphics, collisions, Plr));
-			//levels.Add (new LevelThree (graphics, collisions, Plr));	
-			//levels.Add (new LevelFour (graphics, collisions, Plr));	
-			levels.Add (new LevelFive (graphics, collisions, Plr));
+			levels.Add (new LevelOne (graphics, collisions, Plr));
+			levels.Add (new LevelTwo (graphics, collisions, Plr));
+			levels.Add (new LevelThree (graphics, collisions, Plr));	
+//			levels.Add (new LevelFour (graphics, collisions, Plr));	
+//			levels.Add (new LevelFive (graphics, collisions, Plr));
 			//Load menu
 			currentState = GameState.Menu;
 			currentLevel = 0;
 			
-			GC.Collect();
+//			ReadHighScores();
+//			foreach(HighScore h in highScores)
+//				Console.WriteLine(h);
+		}
+		
+		public static void ReadHighScores()
+		{
+//			if(!File.Exists("/highscores.txt"))
+//			{
+//				StreamWriter sw = new StreamWriter("/highscores.txt");
+//				sw.Close();
+//			}
+			
+			sr = new StreamReader("highscores.txt");
+			
+			while(!sr.EndOfStream)
+			{
+				highScores.Add(new HighScore(sr.ReadLine()));
+			}
+			sr.Close();
 		}
 		
 		public static void Update ()
@@ -278,12 +304,12 @@ namespace ZombieKiller
 		{
 			k.Update(gp);
 			string s = "";
-			foreach(string a in highScores)
+			foreach(HighScore a in highScores)
 				s = s + "\n" + a;
 			hScores.Text = s;
 			if(k.Finished)
 			{			
-				highScores.Add (k.ReturnResult());
+				highScores.Add (new HighScore(k.ReturnResult() + "," + Plr.Score));
 				
 				bgMusic.Dispose();
 				bgMusic = bgm.CreatePlayer();

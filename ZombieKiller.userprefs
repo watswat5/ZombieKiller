@@ -1,25 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Levels\LevelFive.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\AppMain.cs">
     <Files>
-      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="35" Column="48" />
-      <File FileName="ZombieKiller\Enemies\BoomerBoss.cs" Line="26" Column="18" />
-      <File FileName="ZombieKiller\Levels\LevelOne.cs" Line="1" Column="1" />
-      <File FileName="ZombieKiller\Levels\LevelFive.cs" Line="18" Column="20" />
-      <File FileName="ZombieKiller\AppMain.cs" Line="175" Column="6" />
-      <File FileName="ZombieKiller\Collisions.cs" Line="196" Column="4" />
-      <File FileName="ZombieKiller\Enemies\Boomer.cs" Line="88" Column="4" />
-      <File FileName="ZombieKiller\Enemies\Enemy.cs" Line="1" Column="1" />
-      <File FileName="ZombieKiller\Enemies\Zombie.cs" Line="45" Column="74" />
-      <File FileName="ZombieKiller\Creature.cs" Line="141" Column="16" />
+      <File FileName="ZombieKiller\Enemies\Blade.cs" Line="82" Column="4" />
+      <File FileName="ZombieKiller\Enemies\Boomer.cs" Line="117" Column="26" />
+      <File FileName="ZombieKiller\Enemies\BoomerBoss.cs" Line="112" Column="26" />
+      <File FileName="ZombieKiller\Enemies\Zombie.cs" Line="111" Column="26" />
+      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="115" Column="26" />
+      <File FileName="ZombieKiller\Keyboard.cs" Line="85" Column="21" />
+      <File FileName="ZombieKiller\AppMain.cs" Line="161" Column="1" />
+      <File FileName="ZombieKiller\HighScore.cs" Line="44" Column="21" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
+          <Option id="ShowAllFiles" value="False" />
+          <Option id="ShowVersionControlOverlays" value="True" />
           <Node name="ZombieKiller" expanded="True">
-            <Node name="Enemies" expanded="True" />
-            <Node name="Levels" expanded="True">
-              <Node name="LevelFive.cs" selected="True" />
+            <Option id="ShowAllFiles" value="True" />
+            <Node name="bin" expanded="True">
+              <Node name="Debug" expanded="True">
+                <Node name="ZombieKiller-unsigned" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -35,6 +37,7 @@
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
+          <Value>Instance</Value>
           <Value>Instance</Value>
         </State>
       </Pad>

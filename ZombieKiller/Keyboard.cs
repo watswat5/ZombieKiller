@@ -17,6 +17,8 @@ namespace ZombieKiller
 		private Sprite keyboard;
 		private Sprite key;
 		
+		private Sprite bg;
+		
 		//Every key and position
 		private KeyValuePair<Vector3, string>[,] letters;
 		
@@ -69,6 +71,8 @@ namespace ZombieKiller
 			graphics = g;
 			UISystem.Initialize(graphics);
 			
+			bg = new Sprite(graphics, new Texture2D("/Application/Assets/hsscreen.png", false));
+			                
 			s = new Scene();
 			l = new Label();
 			
@@ -78,8 +82,10 @@ namespace ZombieKiller
 			
 			maxLetters = 10;
 			
-			l.Y = height - 25;
+			l.Y = height - 35;
+			l.X = 10;
 			l.Width = 544;
+			l.TextColor = new UIColor(0,0,0,1);
 			
 			keyboard = new Sprite(graphics, new Texture2D("/Application/Assets/Keyboard.png", false)); 
 			keyboard.Position.Y += height;
@@ -196,6 +202,7 @@ namespace ZombieKiller
 		
 		public void Render()
 		{
+			bg.Render();
 			keyboard.Render();	
 			key.Render();
 			if(preview)

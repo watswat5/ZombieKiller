@@ -41,6 +41,13 @@ namespace ZombieKiller
 			set { money = value;}
 		}
 		
+		private int score;
+		public int Score
+		{
+			get { return score;}
+			set { score = value;}
+		}
+		
 		//Alpha value for blood splatter effect
 		private float alpha;
 		public float Alpha

@@ -108,6 +108,8 @@ namespace ZombieKiller
 			this.IsAlive = false;
 			Explode.p.Position = Position;
 			Collide.AddExplosion = (Explode);	
+			Player.Money += Value;
+			Player.Score += Value;
 			CurrentLevel.Drop(this);
 		}
 		

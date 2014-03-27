@@ -78,6 +78,7 @@
     <Compile Include="Enemies\ZombieBoss.cs" />
     <Compile Include="Levels\LevelFive.cs" />
     <Compile Include="Enemies\BoomerBoss.cs" />
+    <Compile Include="HighScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -101,6 +102,7 @@
     <Folder Include="Assets\Bullets\" />
     <Folder Include="Levels\" />
     <Folder Include="Assets\Levels\" />
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\paused.png" />
@@ -170,5 +172,9 @@
     <Content Include="Assets\Levels\lsd.png" />
     <Content Include="Assets\Levels\sandlot.png" />
     <Content Include="Assets\Sounds\boid.wav" />
+    <Content Include="Assets\hsscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\ZombieKiller-unsigned\highscores.txt" />
   </ItemGroup>
 </Project>
