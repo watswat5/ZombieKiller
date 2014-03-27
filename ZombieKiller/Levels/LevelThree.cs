@@ -52,10 +52,10 @@ namespace ZombieKiller
 				{
 					for(int o = 0; o < dropRate[d]; o++)
 					{
-						int n = rnd.Next (0, 101);
-						if(n == 50)
+						int n = rnd.Next (0, DropRange);
+						if(n == DropRange - 3)
 						{
-							i = d;
+							i = d + 1;
 							picked = true;
 						}
 					}
@@ -69,40 +69,35 @@ namespace ZombieKiller
 				Console.WriteLine("NULL");
 				break;
 			case 1:
-				j = new Health(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 2:
-				j = new MGObject(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 3:
 				j = new MGAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
-			case 4:
-				j = new ShotObject(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 5:
+			case 2:
 				j = new ShotgunAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
-			case 6:
-				j = new RifleObject(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 7:
+			case 3:
 				j = new RifleAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
-			case 8:
-				j = new RPGObject(Graphics, e.Position, Collide);
+			case 5:
+				j = new MGObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 6:
+				j = new ShotObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 7:
+				j = new RifleObject(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
 			case 9:
-				j = new RPGAmmo(Graphics, e.Position, Collide);
+				j = new Health(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
+				break;
+			default:
+				Console.WriteLine("NULL D");
 				break;
 			}
 			

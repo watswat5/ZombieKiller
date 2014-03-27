@@ -124,42 +124,44 @@ namespace ZombieKiller
 			DamageScreen.Scale = new Vector2(2,2);
 			
 			weapons = new List<Weapon>();
-			weapons.Add (new AdminGun(gc, Collide, Position, p.Rotation));
-			currentWeapon = weapons[weaponSelect];
+			//weapons.Add (new AdminGun(gc, Collide, Position, p.Rotation));
+			//currentWeapon = weapons[weaponSelect];
 		}
 		
 		public void Update(long ElapsedTime, GamePadData gp){
 			FrameTime += ElapsedTime;
-			currentWeapon = weapons[weaponSelect];
-			//Weapon Selection
-			if ((gp.ButtonsDown & GamePadButtons.L) != 0) {
-				if (weaponSelect < Weapons.Count - 1)
-				{
-					weaponSelect++;
-					currentWeapon = weapons[weaponSelect];
+			if(weapons.Count > 0)
+			{
+				currentWeapon = weapons[weaponSelect];
+				//Weapon Selection
+				if ((gp.ButtonsDown & GamePadButtons.L) != 0) {
+					if (weaponSelect < Weapons.Count - 1)
+					{
+						weaponSelect++;
+						currentWeapon = weapons[weaponSelect];
+					}
+					else
+					{
+						weaponSelect = 0;
+						currentWeapon = weapons[weaponSelect];
+					}
 				}
-				else
-				{
-					weaponSelect = 0;
-					currentWeapon = weapons[weaponSelect];
+				if ((gp.ButtonsDown & GamePadButtons.R) != 0) {
+					if (weaponSelect > 0)
+					{
+						weaponSelect--;
+						currentWeapon = weapons[weaponSelect];
+					}
+					else
+					{
+						weaponSelect = weapons.Count - 1;
+						currentWeapon = weapons[weaponSelect];	
+					}
 				}
+				
+				//Updates current weapon only
+				weapons [weaponSelect].Update (Position, p.Rotation, gp, ElapsedTime);
 			}
-			if ((gp.ButtonsDown & GamePadButtons.R) != 0) {
-				if (weaponSelect > 0)
-				{
-					weaponSelect--;
-					currentWeapon = weapons[weaponSelect];
-				}
-				else
-				{
-					weaponSelect = weapons.Count - 1;
-					currentWeapon = weapons[weaponSelect];	
-				}
-			}
-			
-			//Updates current weapon only
-			weapons [weaponSelect].Update (Position, p.Rotation, gp, ElapsedTime);
-			
 			//New coordinates for player based on angle and player speed
 			newX = (float) Math.Sin(-Rotation * (3.14/180)) * RunSpeed;
 			newY = (float) Math.Cos(-Rotation * (3.14/180)) * RunSpeed;
@@ -227,7 +229,8 @@ namespace ZombieKiller
 		public override void Render()
 		{
 			//Renders current weapon only
-			weapons[weaponSelect].Render();
+			if(weapons.Count > 0)
+				weapons[weaponSelect].Render();
 			
 			//Sprite sheet rendering
 			p.SetTextureCoord (CellSize * ActiveFrame, 0, CellSize * (ActiveFrame + 1) - 1, CellSize);

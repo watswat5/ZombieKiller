@@ -74,8 +74,8 @@ namespace ZombieKiller
 			background = new Sprite(graphics, new Texture2D("/Application/Assets/upgrade.png", false));
 			background.Center = new Vector2(0,0);
 			
-			weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
-			weapon.Position = position;
+//			weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
+//			weapon.Position = position;
 		}
 		
 		public void Update(GamePadData gp)
@@ -84,32 +84,32 @@ namespace ZombieKiller
 				if (currentWeapon < plr.Weapons.Count - 1)
 				{
 					currentWeapon++;
-					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
-					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
-					weapon.Position = position;
+//					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
+//					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
+//					weapon.Position = position;
 				}
 				else
 				{
 					currentWeapon = 0;
-					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
-					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
-					weapon.Position = position;
+//					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
+//					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
+//					weapon.Position = position;
 				}
 			}
 			if ((gp.ButtonsDown & GamePadButtons.R) != 0) {
 				if (currentWeapon > 0)
 				{
 					currentWeapon--;
-					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
-					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
-					weapon.Position = position;
+//					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
+//					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
+//					weapon.Position = position;
 				}
 				else
 				{
 					currentWeapon = plr.Weapons.Count - 1;
-					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
-					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
-					weapon.Position = position;
+//					weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
+//					weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
+//					weapon.Position = position;
 				}
 			}
 			
@@ -126,6 +126,9 @@ namespace ZombieKiller
 		
 		public void Render()
 		{
+			weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
+			weapon.Position = position;
+			weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;
 			background.Render();
 			weapon.Render();
 			UISystem.SetScene(scene);

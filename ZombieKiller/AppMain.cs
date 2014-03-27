@@ -139,8 +139,8 @@ namespace ZombieKiller
 			levels.Add (new LevelOne (graphics, collisions, Plr));
 			levels.Add (new LevelTwo (graphics, collisions, Plr));
 			levels.Add (new LevelThree (graphics, collisions, Plr));	
-//			levels.Add (new LevelFour (graphics, collisions, Plr));	
-//			levels.Add (new LevelFive (graphics, collisions, Plr));
+			levels.Add (new LevelFour (graphics, collisions, Plr));	
+			levels.Add (new LevelFive (graphics, collisions, Plr));
 			//Load menu
 			currentState = GameState.Menu;
 			currentLevel = 0;
@@ -325,9 +325,6 @@ namespace ZombieKiller
 		public static void RenderPlaying ()
 		{
 			levels [currentLevel].Render ();
-			
-			//Background
-			//bg.Render ();
 			
 			//This is where bullet and enemy collisions are rendered
 			levels [currentLevel].Collide.Render (DeltaTime);
