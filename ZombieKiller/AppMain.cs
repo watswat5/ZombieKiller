@@ -99,12 +99,30 @@ namespace ZombieKiller
 
 			highScores = new List<HighScore> ();
 			
+			float Height = graphics.Screen.Rectangle.Height;
+			float Width = graphics.Screen.Rectangle.Width;
+			
 			//Backgrounds for different gamestataes
 			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/paused.png", false));
 			menu = new Sprite (graphics, new Texture2D ("/Application/Assets/title.png", false));
 			dead = new Sprite (graphics, new Texture2D ("/Application/Assets/deadscreen.png", false));
 			winner = new Sprite (graphics, new Texture2D ("/Application/Assets/winner.png", false));
 			controls = new Sprite (graphics, new Texture2D ("/Application/Assets/controls.png", false));
+			
+			paused.Height = Height;
+			paused.Width = Width;
+			
+			menu.Height = Height;
+			menu.Width = Width;
+			
+			dead.Height = Height;
+			dead.Width = Width;
+			
+			winner.Height = Height;
+			winner.Width = Width;
+			
+			controls.Height = Height;
+			controls.Width = Width;
 			
 			//Music
 			bgm = new Bgm ("/Application/Assets/Sounds/bg.mp3");

@@ -16,7 +16,6 @@ namespace ZombieKiller
 		{
 			MaxEnemies = 60;
 			c.P = plr;
-			p.Scale = new Vector2(2,2);
 		}
 		
 		public override void Update()

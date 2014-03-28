@@ -90,6 +90,9 @@ namespace ZombieKiller
 			dropRange = drprng;
 			this.name = name;
 			p = new Sprite(graphics, tex);
+			//p.Scale = new Vector2(2f, 2f);
+			p.Width = graphics.Screen.Rectangle.Width;
+			p.Height = graphics.Screen.Rectangle.Height;
 			this.plr = plr;
 			this.col = col;
 		}

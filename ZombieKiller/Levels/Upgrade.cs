@@ -73,9 +73,8 @@ namespace ZombieKiller
 			
 			background = new Sprite(graphics, new Texture2D("/Application/Assets/upgrade.png", false));
 			background.Center = new Vector2(0,0);
-			
-//			weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
-//			weapon.Position = position;
+			background.Height = graphics.Screen.Rectangle.Height;
+			background.Width = graphics.Screen.Rectangle.Width;
 		}
 		
 		public void Update(GamePadData gp)

@@ -175,7 +175,4 @@
     <Content Include="Assets\Sounds\boid.wav" />
     <Content Include="Assets\hsscreen.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="highscores.txt" />
-  </ItemGroup>
 </Project>

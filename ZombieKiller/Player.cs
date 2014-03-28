@@ -121,7 +121,8 @@ namespace ZombieKiller
 			tex = new Texture2D("/Application/Assets/damage.png", false);
 			DamageScreen = new Sprite(Graphics, tex);
 			DamageScreen.SetColor(1,1,1,0);
-			DamageScreen.Scale = new Vector2(2,2);
+			DamageScreen.Width = Graphics.Screen.Rectangle.Width;
+			DamageScreen.Height = Graphics.Screen.Rectangle.Height;
 			
 			weapons = new List<Weapon>();
 			//weapons.Add (new AdminGun(gc, Collide, Position, p.Rotation));
