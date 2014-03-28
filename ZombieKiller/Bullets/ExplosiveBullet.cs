@@ -16,6 +16,12 @@ namespace ZombieKiller
 		private int shrapnel;
 		private int shrapnelDmg;
 		
+		public int Shrapnel
+		{
+			get { return shrapnel;}
+			set { shrapnel = value;}
+		}
+		
 		public ExplosiveBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, new Texture2D("/Application/Assets/Bullets/rocket.png", false))
 		{
 			shrapnel = 16;

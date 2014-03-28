@@ -18,6 +18,8 @@ namespace ZombieKiller
 			}
 		}
 		
+		private int penetration;
+		
 		public Rifle (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/rifle.wav"), new Texture2D("/Application/Assets/Weapons/rifle2.png", false), new Texture2D("/Application/Assets/Weapons/rifleammo.png", false))
 		{
 			p.Center = new Vector2 (0.5f, 1.0f);
@@ -30,6 +32,8 @@ namespace ZombieKiller
 			ReloadTime = 3000;
 			RunSpeed = 20;
 			Damage = 5;
+			penetration = 2;
+			Cost = 40;
 			AmmoScale = new Vector2 (0.1f, 0.1f);
 			UpgradeTexture = new Texture2D ("/Application/Assets/Items/rifleobj.png", false);
 			Type = Weapon.WeaponType.Rifle;
@@ -41,6 +45,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + MaxAmmo + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Enemy Penetration: " + penetration + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
@@ -51,6 +56,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + (MaxAmmo + 1) + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Enemy Penetration: " + (penetration + 1) + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
@@ -58,17 +64,25 @@ namespace ZombieKiller
 		//Four bullets as one. Easy penetration effect.
 		public override void FireWeapon ()
 		{
-			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
-			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
-			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
-			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			for(int i = 0; i < penetration; i++)
+				Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
 			BulletCount++;
 			
 		}
 
 		public override void Upgrade ()
 		{
-			
+			if (Collide.P.Money >= Cost) {
+				Console.WriteLine ("Upgraded");
+				ReloadTime = (int)(ReloadTime * 0.9);
+				MaxAmmo += 5;
+				CurrentAmmo = MaxAmmo;	
+				penetration += 1;
+				Collide.P.Money -= Cost;
+				Cost += 30;
+			} else {
+				Console.WriteLine ("NEM " + Collide.P.Money);
+			}
 		}
 		
 	}

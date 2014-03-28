@@ -18,6 +18,9 @@ namespace ZombieKiller
 				return "Fires a spread of bullets.\nDeals moderate damage.\nEffective on groups of moderately strong enemies.";
 			}
 		}
+		
+		private int bulletsPerShot;
+		
 		//Fires five bullets in a spread out pattern
 		public Shotgun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/shotgunammo.png", false))
 		{
@@ -31,6 +34,8 @@ namespace ZombieKiller
 			ReloadTime = 2000;
 			RunSpeed = 10;
 			Damage = 2;
+			bulletsPerShot = 1;
+			Cost = 40;
 			UpgradeTexture = new Texture2D ("/Application/Assets/Items/shotgunobj.png", false);
 			Type = Weapon.WeaponType.ShotGun;
 		}
@@ -41,6 +46,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + MaxAmmo + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Pellets Per Shot: " + (bulletsPerShot*2 + 1) + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
@@ -51,6 +57,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + (MaxAmmo + 1) + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Pellets Per Shot: " + ((bulletsPerShot + 1)*2 + 1) + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
@@ -60,7 +67,7 @@ namespace ZombieKiller
 		{
 			float spread = .25f;
 			
-			for (int i = -2; i < 3; i++) {
+			for (int i = -bulletsPerShot; i <= bulletsPerShot; i++) {
 				float newRot = (float)((p.Rotation) + Math.PI * i * spread / 12);
 				b = new RubberBullet (Graphics, p.Position, newRot, Collide, (int)RunSpeed, Damage);
 				b.Texture = new Texture2D ("/Application/Assets/Bullets/shotgunpellet.png", false);
@@ -73,6 +80,17 @@ namespace ZombieKiller
 		
 		public override void Upgrade ()
 		{
+			if (Collide.P.Money >= Cost) {
+				Console.WriteLine ("Upgraded");
+				ReloadTime = (int)(ReloadTime * 0.9);
+				MaxAmmo += 4;
+				CurrentAmmo = MaxAmmo;	
+				bulletsPerShot += 1;
+				Collide.P.Money -= Cost;
+				Cost += 20;
+			} else {
+				Console.WriteLine ("NEM " + Collide.P.Money);
+			}
 			
 		}
 		

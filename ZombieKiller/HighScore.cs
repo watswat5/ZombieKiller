@@ -31,12 +31,16 @@ namespace ZombieKiller
 		public int CompareTo(object o)
 		{
 			HighScore h = o as HighScore;
-			
-			if(h.Score > score)
-				return -1;
-			if(h.Score < score)
-				return 1;
-			return 0;
+			if(h.Score != score)
+			{
+				if(h.Score > score)
+					return -1;
+				if(h.Score < score)
+					return 1;
+				return 0;
+			}
+			else
+				return String.Compare(h.Name, Name);				
 		}
 		
 		public override string ToString ()

@@ -86,7 +86,7 @@ namespace ZombieKiller
 		public override void NewGame ()
 		{
 			Collide.PurgeAssets();
-			Item mgo = new MGObject (Graphics, new Vector3 (100, 100, 0), Collide);
+			Item mgo = new RifleObject (Graphics, new Vector3 (100, 100, 0), Collide);
 			Collide.AddItem = (mgo);
 			
 			Plr.Position = new Vector3(20, 20, 0);

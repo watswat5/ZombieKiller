@@ -103,6 +103,7 @@
     <Folder Include="Levels\" />
     <Folder Include="Assets\Levels\" />
     <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Debug\ZombieKiller-unsigned\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\paused.png" />
@@ -175,6 +176,6 @@
     <Content Include="Assets\hsscreen.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\ZombieKiller-unsigned\highscores.txt" />
+    <None Include="highscores.txt" />
   </ItemGroup>
 </Project>

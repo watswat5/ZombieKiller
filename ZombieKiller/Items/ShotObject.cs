@@ -25,13 +25,16 @@ namespace ZombieKiller
 		{
 			//Check if player has the weapon already
 			bool hasGun = false;
-			for(int i = 0; i < p.Weapons.Count; i++)
+			if(p.Weapons.Count > 0)
 			{
-				Weapon w = p.Weapons[i] as Shotgun;
-				if(w != null)
+				for(int i = 0; i < p.Weapons.Count; i++)
 				{
-					hasGun = true;
-					break;
+					Weapon w = p.Weapons[i] as Shotgun;
+					if(w != null)
+					{
+						hasGun = true;
+						break;
+					}
 				}
 			}
 			
@@ -44,15 +47,17 @@ namespace ZombieKiller
 				this.IsAlive = false;
 			}
 			
-			//Checks if current weapon is same as ammo type
-			if(p.currentWeapon.Type == Weapon.WeaponType.ShotGun && p.currentWeapon.CurrentAmmo < p.currentWeapon.MaxAmmo)
+			else if(p.Weapons.Count > 0)
 			{
-				if(p.currentWeapon.CurrentAmmo + StatEffectValue <= p.currentWeapon.MaxAmmo)
-					p.currentWeapon.CurrentAmmo += StatEffectValue;
-				else
-					p.currentWeapon.CurrentAmmo = p.currentWeapon.MaxAmmo;
-
-				this.IsAlive = false;
+				if(p.currentWeapon.Type == Weapon.WeaponType.ShotGun && p.currentWeapon.CurrentAmmo < p.currentWeapon.MaxAmmo)
+				{
+					if(p.currentWeapon.CurrentAmmo + StatEffectValue <= p.currentWeapon.MaxAmmo)
+						p.currentWeapon.CurrentAmmo += StatEffectValue;
+					else
+						p.currentWeapon.CurrentAmmo = p.currentWeapon.MaxAmmo;
+	
+					this.IsAlive = false;
+				}
 			}
 		}
 		

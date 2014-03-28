@@ -18,6 +18,8 @@ namespace ZombieKiller
 			}
 		}
 		
+		private int shrapnel = 16;
+		
 		public RPG (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/rifle.wav"), new Texture2D("/Application/Assets/Weapons/cannon.png", false), new Texture2D("/Application/Assets/Weapons/rocketammo.png", false))
 		{
 			p.Center = new Vector2 (0.5f, 0.7f);
@@ -30,6 +32,7 @@ namespace ZombieKiller
 			ReloadTime = 2000;
 			RunSpeed = 10;
 			Damage = 10;
+			Cost = 50;
 			AmmoScale = new Vector2 (.6f, .6f);
 			UpgradeTexture = new Texture2D ("/Application/Assets/Items/cannonobject.png", false);
 			Type = Weapon.WeaponType.RPG;
@@ -41,6 +44,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + MaxAmmo + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Shrapnel Shards: " + shrapnel + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
@@ -51,19 +55,32 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + (MaxAmmo + 1) + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
+						+ "Shrapnel Shards: " + (shrapnel + 2) + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
 		
 		public override void FireWeapon ()
 		{
-			Collide.AddBullet = new ExplosiveBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			ExplosiveBullet b = new ExplosiveBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			b.Shrapnel = shrapnel;
+			Collide.AddTempBullet = b;
 			BulletCount++;
 		}
 		
 		public override void Upgrade ()
 		{
-			
+			if (Collide.P.Money >= Cost) {
+				Console.WriteLine ("Upgraded");
+				ReloadTime = (int)(ReloadTime * 0.8);
+				MaxAmmo += 1;
+				shrapnel += 2;
+				CurrentAmmo = MaxAmmo;	
+				Collide.P.Money -= Cost;
+				Cost += 30;
+			} else {
+				Console.WriteLine ("NEM " + Collide.P.Money);
+			}
 		}
 	}
 }
