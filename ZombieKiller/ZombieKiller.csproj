@@ -79,6 +79,7 @@
     <Compile Include="Levels\LevelFive.cs" />
     <Compile Include="Enemies\BoomerBoss.cs" />
     <Compile Include="HighScore.cs" />
+    <Compile Include="Items\BoidObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />

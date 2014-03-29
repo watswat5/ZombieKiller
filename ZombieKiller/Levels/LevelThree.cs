@@ -39,16 +39,20 @@ namespace ZombieKiller
 			}
 		}
 		
+		//Item drops
 		public override void Drop(Enemy e)
 		{
 			int i = 0;
 			Item j;
 			bool picked = false;
 			
+			//Run the selection algorithm for each item
 			for(int d = 0; d < dropRate.Length; d++)
 			{
 				if(!picked)
 				{
+					//Runs the loop the # of times assigned as drop rate.
+					//More runs = higher chance.
 					for(int o = 0; o < dropRate[d]; o++)
 					{
 						int n = rnd.Next (0, DropRange);
@@ -61,7 +65,6 @@ namespace ZombieKiller
 				}
 			}
 				
-			
 			switch(i)
 			{
 			case 0:
@@ -106,6 +109,9 @@ namespace ZombieKiller
 		{
 			Collide.PurgeAssets ();
 	
+			Item mgo = new BoidObject (Graphics, new Vector3 (rnd.Next (0, Graphics.Screen.Rectangle.Width), rnd.Next (0, Graphics.Screen.Rectangle.Height), 0), Collide);
+			Collide.AddItem = (mgo);
+			
 			Plr.Position = new Vector3(20, 20, 0);
 			
 			//Spawn initial enemies

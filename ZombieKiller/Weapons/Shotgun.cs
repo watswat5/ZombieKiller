@@ -20,6 +20,7 @@ namespace ZombieKiller
 		}
 		
 		private int bulletsPerShot;
+		private float dmgUp;
 		
 		//Fires five bullets in a spread out pattern
 		public Shotgun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/shotgunammo.png", false))
@@ -47,7 +48,7 @@ namespace ZombieKiller
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
 						+ "Pellets Per Shot: " + (bulletsPerShot*2 + 1) + "\n"
-						+ "Damage: " + Damage;
+						+ "Damage: " + Dmg ();
 			return stats;
 		}
 		
@@ -58,7 +59,7 @@ namespace ZombieKiller
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
 						+ "Pellets Per Shot: " + ((bulletsPerShot + 1)*2 + 1) + "\n"
-						+ "Damage: " + Damage;
+						+ "Damage: " + FutureDmg();
 			return stats;
 		}
 		
@@ -87,11 +88,32 @@ namespace ZombieKiller
 				CurrentAmmo = MaxAmmo;	
 				bulletsPerShot += 1;
 				Collide.P.Money -= Cost;
+				dmgUp += .3f;
+				Damage = Dmg ();
 				Cost += 20;
 			} else {
 				Console.WriteLine ("NEM " + Collide.P.Money);
 			}
 			
+		}
+		
+		private int Dmg()
+		{
+			if(dmgUp > 1.0f)
+			{
+				dmgUp = 0f;
+				return Damage + 1;
+			}
+			return Damage;
+		}
+		
+		private int FutureDmg()
+		{
+			if(dmgUp + 0.35f > 1.0f)
+			{
+				return Damage + 1;
+			}
+			return Damage;
 		}
 		
 		public override void Render ()

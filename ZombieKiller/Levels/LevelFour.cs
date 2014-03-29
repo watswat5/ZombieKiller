@@ -135,6 +135,9 @@ namespace ZombieKiller
 		{
 			Collide.PurgeAssets ();
 	
+			Item mgo = new RPGObject (Graphics, new Vector3 (rnd.Next (0, Graphics.Screen.Rectangle.Width), rnd.Next (0, Graphics.Screen.Rectangle.Height), 0), Collide);
+			Collide.AddItem = (mgo);
+			
 			Plr.Position = new Vector3(20, 20, 0);
 			
 			//Spawn initial enemies

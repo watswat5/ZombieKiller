@@ -156,9 +156,9 @@ namespace ZombieKiller
 			levels = new List<Level> ();
 			levels.Add (new LevelOne (graphics, collisions, Plr));
 			levels.Add (new LevelTwo (graphics, collisions, Plr));
-//			levels.Add (new LevelThree (graphics, collisions, Plr));	
-//			levels.Add (new LevelFour (graphics, collisions, Plr));	
-//			levels.Add (new LevelFive (graphics, collisions, Plr));
+			levels.Add (new LevelThree (graphics, collisions, Plr));	
+			levels.Add (new LevelFour (graphics, collisions, Plr));	
+			levels.Add (new LevelFive (graphics, collisions, Plr));
 			//Load menu
 			currentState = GameState.Menu;
 			currentLevel = 0;

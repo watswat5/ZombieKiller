@@ -21,7 +21,7 @@ namespace ZombieKiller
 		}
 		
 		//Item type
-		public enum ItemType {Health, RifleAmmo, MGAmmo, ShotAmmo, MGObject, RifleObject, ShotObject, RPGObject, RPGAmmo};
+		public enum ItemType {Health, RifleAmmo, MGAmmo, ShotAmmo, MGObject, RifleObject, ShotObject, RPGObject, RPGAmmo, BoidObject};
 		private ItemType itemType;
 		public ItemType ItemClass
 		{
