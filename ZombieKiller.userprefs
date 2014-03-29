@@ -7,11 +7,11 @@
           <Option id="ShowVersionControlOverlays" value="True" />
           <Option id="ShowAllFiles" value="False" />
           <Node name="ZombieKiller" expanded="True">
-            <Node name="Items" expanded="True">
-              <Node name="BoidObject.cs" selected="True" />
+            <Node name="Bullets" expanded="True" />
+            <Node name="Enemies" expanded="True">
+              <Node name="Enemy.cs" selected="True" />
             </Node>
-            <Node name="Levels" expanded="True" />
-            <Node name="Weapons" expanded="True" />
+            <Node name="Items" expanded="True" />
           </Node>
         </State>
       </Pad>

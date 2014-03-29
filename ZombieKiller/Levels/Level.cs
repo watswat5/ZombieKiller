@@ -7,7 +7,7 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using System.Diagnostics;
 using Sce.PlayStation.Core.Audio;
-//Chris Antepenko
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	//A level can have a specific background, difficulty, enemy set, drop rate, etc.

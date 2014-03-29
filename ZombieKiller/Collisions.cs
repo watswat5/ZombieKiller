@@ -7,7 +7,7 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.Core.Audio;
 
-/*Chris Antepenko*/
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	//Handles collisions between all objects.

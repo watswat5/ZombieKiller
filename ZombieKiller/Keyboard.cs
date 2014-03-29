@@ -7,6 +7,7 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.UI;
 
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	//Portable class for text entry.

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	public class HighScore : IComparable

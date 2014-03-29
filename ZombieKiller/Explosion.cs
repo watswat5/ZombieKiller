@@ -6,7 +6,7 @@ using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 
-/*Chris Antepenko*/
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	//Death sprite

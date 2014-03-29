@@ -8,7 +8,7 @@ using Sce.PlayStation.Core.Input;
 using System.Diagnostics;
 using Sce.PlayStation.Core.Audio;
 
-//Chris Antepenko
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	public class LevelFive : Level

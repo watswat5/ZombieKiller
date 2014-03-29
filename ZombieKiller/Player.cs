@@ -8,7 +8,7 @@ using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.Core.Audio;
 using Sce.PlayStation.HighLevel.UI;
 
-/*Chris Antepenko*/
+//Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
 {
 	//Main player object.

@@ -7,7 +7,7 @@ using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.UI;
 using System.Diagnostics;
-//Chris Antepenko
+//Chris Antepenko & C. Blake Becker
 
 namespace ZombieKiller
 {
