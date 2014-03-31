@@ -77,9 +77,9 @@ namespace ZombieKiller
 			set {dropRange = value;}
 		}
 		
-		//First term is ammo drop rate, second is weapon drop rate. Higher # = Higher % drop rate.
-		//From L to R: MG, Shotgun, Rifle, RPG, Shield (Boid Gun). First is health.  
-		public static int[] dropRate = {20, 20, 20, 20, 5, 5, 5, 5, 15};
+		//From L to R - Machinegun, Shotgun, Rifle, RPG. Weapon first, then ammo.
+		//Last is health.
+		public static int[] dropRate = {0, 6, 4, 2, 11, 9, 7, 5, 5};//Higher # = Higher Drop %
 		
 		public Level (GraphicsContext g, Texture2D t, Collisions col, int d, int max, int drprng, string name, Player plr)
 		{

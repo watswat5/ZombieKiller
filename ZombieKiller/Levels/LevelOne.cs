@@ -67,12 +67,8 @@ namespace ZombieKiller
 			case 0:
 				Console.WriteLine("NULL 0");
 				break;
-			case 1:
-				j = new MGAmmo(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
 			case 5:
-				j = new MGObject(Graphics, e.Position, Collide);
+				j = new MGAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
 			default:

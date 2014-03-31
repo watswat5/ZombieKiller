@@ -13,7 +13,7 @@ namespace ZombieKiller
 {
 	public class LevelFive : Level
 	{
-		public LevelFive (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/grassfield.png", false), c, 3, 20, 200, "Level One", plr)
+		public LevelFive (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/grassfield.png", false), c, 3, 20, 250, "Level Five", plr)
 		{
 			MaxEnemies = 10;
 			c.P = plr;
@@ -63,38 +63,38 @@ namespace ZombieKiller
 			switch(i)
 			{
 			case 0:
-				Console.WriteLine("NULL");
+				Console.WriteLine("NULL 0");
 				break;
 			case 1:
-				j = new MGAmmo(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 2:
-				j = new ShotgunAmmo(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 3:
-				j = new RifleAmmo(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 4:
-				j = new RPGAmmo(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
-			case 5:
 				j = new MGObject(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
-			case 6:
+			case 2:
 				j = new ShotObject(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
-			case 7:
+			case 3:
 				j = new RifleObject(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
-			case 8:
+			case 4:
 				j = new RPGObject(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 5:
+				j = new MGAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 6:
+				j = new ShotgunAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 7:
+				j = new RifleAmmo(Graphics, e.Position, Collide);
+				Collide.AddItem = j;
+				break;
+			case 8:
+				j = new RPGAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
 			case 9:

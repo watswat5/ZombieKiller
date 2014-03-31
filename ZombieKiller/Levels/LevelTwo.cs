@@ -12,7 +12,7 @@ namespace ZombieKiller
 {
 	public class LevelTwo : Level
 	{
-		public LevelTwo (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/lava.png", false), c, 2, 20, 50, "Level One", plr)
+		public LevelTwo (GraphicsContext g, Collisions c, Player plr) : base(g, new Texture2D("/Application/Assets/Levels/lava.png", false), c, 2, 20, 102, "Level Two", plr)
 		{
 			MaxEnemies = 60;
 			c.P = plr;
@@ -38,65 +38,7 @@ namespace ZombieKiller
 				EnemyCount++;
 			}
 		}
-		
-//		public override void Drop(Enemy e)
-//		{
-//			Plr.Money += e.Value;
-//			Item it;
-//			int rand = rnd.Next (1, DropRange);
-//			List<Vector2> drops = new List<Vector2>();
-//
-//			for(int i = 0; i < dropRate.Length; i++)
-//			{
-//				if(dropRate[i] != 0)
-//				{
-//					if(rand%dropRate[i] == 0)
-//					{
-//						drops.Add(new Vector2(i, dropRate[i]));
-//					}
-//				}
-//			}
-//			
-//			int max = 0;
-//			for(int i = 0; i < drops.Count; i++)
-//				if(drops[i].Y > drops[max].Y)
-//					max = i;
-//			
-//			if(drops.Count != 0)
-//			{
-//				int x = (int)drops[max].X;
-//				switch(x)
-//				{
-//				case 0:
-//					it = new MGObject(Graphics, e.p.Position, Collide);
-//					Collide.AddItem = it;
-//					break;
-//				case 1:
-//					it = new MGAmmo(Graphics, e.p.Position, Collide);
-//					Collide.AddItem = it;
-//					break;
-//				case 2:
-//					it = new ShotObject(Graphics, e.p.Position, Collide);
-//					Collide.AddItem = it;
-//					break;
-//				case 3:
-//					it = new ShotgunAmmo(Graphics, e.p.Position, Collide);
-//					Collide.AddItem = it;
-//					break;
-//				default:
-//					break;
-//				}
-//			}
-////			Item i;
-////			if(rand%10== 0)
-////				i = new MGObject(Graphics, pos, Collide);
-////			else if(rand%5 == 0)
-////				i = new MGAmmo(Graphics, pos, Collide);
-////			else
-////				return;
-////			Collide.AddItem = i;
-//		}
-		
+	
 		public override void Drop(Enemy e)
 		{
 			int i = 0;
@@ -125,20 +67,16 @@ namespace ZombieKiller
 			case 0:
 				Console.WriteLine("NULL 0");
 				break;
-			case 1:
-				j = new MGAmmo(Graphics, e.Position, Collide);
-				Collide.AddItem = j;
-				break;
 			case 2:
-				j = new ShotgunAmmo(Graphics, e.Position, Collide);
+				j = new ShotObject(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
 			case 5:
-				j = new MGObject(Graphics, e.Position, Collide);
+				j = new MGAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
 			case 6:
-				j = new ShotObject(Graphics, e.Position, Collide);
+				j = new ShotgunAmmo(Graphics, e.Position, Collide);
 				Collide.AddItem = j;
 				break;
 			case 9:

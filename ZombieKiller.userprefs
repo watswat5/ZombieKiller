@@ -1,18 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Levels\LevelThree.cs">
+    <Files>
+      <File FileName="ZombieKiller\Levels\Level.cs" Line="82" Column="61" />
+      <File FileName="ZombieKiller\Levels\LevelOne.cs" Line="69" Column="11" />
+      <File FileName="ZombieKiller\Levels\LevelTwo.cs" Line="41" Column="2" />
+      <File FileName="ZombieKiller\Levels\LevelThree.cs" Line="113" Column="27" />
+      <File FileName="ZombieKiller\Levels\LevelFour.cs" Line="16" Column="169" />
+      <File FileName="ZombieKiller\Levels\LevelFive.cs" Line="16" Column="169" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Option id="ShowVersionControlOverlays" value="True" />
           <Option id="ShowAllFiles" value="False" />
-          <Node name="ZombieKiller" expanded="True">
-            <Node name="Bullets" expanded="True" />
-            <Node name="Enemies" expanded="True">
-              <Node name="Enemy.cs" selected="True" />
-            </Node>
-            <Node name="Items" expanded="True" />
-          </Node>
+          <Option id="ShowVersionControlOverlays" value="True" />
+          <Node name="ZombieKiller" expanded="True" selected="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
