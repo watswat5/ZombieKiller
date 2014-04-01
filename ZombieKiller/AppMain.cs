@@ -26,7 +26,8 @@ namespace ZombieKiller
 			Controls,
 			Upgrade,
 			Winner,
-			HighScore
+			HighScoreEntry,
+			HighScoreView
 		};
 		
 		private static bool Running;
@@ -35,6 +36,7 @@ namespace ZombieKiller
 		public static Collisions collisions;
 		private static Random rnd;
 		private static Upgrade upgrade;
+		private static LevelManager lvlMan;
 		//Timer
 		private static Stopwatch clock;
 		private static long StartTime;
@@ -50,8 +52,7 @@ namespace ZombieKiller
 		private static Sprite dead;
 		private static Sprite controls;
 		private static Player Plr;
-		private static List<Level> levels;
-		private static int currentLevel;
+		private static Queue<Level> levels;
 		private static Bgm death, win, bgm;
 		private static Keyboard k;
 		private static List<HighScore> highScores;
@@ -134,6 +135,8 @@ namespace ZombieKiller
 			win = new Bgm ("/Application/Assets/Sounds/win.mp3");
 			death = new Bgm ("/Application/Assets/Sounds/dead.mp3");
 			
+			upgrade = new Upgrade(graphics);
+			
 			//Set up a new game
 			//NewGame ();
 			NewGame ();
@@ -146,45 +149,56 @@ namespace ZombieKiller
 			collisions = new Collisions (graphics);
 			
 			Plr = new Player (graphics, new Vector3 (20, 20, 0), collisions);
-			upgrade = new Upgrade (graphics, Plr);
+			collisions.P = Plr; 
+			
+			//upgrade = new Upgrade (graphics);
+			upgrade.Plr = Plr;
 			
 			k = new Keyboard (graphics, 337);
 
 			upgrade.Plr = Plr;
 			
 			//Init levels
-			levels = new List<Level> ();
-			levels.Add (new LevelOne (graphics, collisions, Plr));
-			levels.Add (new LevelTwo (graphics, collisions, Plr));
-			levels.Add (new LevelThree (graphics, collisions, Plr));	
-			levels.Add (new LevelFour (graphics, collisions, Plr));	
-			levels.Add (new LevelFive (graphics, collisions, Plr));
+//			levels = new Queue<Level> ();
+//			levels.Enqueue (new LevelOne (graphics, collisions, Plr));
+//			levels.Enqueue (new LevelTwo (graphics, collisions, Plr));
+//			levels.Enqueue (new LevelThree (graphics, collisions, Plr));	
+//			levels.Enqueue (new LevelFour (graphics, collisions, Plr));	
+//			levels.Enqueue (new LevelFive (graphics, collisions, Plr));
+			
+			lvlMan = new LevelManager(graphics, collisions);
+			lvlMan.Initialize();
+			
+			
 			//Load menu
 			currentState = GameState.Menu;
-			currentLevel = 0;
 			
-//			ReadHighScores();
-//			highScores.Sort();
-//			highScores.Reverse();
-//			foreach(HighScore h in highScores)
-//				Console.WriteLine(h);
+			if(highScores.Count < 5)
+			{
+				highScores = new List<HighScore>();
+				ReadHighScores();
+				highScores.Sort();
+				highScores.Reverse();
+				foreach(HighScore h in highScores)
+					Console.WriteLine(h);
+			}
 		}
 		
 		public static void ReadHighScores ()
 		{
-//			if(!File.Exists("/Debug/highscores.txt"))
-//			{
-//				using(StreamWriter writer = new StreamWriter("/Debug/highscores.txt", true))
-//				{
-//					for(int i = 0; i < 5; i++)
-//					{
-//				  		writer.WriteLine("AAA,00{0}", (i + 1));
-//					}
-//					writer.Close();
-//				}
-//			}
+			if(!File.Exists("/Documents/highscores.txt"))
+			{
+				using(StreamWriter writer = new StreamWriter("/Documents/highscores.txt", true))
+				{
+					for(int i = 0; i < 5; i++)
+					{
+				  		writer.WriteLine("AAA,000");
+					}
+					writer.Close();
+				}
+			}
 			
-			sr = new StreamReader ("/Application/highscores.txt");
+			sr = new StreamReader ("/Documents/highscores.txt");
 			
 			while (!sr.EndOfStream) {
 				highScores.Add (new HighScore (sr.ReadLine ()));
@@ -220,8 +234,11 @@ namespace ZombieKiller
 			case GameState.Winner:
 				UpdateWinner (gamePadData);
 				break;
-			case GameState.HighScore:
-				UpdateHighScore (gamePadData);
+			case GameState.HighScoreEntry:
+				UpdateHighScoreEntry (gamePadData);
+				break;
+			case GameState.HighScoreView:
+				UpdateHighScoreView (gamePadData);
 				break;
 			}
 			//Console.WriteLine(DeltaTime);
@@ -230,16 +247,14 @@ namespace ZombieKiller
 		//Update Ingame
 		public static void UpdatePlaying (GamePadData gamePadData)
 		{
-			if (levels [currentLevel].Finished)
+			if (lvlMan.Finished)
 				currentState = GameState.Upgrade;
-			levels [currentLevel].Collide.Update (DeltaTime, gamePadData);
-			levels [currentLevel].Update ();
-			
+			lvlMan.Update (DeltaTime, gamePadData);
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
 				currentState = GameState.Paused;
 				bgMusic.Volume = 0.1f;
 			}
-			if (levels [currentLevel].Plr.Health <= 0) {
+			if (lvlMan.Health <= 0) {
 				bgMusic.Dispose ();
 				bgMusic = death.CreatePlayer ();
 				bgMusic.Volume = 0.3f;
@@ -267,7 +282,7 @@ namespace ZombieKiller
 				bgMusic.Volume = 0.1f;
 				bgMusic.Loop = true;
 				bgMusic.Play ();
-				NewGame ();
+				currentState = GameState.HighScoreView;
 			}
 		}
 		
@@ -276,7 +291,7 @@ namespace ZombieKiller
 		{
 			//Start game
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
-				levels [currentLevel].NewGame (); 
+				lvlMan.NewGame (); 
 				currentState = GameState.Playing;
 				bgMusic.Volume = .25f;
 			} 
@@ -305,7 +320,7 @@ namespace ZombieKiller
 		{
 			upgrade.Update (gamePadData);
 			
-			if (currentLevel == levels.Count - 1) {
+			if (!lvlMan.InfiniteMode && lvlMan.EndGame) {
 				currentState = GameState.Winner;
 				bgMusic.Dispose ();
 				bgMusic = win.CreatePlayer ();
@@ -314,8 +329,8 @@ namespace ZombieKiller
 				bgMusic.Play ();	
 			} else if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
 				currentState = GameState.Playing;
-				currentLevel++;
-				levels [currentLevel].NewGame ();
+				lvlMan.NextLevel();
+				lvlMan.NewGame ();
 				bgMusic.Volume = .25f;
 			}
 		}
@@ -334,8 +349,8 @@ namespace ZombieKiller
 			}
 		}
 		
-		//Update High Score Screen
-		public static void UpdateHighScore (GamePadData gp)
+		//Update High Score Entry Screen
+		public static void UpdateHighScoreEntry (GamePadData gp)
 		{
 			k.Update (gp);
 			string s = "";
@@ -355,13 +370,37 @@ namespace ZombieKiller
 			}
 		}
 		
+		//Update High Score View Screen
+		public static void UpdateHighScoreView (GamePadData gp)
+		{
+			if(hScores.Text.Equals(""))
+			{
+				string s = "";
+				foreach (HighScore a in highScores)
+					s = s + "\n" + a;
+				hScores.Text = s;
+				hScores.TextColor = new UIColor(1,1,1,1);
+			}
+			if((gp.ButtonsDown & GamePadButtons.Start) != 0)
+			{
+				bgMusic.Dispose ();
+				bgMusic = bgm.CreatePlayer ();
+				bgMusic.Volume = 0.1f;
+				bgMusic.Loop = true;
+				bgMusic.Play ();
+				hScores.Text = "";
+				currentState = GameState.Menu;	
+				NewGame ();		
+			}
+		}
+		
 		//Render In game
 		public static void RenderPlaying ()
 		{
-			levels [currentLevel].Render ();
+			lvlMan.Render (DeltaTime);
 			
 			//This is where bullet and enemy collisions are rendered
-			levels [currentLevel].Collide.Render (DeltaTime);
+			//levels [currentLevel].Collide.Render (DeltaTime);
 			
 			
 		}
@@ -369,9 +408,10 @@ namespace ZombieKiller
 		//Render Pause menu
 		public static void RenderPaused ()
 		{
-			levels [currentLevel].Render ();
-			//This is where bullet and enemy collisions are calculated and rendered
-			collisions.Render (DeltaTime);
+//			levels [currentLevel].Render ();
+//			//This is where bullet and enemy collisions are calculated and rendered
+//			collisions.Render (DeltaTime);
+			lvlMan.Render (DeltaTime);			
 			//Renders current weapon only
 			paused.Render ();
 			
@@ -380,9 +420,12 @@ namespace ZombieKiller
 		//Render death screen
 		public static void RenderDead ()
 		{
-			levels [currentLevel].Render ();
-			//This is where bullet and enemy collisions are calculated and rendered
-			levels [currentLevel].Collide.Render (DeltaTime);
+//			levels [currentLevel].Render ();
+//			//This is where bullet and enemy collisions are calculated and rendered
+//			levels [currentLevel].Collide.Render (DeltaTime);
+			
+			lvlMan.Render (DeltaTime);
+			
 			//Renders current weapon only
 			dead.Render ();	
 		}
@@ -390,20 +433,20 @@ namespace ZombieKiller
 		//Render Main Menu
 		public static void RenderMenu ()
 		{
-			levels [currentLevel].p.Render ();
+			//levels [currentLevel].p.Render ();
 			menu.Render ();			
 		}
 		//Render Controls Menu
 		public static void RenderControls ()
 		{
-			levels [currentLevel].p.Render ();
+			//levels [currentLevel].p.Render ();
 			controls.Render ();			
 		}
 		
 		//Render Upgrade Menu
 		public static void RenderUpgrade ()
 		{
-			levels [currentLevel].p.Render ();
+			//levels [currentLevel].p.Render ();
 			upgrade.Render ();
 			//controls.Render ();			
 		}
@@ -415,9 +458,15 @@ namespace ZombieKiller
 		}
 		
 		//Render High Score Menu
-		public static void RenderHighScore ()
+		public static void RenderHighScoreEntry ()
 		{
 			k.Render ();
+			UISystem.SetScene (s);
+			UISystem.Render ();
+		}
+		
+		public static void RenderHighScoreView ()
+		{
 			UISystem.SetScene (s);
 			UISystem.Render ();
 		}
@@ -499,8 +548,11 @@ namespace ZombieKiller
 			case GameState.Winner:
 				RenderWinner ();
 				break;
-			case GameState.HighScore:
-				RenderHighScore ();
+			case GameState.HighScoreEntry:
+				RenderHighScoreEntry ();
+				break;
+			case GameState.HighScoreView:
+				RenderHighScoreView ();
 				break;
 			}
 			

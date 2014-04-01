@@ -13,8 +13,8 @@ namespace ZombieKiller
 {
 	public class Zombie : Enemy
 	{
-		
-		public Zombie (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
+		private static Texture2D tex = new Texture2D("/Application/Assets/Enemies/zombie.png", false);
+		public Zombie (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, tex, col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
 		{
 			Difficulty = d;
 			RunSpeed = .8f;

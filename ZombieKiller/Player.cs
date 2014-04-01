@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Environment;

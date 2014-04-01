@@ -17,7 +17,9 @@ namespace ZombieKiller
 		private int numOfBounces;
 		private const int MAX_BOUNCES = 3;
 		
-		public RubberBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, new Texture2D("/Application/Assets/Bullets/bullet.png", false))
+		private static Texture2D tex = new Texture2D("/Application/Assets/Bullets/bullet.png", false);
+		
+		public RubberBullet (GraphicsContext gc, Vector3 position, float rot, Collisions col, int speed, int damage) : base(gc, position, rot, col, speed, damage, tex)
 		{
 			
 		}

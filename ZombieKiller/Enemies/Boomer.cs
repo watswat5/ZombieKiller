@@ -14,11 +14,11 @@ namespace ZombieKiller
 	//Explodes on contact with player.
 	public class Boomer : Enemy
 	{
-		
-		public Boomer (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/boomer.png", false), col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
+		private static Texture2D tex = new Texture2D("/Application/Assets/Enemies/boomer.png", false);
+		public Boomer (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, tex, col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
 		{
 			Difficulty = d;
-			RunSpeed = 0.5f;
+			RunSpeed = 0.4f;
 			explode.FrameDuration = 100;
 			explode.Scale = new Vector2 (1.2f, 1.2f);
 			FrameDuration = 100;

@@ -28,14 +28,14 @@ namespace ZombieKiller
 			set { plr = value;}
 		}
 		
-		public Upgrade (GraphicsContext g, Player p)
+		public Upgrade (GraphicsContext g)//, Player p)
 		{
 			graphics = g;
 			currentWeapon = 0;
 			
 			UISystem.Initialize(graphics);
 			
-			plr = p;
+			//plr = p;
 			
 			scene = new Scene();
 			

@@ -102,7 +102,13 @@ namespace ZombieKiller
 			p.Render();
 		}
 		
-		public abstract void Update();
+		public virtual void Update()
+		{
+			if(Collide.Enemies.Count <= 0)
+			{
+				Finished = true;	
+			}
+		}
 		
 		//Spawns enemies until the max count is reached.
 		public abstract void SpawnEnemies();

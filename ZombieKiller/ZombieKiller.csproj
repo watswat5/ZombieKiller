@@ -80,6 +80,8 @@
     <Compile Include="Enemies\BoomerBoss.cs" />
     <Compile Include="HighScore.cs" />
     <Compile Include="Items\BoidObject.cs" />
+    <Compile Include="LevelManager.cs" />
+    <Compile Include="Levels\RandomLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
