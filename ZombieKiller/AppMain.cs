@@ -364,10 +364,10 @@ namespace ZombieKiller
 		public static void UpdateHighScoreEntry (GamePadData gp)
 		{
 			k.Update (gp);
-			string s = "";
-			foreach (HighScore a in highScores)
-				s = s + "\n" + a;
-			hScores.Text = s;
+//			string s = "";
+//			foreach (HighScore a in highScores)
+//				s = s + "\n" + a;
+//			hScores.Text = s;
 			if (k.Finished) {	
 				highScores.Sort ();
 				highScores.RemoveAt(0);
@@ -470,8 +470,8 @@ namespace ZombieKiller
 		public static void RenderHighScoreEntry ()
 		{
 			k.Render ();
-			UISystem.SetScene (s);
-			UISystem.Render ();
+//			UISystem.SetScene (s);
+//			UISystem.Render ();
 		}
 		
 		public static void RenderHighScoreView ()
@@ -532,7 +532,7 @@ namespace ZombieKiller
 		public static void Render ()
 		{
 			// Clear the screen
-			graphics.SetClearColor (0.0f, 0.0f, 0.0f, 0.0f);
+			graphics.SetClearColor (0.5f, 0.5f, 0.5f, 0.0f);
 			graphics.Clear ();
 			
 			switch (currentState) {

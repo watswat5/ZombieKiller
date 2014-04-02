@@ -15,6 +15,8 @@ namespace ZombieKiller
 {
 	public class LevelManager
 	{
+		//Variables
+		#region
 		private GraphicsContext graphics;
 		private Collisions collisions;
 		private Random rnd;
@@ -41,8 +43,18 @@ namespace ZombieKiller
 			get { return plr.Health;}	
 		}
 		
-		private int Difficulty;
+		private int levelCount;
+		public int LevelCount
+		{
+			get { return levelCount;}	
+		}
 		
+		private float Difficulty;
+		
+		private Scene s;
+		private Label l;
+		
+		#endregion
 		public LevelManager (GraphicsContext g, Collisions c)
 		{
 			graphics = g;
@@ -59,20 +71,25 @@ namespace ZombieKiller
 			levels = new Queue<Level> ();
 			
 			rnd = new Random ();
+			s = new Scene();
+			l = new Label();
+			l.SetPosition(5, 5);
+			l.Text = "Level " + LevelCount;
+			s.RootWidget.AddChildLast(l);
 		}
 		
 		public void Initialize (int i)
 		{
-			Difficulty = 50;
-			RandomLevel.LevelDifficulty = Difficulty;
+			Difficulty = 1f;
+			RandomLevel.LevelDifficulty = 50;
 			levels = new Queue<Level> ();
 			Setup (i);
 		}
 		
 		public void Initialize (Queue<Level> l)
 		{
-			Difficulty = 50;
-			RandomLevel.LevelDifficulty = Difficulty;
+			Difficulty = 1f;
+			RandomLevel.LevelDifficulty = 50;
 			levels = l;
 			currentLevel = levels.Dequeue ();
 		}
@@ -80,20 +97,20 @@ namespace ZombieKiller
 		public void Initialize ()
 		{
 			infinite = true;
-			Difficulty = 50;
-			RandomLevel.LevelDifficulty = Difficulty;
+			Difficulty = 1f;
+			RandomLevel.LevelDifficulty = 50;
 			Setup ();
 		}
 		
 		private void Setup (int i)
 		{
-			int dropRange, maxEnemies, levelDiff, texNum; 
+			int dropRange, maxEnemies, texNum; 
 			for (int l = 0; l < i; l++) {
+				Difficulty += 0.2f;
 				dropRange = rnd.Next (50, 301);
 				maxEnemies = rnd.Next (5, 50);
-				levelDiff = 2;//rnd.Next(1, 5);
 				texNum = rnd.Next (0, backgrounds.Count);
-				RandomLevel randL = new RandomLevel (graphics, collisions, backgrounds [texNum], levelDiff, maxEnemies, dropRange);
+				RandomLevel randL = new RandomLevel (graphics, collisions, backgrounds [texNum], (int)Math.Round(Difficulty), maxEnemies, dropRange, "" + i);
 				levels.Enqueue (randL);
 			}
 			
@@ -102,13 +119,13 @@ namespace ZombieKiller
 		
 		private void Setup ()
 		{
-			int dropRange, maxEnemies, levelDiff, texNum; 
+			int dropRange, maxEnemies, texNum; 
 			dropRange = rnd.Next (50, 301);
 			maxEnemies = rnd.Next (5, 50);
-			levelDiff = 2;//rnd.Next(1, 5);
 			texNum = rnd.Next (0, backgrounds.Count);
-			RandomLevel randL = new RandomLevel (graphics, collisions, backgrounds [texNum], levelDiff, maxEnemies, dropRange);
-			Difficulty = RandomLevel.LevelDifficulty;
+			RandomLevel randL = new RandomLevel (graphics, collisions, backgrounds [texNum], (int)Math.Round(Difficulty), 60, dropRange, "" + levelCount);
+			Difficulty += 0.2f;
+			levelCount++;
 			currentLevel = randL;
 		}
 		
@@ -117,6 +134,7 @@ namespace ZombieKiller
 			if (infinite) {
 				Setup ();
 				currentLevel.NewGame ();
+				l.Text = "Level " + LevelCount;
 			} else {
 				if (levels.Count > 0) {
 					currentLevel = levels.Dequeue ();
@@ -141,6 +159,8 @@ namespace ZombieKiller
 		{
 			currentLevel.Render ();
 			collisions.Render (Delta);
+			UISystem.SetScene(s);
+			UISystem.Render();
 		}
 	}
 }

@@ -15,9 +15,9 @@ namespace ZombieKiller
 	{
 		public static int LevelDifficulty = 50;
 		
-		public RandomLevel (GraphicsContext g, Collisions c, Texture2D tex, int diff, int maxE, int drpRng) : base(g, tex, c, diff, maxE, drpRng, "Level Five", c.P)
+		public RandomLevel (GraphicsContext g, Collisions c, Texture2D tex, int diff, int maxE, int drpRng, string lCount) : base(g, tex, c, diff, maxE, drpRng, lCount, c.P)
 		{
-			MaxEnemies = 10;
+			MaxEnemies = maxE;
 		}
 		
 		public override void Update ()
@@ -87,7 +87,6 @@ namespace ZombieKiller
 			switch(i)
 			{
 			case 0:
-				Console.WriteLine("NULL 0");
 				break;
 			case 1:
 				j = new MGObject(Graphics, e.Position, Collide);
@@ -126,7 +125,6 @@ namespace ZombieKiller
 				Collide.AddItem = j;
 				break;
 			default:
-				Console.WriteLine("NULL D");
 				break;
 			}
 			
@@ -163,11 +161,14 @@ namespace ZombieKiller
 			
 			Collide.AddItem = mgo;
 			
+			mgo = new MGObject (Graphics, new Vector3 (rnd.Next (0, Graphics.Screen.Rectangle.Width), rnd.Next (0, Graphics.Screen.Rectangle.Height), 0), Collide);
+			Collide.AddItem = mgo;
+			
 			Plr.Position = new Vector3(20, 20, 0);
 			
 			//Spawn initial enemies
 			EnemyCount = 0;
-			Console.WriteLine(LevelDifficulty);
+			Console.WriteLine(LevelDifficulty + ", " + Difficulty);
 			LevelDifficulty = InfinityGen (LevelDifficulty);
 			GC.Collect();
 		}
@@ -176,8 +177,8 @@ namespace ZombieKiller
 		{
 			Vector3 v = Vector3.Zero;
 			
-			v.X = rnd.Next(100, Graphics.Screen.Rectangle.Width + 20);
-			v.Y = rnd.Next(100, Graphics.Screen.Rectangle.Height + 20);
+			v.X = rnd.Next(100, Graphics.Screen.Rectangle.Width);
+			v.Y = rnd.Next(100, Graphics.Screen.Rectangle.Height);
 			
 			return v;
 		}
@@ -246,10 +247,13 @@ namespace ZombieKiller
 					break;
 				}
 				Collide.AddEnemy = e;
+				EnemyCount++;
 				currDiff += SumDiff ();
+				if(currDiff > startDiff)
+					break;
 			}
-			while (currDiff < startDiff);
-			return (int)(currDiff * 1.1);
+			while (EnemyCount < MaxEnemies);
+			return (int)(currDiff * 1.0);
 		}
 			
 		private int SumDiff ()
