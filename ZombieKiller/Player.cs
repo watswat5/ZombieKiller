@@ -94,7 +94,7 @@ namespace ZombieKiller
 			RunSpeed = 2;
 			turnSpeed = 3;
 			
-			Money = 0;
+			Money = 10000;
 			s = new Scene();
 			moneyL = new Label();
 			moneyL.SetPosition(Graphics.Screen.Rectangle.Width - 470, 5);

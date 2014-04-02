@@ -81,13 +81,13 @@ namespace ZombieKiller
 						
 			height = h;
 			
-			maxLetters = 10;
+			maxLetters = 20;
 			
-			l.Y = height - 35;
+			l.Y = height/2 - 35;
 			l.X = 10;
 			l.Width = 544;
 			l.TextColor = new UIColor(0,0,0,1);
-			
+			l.Font.Size = (40);
 			keyboard = new Sprite(graphics, new Texture2D("/Application/Assets/Keyboard.png", false)); 
 			keyboard.Position.Y += height;
 			key = new Sprite(graphics, new Texture2D("/Application/Assets/key.png", false));

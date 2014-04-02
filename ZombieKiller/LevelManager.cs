@@ -67,8 +67,11 @@ namespace ZombieKiller
 			backgrounds.Add (new Texture2D ("/Application/Assets/Levels/lava.png", false));
 			backgrounds.Add (new Texture2D ("/Application/Assets/Levels/grassfield.png", false));
 			backgrounds.Add (new Texture2D ("/Application/Assets/Levels/sandlot.png", false));
-			
+			backgrounds.Add (new Texture2D ("/Application/Assets/Levels/lsd.png", false));
+			backgrounds.Add (new Texture2D ("/Application/Assets/Levels/test.png", false));
 			levels = new Queue<Level> ();
+			
+			levelCount = 1;
 			
 			rnd = new Random ();
 			s = new Scene();
@@ -81,7 +84,7 @@ namespace ZombieKiller
 		public void Initialize (int i)
 		{
 			Difficulty = 1f;
-			RandomLevel.LevelDifficulty = 50;
+			RandomLevel.LevelDifficulty = 10;
 			levels = new Queue<Level> ();
 			Setup (i);
 		}
@@ -89,7 +92,7 @@ namespace ZombieKiller
 		public void Initialize (Queue<Level> l)
 		{
 			Difficulty = 1f;
-			RandomLevel.LevelDifficulty = 50;
+			RandomLevel.LevelDifficulty = 10;
 			levels = l;
 			currentLevel = levels.Dequeue ();
 		}
@@ -98,7 +101,7 @@ namespace ZombieKiller
 		{
 			infinite = true;
 			Difficulty = 1f;
-			RandomLevel.LevelDifficulty = 50;
+			RandomLevel.LevelDifficulty = 10;
 			Setup ();
 		}
 		

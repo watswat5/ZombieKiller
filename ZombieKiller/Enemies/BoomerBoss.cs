@@ -22,7 +22,7 @@ namespace ZombieKiller
 		public BoomerBoss (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/boomer.png", false), col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
 		{
 			Difficulty = d;
-			LiteralDifficulty = 10 * Difficulty;
+			LiteralDifficulty = 30 * Difficulty;
 			RunSpeed = 0.3f;
 			explode.FrameDuration = 100;
 			explode.Scale = new Vector2 (2f, 2f);
@@ -37,9 +37,10 @@ namespace ZombieKiller
 			
 			Player = Collide.P;
 			
-			healthBar = new Sprite (Graphics, new Texture2D ("/Application/Assets/Player/health.png", false));
-			healthBar.Scale = new Vector2 (.47f, .2f);
-			healthBar.Position = new Vector3 (0, 500, 0);
+			healthBar = new Sprite (Graphics, new Texture2D ("/Application/Assets/Enemies/health.png", false));
+			healthBar.Scale = new Vector2 (.47f, .1f);
+			healthBar.Position = position;
+			healthBar.Center = new Vector2(0.5f, -2f);
 			
 			p.Scale = new Vector2 (2.2f, 2.2f);
 		}
@@ -58,9 +59,12 @@ namespace ZombieKiller
 			Rotation = (float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
 			p.Rotation = -Rotation;
 			
+			Vector3 change = new Vector3 ((float)Math.Sin (-Rotation) * RunSpeed, -(float)Math.Cos (-Rotation) * RunSpeed, 0);
+			
+			healthBar.Rotation = p.Rotation;
+			healthBar.Position = Position;
 			//Calculate new position based on angle
-			Position += new Vector3 ((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
-			Position -= new Vector3 (0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
+			Position += change;
 			
 			//spawnTimer boomer
 			if (spawnTimer > SPAWN_TIME && Collide.enemyCount < CurrentLevel.MaxEnemies) {
@@ -68,7 +72,6 @@ namespace ZombieKiller
 				b.CurrentLevel = CurrentLevel;
 				Collide.AddTempEnemy = (b);
 				spawnTimer = 0;
-				Console.WriteLine ("SPAWNED ");
 			}
 			
 			//Advance sprite sheet
@@ -118,8 +121,8 @@ namespace ZombieKiller
 			p.Render ();
 			
 			//Renders the healthbar with a size proportionate to total health.
-			healthBar.SetTextureCoord (0, 0, (2000 / (MAX_HEALTH)) * Health, 200);
-			healthBar.Width = ((2000 / MAX_HEALTH) * Health - 1);
+			healthBar.SetTextureCoord (0, 0, (200 / (MAX_HEALTH)) * Health, 200);
+			healthBar.Width = ((200 / MAX_HEALTH) * Health - 1);
 			healthBar.Render ();	
 		}
 		

@@ -68,9 +68,14 @@ namespace ZombieKiller
 		{
 			float spread = .25f;
 			
+			Vector3 newPos = p.Position;
+			
+			newPos += new Vector3((float)Math.Sin (p.Rotation) * RunSpeed, 0, 0);
+			newPos -= new Vector3(0, (float)Math.Cos (p.Rotation) * RunSpeed, 0);
+			
 			for (int i = -bulletsPerShot; i <= bulletsPerShot; i++) {
 				float newRot = (float)((p.Rotation) + Math.PI * i * spread / 12);
-				b = new RubberBullet (Graphics, p.Position, newRot, Collide, (int)RunSpeed, Damage);
+				b = new RubberBullet (Graphics, newPos, newRot, Collide, (int)RunSpeed, Damage);
 				b.Texture = new Texture2D ("/Application/Assets/Bullets/shotgunpellet.png", false);
 				b.Scale = new Vector2 (0.2f, 0.2f);
 				Collide.AddBullet = b;
@@ -82,7 +87,6 @@ namespace ZombieKiller
 		public override void Upgrade ()
 		{
 			if (Collide.P.Money >= Cost) {
-				Console.WriteLine ("Upgraded");
 				ReloadTime = (int)(ReloadTime * 0.9);
 				MaxAmmo += 4;
 				CurrentAmmo = MaxAmmo;	
@@ -92,7 +96,6 @@ namespace ZombieKiller
 				Damage = Dmg ();
 				Cost += 20;
 			} else {
-				Console.WriteLine ("NEM " + Collide.P.Money);
 			}
 			
 		}

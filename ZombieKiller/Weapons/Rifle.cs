@@ -64,8 +64,13 @@ namespace ZombieKiller
 		//Four bullets as one. Easy penetration effect.
 		public override void FireWeapon ()
 		{
+			Vector3 newPos = p.Position;
+			
+			newPos += new Vector3((float)Math.Sin (p.Rotation) * RunSpeed, 0, 0);
+			newPos -= new Vector3(0, (float)Math.Cos (p.Rotation) * RunSpeed, 0);
+			
 			for(int i = 0; i < penetration; i++)
-				Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+				Collide.AddBullet = new RubberBullet (Graphics, newPos, p.Rotation, Collide, (int)RunSpeed, Damage);
 			BulletCount++;
 			
 		}
@@ -73,7 +78,6 @@ namespace ZombieKiller
 		public override void Upgrade ()
 		{
 			if (Collide.P.Money >= Cost) {
-				Console.WriteLine ("Upgraded");
 				ReloadTime = (int)(ReloadTime * 0.9);
 				MaxAmmo += 5;
 				CurrentAmmo = MaxAmmo;	
@@ -81,7 +85,6 @@ namespace ZombieKiller
 				Collide.P.Money -= Cost;
 				Cost += 30;
 			} else {
-				Console.WriteLine ("NEM " + Collide.P.Money);
 			}
 		}
 		

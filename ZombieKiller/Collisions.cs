@@ -197,7 +197,6 @@ namespace ZombieKiller
 			}
 			foreach (Enemy e in tempEnemies) {
 				enemies.Add (e);
-				Console.WriteLine("ADDED");
 			}
 			
 			if (NeedCleanUp) {

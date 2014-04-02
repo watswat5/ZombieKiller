@@ -81,7 +81,7 @@ namespace ZombieKiller
 		}
 		
 		public override void FireWeapon ()
-		{
+		{		
 			for (int i = 0; i < bulletNum; i++) {
 				Vector3 pos = p.Position;
 				float rot = p.Rotation + (float)(Math.PI / (float)bulletNum) * 2 * i;
@@ -95,7 +95,6 @@ namespace ZombieKiller
 		public override void Upgrade ()
 		{
 			if (Collide.P.Money >= Cost) {
-				Console.WriteLine ("Upgraded");
 				ReloadTime = (int)(ReloadTime * 0.9);
 				MaxAmmo += 1;
 				CurrentAmmo = MaxAmmo;	
@@ -103,7 +102,6 @@ namespace ZombieKiller
 				Collide.P.Money -= Cost;
 				Cost += 15;
 			} else {
-				Console.WriteLine ("NEM " + Collide.P.Money);
 			}
 		}
 	}

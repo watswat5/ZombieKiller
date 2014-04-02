@@ -31,9 +31,10 @@ namespace ZombieKiller
 			p.Scale = new Vector2(2.2f, 2.2f);
 			Player = Collide.P;
 			
-			healthBar = new Sprite(Graphics, new Texture2D("/Application/Assets/Player/health.png", false));
-			healthBar.Scale = new Vector2(.47f, .2f);
-			healthBar.Position = new Vector3(0, 500, 0);
+			healthBar = new Sprite(Graphics, new Texture2D("/Application/Assets/Enemies/health.png", false));
+			healthBar.Scale = new Vector2(.47f, .1f);
+			healthBar.Position = position;
+			healthBar.Center = new Vector2(0.5f, -2f);
 		}
 		
 		public override void Update (long ElapsedTime)
@@ -48,6 +49,9 @@ namespace ZombieKiller
 			//Find rotation of zombie that looks at player
 			Rotation = -(float)Math.Atan2 ((double)DeltaX, (double)DeltaY);
 			//p.Rotation = -Rotation;
+			
+			healthBar.Position = Position;
+			healthBar.Rotation = p.Rotation;
 			
 			//Calculate new position based on angle
 			Position -= new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
@@ -123,8 +127,8 @@ namespace ZombieKiller
 			p.Render ();
 			
 			//Renders the healthbar with a size proportionate to total health.
-			healthBar.SetTextureCoord(0, 0, (2000 / (MAX_HEALTH)) * Health, 200);
-			healthBar.Width = ((2000/MAX_HEALTH) *  Health - 1);
+			healthBar.SetTextureCoord(0, 0, (200 / (MAX_HEALTH)) * Health, 200);
+			healthBar.Width = ((200/MAX_HEALTH) *  Health - 1);
 			healthBar.Render ();
 		}
 		

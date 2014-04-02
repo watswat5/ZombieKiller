@@ -177,5 +177,6 @@
     <Content Include="Assets\Levels\sandlot.png" />
     <Content Include="Assets\Sounds\boid.wav" />
     <Content Include="Assets\hsscreen.png" />
+    <Content Include="Assets\Enemies\health.png" />
   </ItemGroup>
 </Project>

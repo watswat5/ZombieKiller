@@ -13,7 +13,7 @@ namespace ZombieKiller
 {
 	public class RandomLevel : Level
 	{
-		public static int LevelDifficulty = 50;
+		public static int LevelDifficulty = 10;
 		
 		public RandomLevel (GraphicsContext g, Collisions c, Texture2D tex, int diff, int maxE, int drpRng, string lCount) : base(g, tex, c, diff, maxE, drpRng, lCount, c.P)
 		{
@@ -59,8 +59,7 @@ namespace ZombieKiller
 				
 				EnemyCount++;
 			}
-		}
-		
+		}		
 		public override void Drop(Enemy e)
 		{
 			int i = 0;
@@ -190,7 +189,7 @@ namespace ZombieKiller
 			Random rand = new Random ();
 			Enemy e;
 			do {
-				int x = rand.Next (0, 12);
+				int x = rand.Next (0, 13);
 				switch (x) {
 				case 0:
 					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
@@ -248,7 +247,7 @@ namespace ZombieKiller
 				}
 				Collide.AddEnemy = e;
 				EnemyCount++;
-				currDiff += SumDiff ();
+				currDiff = SumDiff ();
 				if(currDiff > startDiff)
 					break;
 			}

@@ -84,14 +84,18 @@ namespace ZombieKiller
 		
 		public override void FireWeapon ()
 		{
-			Collide.AddBullet = new RubberBullet (Graphics, p.Position, p.Rotation, Collide, (int)RunSpeed, Damage);
+			Vector3 newPos = p.Position;
+			
+			newPos += new Vector3((float)Math.Sin (p.Rotation) * RunSpeed, 0, 0);
+			newPos -= new Vector3(0, (float)Math.Cos (p.Rotation) * RunSpeed, 0);
+			
+			Collide.AddBullet = new RubberBullet (Graphics, newPos, p.Rotation + 0.08f * rnd.Next(-1, 2), Collide, (int)RunSpeed, Damage);
 			BulletCount++;
 		}
 		
 		public override void Upgrade ()
 		{
 			if (Collide.P.Money >= Cost) {
-				Console.WriteLine ("Upgraded");
 				ReloadTime = (int)(ReloadTime * 0.9);
 				MaxAmmo += 30;
 				dmgUp += .35f;
@@ -102,7 +106,6 @@ namespace ZombieKiller
 				Collide.P.Money -= Cost;
 				Cost += 5;
 			} else {
-				Console.WriteLine ("NEM " + Collide.P.Money);
 			}
 		}
 	}
