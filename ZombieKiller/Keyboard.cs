@@ -6,6 +6,7 @@ using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.UI;
+using Sce.PlayStation.Core.Imaging;
 
 //Chris Antepenko & C. Blake Becker
 namespace ZombieKiller
@@ -85,9 +86,10 @@ namespace ZombieKiller
 			
 			l.Y = height/2 - 35;
 			l.X = 10;
-			l.Width = 544;
+			l.Width = 780;
+			l.Height = 200;
 			l.TextColor = new UIColor(0,0,0,1);
-			l.Font.Size = (40);
+			l.Font.Size = 60;
 			keyboard = new Sprite(graphics, new Texture2D("/Application/Assets/Keyboard.png", false)); 
 			keyboard.Position.Y += height;
 			key = new Sprite(graphics, new Texture2D("/Application/Assets/key.png", false));

@@ -31,6 +31,8 @@ namespace ZombieKiller
 			p.Scale = new Vector2(2.2f, 2.2f);
 			Player = Collide.P;
 			
+			Explode.Scale = new Vector2(4, 4);
+			
 			healthBar = new Sprite(Graphics, new Texture2D("/Application/Assets/Enemies/health.png", false));
 			healthBar.Scale = new Vector2(.47f, .1f);
 			healthBar.Position = position;

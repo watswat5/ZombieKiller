@@ -77,7 +77,9 @@ namespace ZombieKiller
 			s = new Scene();
 			l = new Label();
 			l.SetPosition(5, 5);
-			l.Text = "Level " + LevelCount;
+			l.Width = 400;
+			Difficulty = 1;
+			l.Text = "Level " + LevelCount + ", Difficulty: " + Math.Round(Difficulty) ;
 			s.RootWidget.AddChildLast(l);
 		}
 		
@@ -137,7 +139,7 @@ namespace ZombieKiller
 			if (infinite) {
 				Setup ();
 				currentLevel.NewGame ();
-				l.Text = "Level " + LevelCount;
+				l.Text = "Level " + LevelCount + ", Difficulty: " + Math.Round(Difficulty) ;
 			} else {
 				if (levels.Count > 0) {
 					currentLevel = levels.Dequeue ();

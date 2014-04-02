@@ -26,6 +26,8 @@ namespace ZombieKiller
 			char[] delim = {','};
 			values = data.Split(delim, StringSplitOptions.None);
 			name = values[0];
+			if(name.Equals(""))
+				name = "-----";
 			score = Int32.Parse(values[1]);
 		}
 				

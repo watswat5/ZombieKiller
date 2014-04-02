@@ -117,7 +117,7 @@ namespace ZombieKiller
 			description.Text = plr.Weapons[currentWeapon].Description;
 			cost.Text = "Cost: " + plr.Weapons[currentWeapon].Cost + ", Curent Money: " + plr.Money;
 			
-			if ((gp.ButtonsDown & GamePadButtons.Cross) != 0)
+			if ((gp.ButtonsDown & GamePadButtons.Triangle) != 0)
 			{
 				plr.Weapons[currentWeapon].Upgrade();	
 			}			

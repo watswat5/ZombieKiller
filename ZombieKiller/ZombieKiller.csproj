@@ -107,6 +107,7 @@
     <Folder Include="Assets\Levels\" />
     <Folder Include="bin\Debug\" />
     <Folder Include="bin\Debug\ZombieKiller-unsigned\" />
+    <Folder Include="Assets\Font\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\paused.png" />
@@ -178,5 +179,8 @@
     <Content Include="Assets\Sounds\boid.wav" />
     <Content Include="Assets\hsscreen.png" />
     <Content Include="Assets\Enemies\health.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Font\gypsycurse.ttf" />
   </ItemGroup>
 </Project>

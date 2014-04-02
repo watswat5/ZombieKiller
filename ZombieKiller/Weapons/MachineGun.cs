@@ -47,7 +47,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + MaxAmmo + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[1] + "\n"
-						+ "Bulleps Per Second: " + bulletsPerSecond + "\n"
+						+ "Bullets Per Second: " + Math.Round (bulletsPerSecond, 2) + "\n"
 						+ "Damage: " + Damage;
 			return stats;
 		}
@@ -58,7 +58,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + (MaxAmmo + 30) + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + ((int)(Level.dropRate[1] * 1.2)) + "\n"
-						+ "BPS: " + bulletsPerSecond + .3f+ "\n"
+						+ "Bullets Per Second: " + Math.Round(bulletsPerSecond + .3f, 2)+ "\n"
 						+ "Damage: " + (FutureDmg());
 			return stats;
 		}

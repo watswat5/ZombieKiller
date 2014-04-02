@@ -25,7 +25,7 @@ namespace ZombieKiller
 			LiteralDifficulty = 30 * Difficulty;
 			RunSpeed = 0.3f;
 			explode.FrameDuration = 100;
-			explode.Scale = new Vector2 (2f, 2f);
+			explode.Scale = new Vector2 (4f, 4f);
 			FrameDuration = 100;
 			enemyType = Types.Boomer;
 			Damage = 3 * Difficulty;

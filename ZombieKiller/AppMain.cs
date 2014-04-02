@@ -384,6 +384,7 @@ namespace ZombieKiller
 			if(hScores.Text.Equals(""))
 			{
 				highScores.Sort();
+				hScores.Width = 700;
 				string s = "";
 				for (int a = highScores.Count - 1; a >= 0; a--)
 					s = s + "\n" + highScores[a];
