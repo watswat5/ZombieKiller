@@ -56,8 +56,6 @@ namespace ZombieKiller
 		private static Bgm death, win, bgm;
 		private static Keyboard k;
 		private static List<HighScore> highScores;
-		private static StringWriter sw;
-		private static StreamReader sr;
 		private static Scene s;
 		private static Label hScores;
 		
@@ -84,7 +82,7 @@ namespace ZombieKiller
 			
 			UISystem.Initialize (graphics);
 			
-			sw = new StringWriter ();
+			StringWriter sw = new StringWriter ();
 			//sr = new StreamReader("highscores.txt");
 			
 			rnd = new Random ();
@@ -99,6 +97,8 @@ namespace ZombieKiller
 			s.RootWidget.AddChildLast (hScores);
 
 			highScores = new List<HighScore> ();
+			
+			k = new Keyboard(graphics, 295);
 			
 			float Height = graphics.Screen.Rectangle.Height;
 			float Width = graphics.Screen.Rectangle.Width;
@@ -154,10 +154,7 @@ namespace ZombieKiller
 			//upgrade = new Upgrade (graphics);
 			upgrade.Plr = Plr;
 			
-			k = new Keyboard (graphics, 337);
-
-			upgrade.Plr = Plr;
-			
+			k.Reset();			
 			//Init levels
 //			levels = new Queue<Level> ();
 //			levels.Enqueue (new LevelOne (graphics, collisions, Plr));
@@ -198,13 +195,24 @@ namespace ZombieKiller
 				}
 			}
 			
-			sr = new StreamReader ("/Documents/highscores.txt");
+			StreamReader sr = new StreamReader ("/Documents/highscores.txt");
 			
 			while (!sr.EndOfStream) {
 				highScores.Add (new HighScore (sr.ReadLine ()));
 			}
-			
 			sr.Close ();
+		}
+		
+		public static void WriteHighScores ()
+		{
+			StreamWriter sw = new StreamWriter("/Documents/highscores.txt");
+			highScores.Sort();
+			highScores.Reverse();
+			foreach(HighScore h in highScores)
+			{
+		  		sw.WriteLine(h);
+			}
+			sw.Close();
 		}
 		
 		public static void Update ()
@@ -282,7 +290,11 @@ namespace ZombieKiller
 				bgMusic.Volume = 0.1f;
 				bgMusic.Loop = true;
 				bgMusic.Play ();
-				currentState = GameState.HighScoreView;
+				highScores.Sort();
+				if(Plr.Score < highScores[0].Score)
+					currentState = GameState.HighScoreView;
+				else
+					currentState = GameState.HighScoreEntry;
 			}
 		}
 		
@@ -339,13 +351,12 @@ namespace ZombieKiller
 		public static void UpdateWinner (GamePadData gp)
 		{
 			if ((gp.ButtonsDown & GamePadButtons.Start) != 0) {
-				currentState = GameState.Menu;	
-				bgMusic.Dispose ();
-				bgMusic = bgm.CreatePlayer ();
-				bgMusic.Volume = 0.1f;
-				bgMusic.Loop = true;
-				bgMusic.Play ();
-				NewGame ();
+				highScores.Sort();
+				if(Plr.Score > highScores[0].Score)
+					currentState = GameState.HighScoreEntry;
+				else
+					currentState = GameState.HighScoreView;
+				
 			}
 		}
 		
@@ -357,16 +368,13 @@ namespace ZombieKiller
 			foreach (HighScore a in highScores)
 				s = s + "\n" + a;
 			hScores.Text = s;
-			if (k.Finished) {			
+			if (k.Finished) {	
+				highScores.Sort ();
+				highScores.RemoveAt(0);
 				highScores.Add (new HighScore (k.ReturnResult () + "," + Plr.Score));
-				
-				bgMusic.Dispose ();
-				bgMusic = bgm.CreatePlayer ();
-				bgMusic.Volume = 0.1f;
-				bgMusic.Loop = true;
-				bgMusic.Play ();
-				currentState = GameState.Menu;	
-				NewGame ();
+				WriteHighScores();
+				hScores.Text = "";
+				currentState = GameState.HighScoreView;	
 			}
 		}
 		
@@ -375,9 +383,10 @@ namespace ZombieKiller
 		{
 			if(hScores.Text.Equals(""))
 			{
+				highScores.Sort();
 				string s = "";
-				foreach (HighScore a in highScores)
-					s = s + "\n" + a;
+				for (int a = highScores.Count - 1; a >= 0; a--)
+					s = s + "\n" + highScores[a];
 				hScores.Text = s;
 				hScores.TextColor = new UIColor(1,1,1,1);
 			}

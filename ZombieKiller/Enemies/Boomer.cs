@@ -14,10 +14,12 @@ namespace ZombieKiller
 	//Explodes on contact with player.
 	public class Boomer : Enemy
 	{
-		private static Texture2D tex = new Texture2D("/Application/Assets/Enemies/boomer.png", false);
+		private static Texture2D tex = new Texture2D ("/Application/Assets/Enemies/boomer.png", false);
+
 		public Boomer (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, tex, col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
 		{
 			Difficulty = d;
+			LiteralDifficulty = 2 * Difficulty;
 			RunSpeed = 0.4f;
 			explode.FrameDuration = 100;
 			explode.Scale = new Vector2 (1.2f, 1.2f);
@@ -46,10 +48,10 @@ namespace ZombieKiller
 			
 			//Calculate new position based on angle
 			Vector3 vel = Vector3.Zero;
-			vel += new Vector3((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
-			vel -= new Vector3(0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
+			vel += new Vector3 ((float)Math.Sin (-Rotation) * RunSpeed, 0, 0);
+			vel -= new Vector3 (0, (float)Math.Cos (-Rotation) * RunSpeed, 0);
 			
-			avoidNeighbors(vel);
+			avoidNeighbors (vel);
 			
 			Position += vel;
 			//Advance sprite sheet
@@ -69,10 +71,8 @@ namespace ZombieKiller
 			//Vector3 oldVel = v;
 			//Vector3 vel = v;
 			Vector3 oldVel = v;
-			foreach (Creature z in Collide.Enemies)
-			{
-				if ((z != this) && (Vector3.Distance (z.p.Position, this.p.Position) < 100))
-				{
+			foreach (Creature z in Collide.Enemies) {
+				if ((z != this) && (Vector3.Distance (z.p.Position, this.p.Position) < 100)) {
 					nearNeighborCount++;
 					avoidanceVector += Vector3.Subtract (p.Position, z.p.Position) * 1.0f / Vector3.Distance (z.p.Position, this.p.Position);
 				}
@@ -102,20 +102,20 @@ namespace ZombieKiller
 		public override void OnHurt (Bullet b)
 		{
 			//Destroy enemy and bullet, add death sprite
-			if(Health > b.Damage)
+			if (Health > b.Damage)
 				Health -= b.Damage;
 			else
 				Die ();
 		}
 		
-		public override void Die()
+		public override void Die ()
 		{
 			this.IsAlive = false;
 			Explode.p.Position = Position;
 			Collide.AddExplosion = (Explode);	
 			Player.Money += Value;
 			Player.Score += Value;
-			CurrentLevel.Drop(this);
+			CurrentLevel.Drop (this);
 		}
 		
 	}

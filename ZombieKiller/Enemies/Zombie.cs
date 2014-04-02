@@ -17,6 +17,7 @@ namespace ZombieKiller
 		public Zombie (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, tex, col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
 		{
 			Difficulty = d;
+			LiteralDifficulty = 1 * Difficulty;
 			RunSpeed = .8f;
 			Damage = 1 * Difficulty;
 			Health = 1 * Difficulty;

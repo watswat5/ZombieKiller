@@ -20,6 +20,7 @@ namespace ZombieKiller
 		public Blade (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/blade.png", false), col, new Texture2D("/Application/Assets/Enemies/deadblade.png", false))
 		{
 			Difficulty = d;
+			LiteralDifficulty = 3 * Difficulty;
 			RunSpeed = 3;
 			enemyType = Types.Blade;
 			rot = (float)(2 * Math.PI * rnd.NextDouble ());
@@ -48,14 +49,14 @@ namespace ZombieKiller
 				turning = false;
 			
 			//Calculate new position based on angle
-			Position += new Vector3((float)Math.Sin (rot) * RunSpeed, 0, 0);
-			Position -= new Vector3(0, (float)Math.Cos (rot) * RunSpeed, 0);
+			Position += new Vector3 ((float)Math.Sin (rot) * RunSpeed, 0, 0);
+			Position -= new Vector3 (0, (float)Math.Cos (rot) * RunSpeed, 0);
 			
-			if(Collide.FarOffScreen(this))
+			if (Collide.FarOffScreen (this))
 				IsAlive = false;
 		}
 		
-		public override void HurtPlayer(Player plr)
+		public override void HurtPlayer (Player plr)
 		{
 			plr.Alpha += Alpha;
 			if (plr.Health >= Damage)
@@ -67,20 +68,20 @@ namespace ZombieKiller
 		public override void OnHurt (Bullet b)
 		{
 			//Destroy enemy and bullet, add death sprite
-			if(Health > b.Damage)
+			if (Health > b.Damage)
 				Health -= b.Damage;
 			else
 				Die ();
 		}
 		
-		public override void Die()
+		public override void Die ()
 		{
 			this.IsAlive = false;
 			Explode.Position = Position;
 			Collide.AddExplosion = (Explode);	
 			Player.Money += Value;
 			Player.Score += Value;
-			CurrentLevel.Drop(this);
+			CurrentLevel.Drop (this);
 		}
 		
 		//No sprite sheet, just a rotation.

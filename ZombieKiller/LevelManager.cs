@@ -41,6 +41,8 @@ namespace ZombieKiller
 			get { return plr.Health;}	
 		}
 		
+		private int Difficulty;
+		
 		public LevelManager (GraphicsContext g, Collisions c)
 		{
 			graphics = g;
@@ -61,12 +63,16 @@ namespace ZombieKiller
 		
 		public void Initialize (int i)
 		{
+			Difficulty = 50;
+			RandomLevel.LevelDifficulty = Difficulty;
 			levels = new Queue<Level> ();
 			Setup (i);
 		}
 		
 		public void Initialize (Queue<Level> l)
 		{
+			Difficulty = 50;
+			RandomLevel.LevelDifficulty = Difficulty;
 			levels = l;
 			currentLevel = levels.Dequeue ();
 		}
@@ -74,7 +80,8 @@ namespace ZombieKiller
 		public void Initialize ()
 		{
 			infinite = true;
-			;
+			Difficulty = 50;
+			RandomLevel.LevelDifficulty = Difficulty;
 			Setup ();
 		}
 		
@@ -101,6 +108,7 @@ namespace ZombieKiller
 			levelDiff = 2;//rnd.Next(1, 5);
 			texNum = rnd.Next (0, backgrounds.Count);
 			RandomLevel randL = new RandomLevel (graphics, collisions, backgrounds [texNum], levelDiff, maxEnemies, dropRange);
+			Difficulty = RandomLevel.LevelDifficulty;
 			currentLevel = randL;
 		}
 		
@@ -120,61 +128,7 @@ namespace ZombieKiller
 		
 		public void NewGame ()
 		{
-			currentLevel.NewGame ();	
-		}
-		
-		public int infinityGen (int diff)
-		{
-			int startDiff = diff;
-			int currDiff = 0;
-			Random rand = new Random ();
-			while (currDiff < startDiff) {
-				int x = rand.Next (0, 5);
-				switch (x) {
-				case 0:
-					collisions.AddEnemy = new Zombie (graphics, new Vector3 
-					                              (rand.Next (graphics.Screen.Rectangle.Width / 2),
-					 								rand.Next (graphics.Screen.Rectangle.Width + 50),
-					 								0), collisions, startDiff);
-					break;
-				case 1:
-					collisions.AddEnemy = new Boomer (graphics, new Vector3 
-					                              (rand.Next (graphics.Screen.Rectangle.Width / 2),
-					 								rand.Next (graphics.Screen.Rectangle.Width + 50),
-					 								0), collisions, startDiff);
-					;
-					break;
-				case 2:
-					collisions.AddEnemy = new Blade (graphics, new Vector3 
-					                              (rand.Next (graphics.Screen.Rectangle.Width / 2),
-					 								rand.Next (graphics.Screen.Rectangle.Width + 50),
-					 								0), collisions, startDiff);
-					break;
-				case 3:
-					collisions.AddEnemy = new ZombieBoss (graphics, new Vector3 
-					                              (rand.Next (graphics.Screen.Rectangle.Width / 2),
-					 								rand.Next (graphics.Screen.Rectangle.Width + 50),
-					 								0), collisions, startDiff);
-					break;
-				case 4:
-					collisions.AddEnemy = new BoomerBoss (graphics, new Vector3 
-					                              (rand.Next (graphics.Screen.Rectangle.Width / 2),
-					 								rand.Next (graphics.Screen.Rectangle.Width + 50),
-					 								0), collisions, startDiff);
-					break;
-				}
-				currDiff += SumDiff ();
-			}
-			return (int)(SumDiff () * 1.1);
-		}
-			
-		private int SumDiff ()
-		{
-			int sum = 0;
-			foreach (Enemy e in collisions.Enemies) {
-				sum += e.Difficulty;
-			}
-			return sum;
+			currentLevel.NewGame();
 		}
 		
 		public void Update (long Delta, GamePadData gp)

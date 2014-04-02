@@ -94,7 +94,7 @@ namespace ZombieKiller
 			
 			keyboard.Width = graphics.Screen.Rectangle.Width;
 			
-			letters = new KeyValuePair<Vector3, string>[3,10];
+			letters = new KeyValuePair<Vector3, string>[4,10];
 			
 			selections = new List<string>();
 			
@@ -103,43 +103,63 @@ namespace ZombieKiller
 			InitLetters();
 		}
 		
+		public void Reset()
+		{
+			selections = new List<string>();
+			result = "";
+			finished = false;
+		}
+		
 		private void InitLetters()
 		{
 			//Row 1
-			letters[0,0] = (new KeyValuePair<Vector3, string>(new Vector3(4, 0 + height, 0), "Q"));
-			letters[0,1] = (new KeyValuePair<Vector3, string>(new Vector3(98, 0 + height, 0), "W"));
-			letters[0,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 0 + height, 0), "E"));
-			letters[0,3] = (new KeyValuePair<Vector3, string>(new Vector3(289, 0 + height, 0), "R"));
-			letters[0,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 0 + height, 0), "T"));
-			letters[0,5] = (new KeyValuePair<Vector3, string>(new Vector3(478, 0 + height, 0), "Y"));
-			letters[0,6] = (new KeyValuePair<Vector3, string>(new Vector3(573, 0 + height, 0), "U"));
-			letters[0,7] = (new KeyValuePair<Vector3, string>(new Vector3(667, 0 + height, 0), "I"));
-			letters[0,8] = (new KeyValuePair<Vector3, string>(new Vector3(761, 0 + height, 0), "O"));
-			letters[0,9] = (new KeyValuePair<Vector3, string>(new Vector3(855, 0 + height, 0), "P"));
+			letters[0,0] = (new KeyValuePair<Vector3, string>(new Vector3(0, 00 + height, 0), "1"));
+			letters[0,1] = (new KeyValuePair<Vector3, string>(new Vector3(96, 0 + height, 0), "2"));
+			letters[0,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 0 + height, 0), "3"));
+			letters[0,3] = (new KeyValuePair<Vector3, string>(new Vector3(288, 0 + height, 0), "4"));
+			letters[0,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 0 + height, 0), "5"));
+			letters[0,5] = (new KeyValuePair<Vector3, string>(new Vector3(480, 0 + height, 0), "6"));
+			letters[0,6] = (new KeyValuePair<Vector3, string>(new Vector3(576, 0 + height, 0), "7"));
+			letters[0,7] = (new KeyValuePair<Vector3, string>(new Vector3(672, 0 + height, 0), "8"));
+			letters[0,8] = (new KeyValuePair<Vector3, string>(new Vector3(768, 0 + height, 0), "9"));
+			letters[0,9] = (new KeyValuePair<Vector3, string>(new Vector3(864, 0 + height, 0), "0"));
 			
 			//Row 2
-			letters[1,0] = (new KeyValuePair<Vector3, string>(new Vector3(4, 70 + height, 0), "A"));
-			letters[1,1] = (new KeyValuePair<Vector3, string>(new Vector3(98, 70 + height, 0), "S"));
-			letters[1,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 70 + height, 0), "D"));
-			letters[1,3] = (new KeyValuePair<Vector3, string>(new Vector3(289, 70 + height, 0), "F"));
-			letters[1,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 70 + height, 0), "G"));
-			letters[1,5] = (new KeyValuePair<Vector3, string>(new Vector3(478, 70 + height, 0), "H"));
-			letters[1,6] = (new KeyValuePair<Vector3, string>(new Vector3(573, 70 + height, 0), "J"));
-			letters[1,7] = (new KeyValuePair<Vector3, string>(new Vector3(667, 70 + height, 0), "K"));
-			letters[1,8] = (new KeyValuePair<Vector3, string>(new Vector3(761, 70 + height, 0), "L"));
-			letters[1,9] = (new KeyValuePair<Vector3, string>(new Vector3(855, 70 + height, 0), "_"));
-			
+			letters[1,0] = (new KeyValuePair<Vector3, string>(new Vector3(0, 64 + height, 0), "Q"));
+			letters[1,1] = (new KeyValuePair<Vector3, string>(new Vector3(96, 64 + height, 0), "W"));
+			letters[1,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 64 + height, 0), "E"));
+			letters[1,3] = (new KeyValuePair<Vector3, string>(new Vector3(288, 64 + height, 0), "R"));
+			letters[1,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 64 + height, 0), "T"));
+			letters[1,5] = (new KeyValuePair<Vector3, string>(new Vector3(480, 64 + height, 0), "Y"));
+			letters[1,6] = (new KeyValuePair<Vector3, string>(new Vector3(576, 64 + height, 0), "U"));
+			letters[1,7] = (new KeyValuePair<Vector3, string>(new Vector3(672, 64 + height, 0), "I"));
+			letters[1,8] = (new KeyValuePair<Vector3, string>(new Vector3(768, 64 + height, 0), "O"));
+			letters[1,9] = (new KeyValuePair<Vector3, string>(new Vector3(864, 64 + height, 0), "P"));
+				
 			//Row 3
-			letters[2,0] = (new KeyValuePair<Vector3, string>(new Vector3(4, 137 + height, 0), ":"));
-			letters[2,1] = (new KeyValuePair<Vector3, string>(new Vector3(98, 137 + height, 0), "Z"));
-			letters[2,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 137 + height, 0), "X"));
-			letters[2,3] = (new KeyValuePair<Vector3, string>(new Vector3(289, 137 + height, 0), "C"));
-			letters[2,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 137 + height, 0), "V"));
-			letters[2,5] = (new KeyValuePair<Vector3, string>(new Vector3(478, 137 + height, 0), "B"));
-			letters[2,6] = (new KeyValuePair<Vector3, string>(new Vector3(573, 137 + height, 0), "N"));
-			letters[2,7] = (new KeyValuePair<Vector3, string>(new Vector3(667, 137 + height, 0), "M"));
-			letters[2,8] = (new KeyValuePair<Vector3, string>(new Vector3(761, 137 + height, 0), "-"));
-			letters[2,9] = (new KeyValuePair<Vector3, string>(new Vector3(855, 137 + height, 0), "/"));
+			letters[2,0] = (new KeyValuePair<Vector3, string>(new Vector3(0, 128 + height, 0), "A"));
+			letters[2,1] = (new KeyValuePair<Vector3, string>(new Vector3(96, 128 + height, 0), "S"));
+			letters[2,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 128 + height, 0), "D"));
+			letters[2,3] = (new KeyValuePair<Vector3, string>(new Vector3(288, 128 + height, 0), "F"));
+			letters[2,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 128 + height, 0), "G"));
+			letters[2,5] = (new KeyValuePair<Vector3, string>(new Vector3(480, 128 + height, 0), "H"));
+			letters[2,6] = (new KeyValuePair<Vector3, string>(new Vector3(576, 128 + height, 0), "J"));
+			letters[2,7] = (new KeyValuePair<Vector3, string>(new Vector3(672, 128 + height, 0), "K"));
+			letters[2,8] = (new KeyValuePair<Vector3, string>(new Vector3(768, 128 + height, 0), "L"));
+			letters[2,9] = (new KeyValuePair<Vector3, string>(new Vector3(864, 128 + height, 0), "-"));
+			
+			//Row 4
+			letters[3,0] = (new KeyValuePair<Vector3, string>(new Vector3(0, 192 + height, 0), "Z"));
+			letters[3,1] = (new KeyValuePair<Vector3, string>(new Vector3(96, 192 + height, 0), "X"));
+			letters[3,2] = (new KeyValuePair<Vector3, string>(new Vector3(192, 192 + height, 0), "C"));
+			letters[3,3] = (new KeyValuePair<Vector3, string>(new Vector3(288, 192 + height, 0), "V"));
+			letters[3,4] = (new KeyValuePair<Vector3, string>(new Vector3(384, 192 + height, 0), "B"));
+			letters[3,5] = (new KeyValuePair<Vector3, string>(new Vector3(480, 192 + height, 0), "N"));
+			letters[3,6] = (new KeyValuePair<Vector3, string>(new Vector3(576, 192 + height, 0), "M"));
+			letters[3,7] = (new KeyValuePair<Vector3, string>(new Vector3(672, 192 + height, 0), "("));
+			letters[3,8] = (new KeyValuePair<Vector3, string>(new Vector3(768, 192 + height, 0), ")"));
+			letters[3,9] = (new KeyValuePair<Vector3, string>(new Vector3(864, 192 + height, 0), ":"));
+				
 		}
 		
 		public void Update(GamePadData gp)

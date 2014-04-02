@@ -13,6 +13,8 @@ namespace ZombieKiller
 {
 	public class RandomLevel : Level
 	{
+		public static int LevelDifficulty = 50;
+		
 		public RandomLevel (GraphicsContext g, Collisions c, Texture2D tex, int diff, int maxE, int drpRng) : base(g, tex, c, diff, maxE, drpRng, "Level Five", c.P)
 		{
 			MaxEnemies = 10;
@@ -165,7 +167,98 @@ namespace ZombieKiller
 			
 			//Spawn initial enemies
 			EnemyCount = 0;
-			SpawnEnemies ();
+			Console.WriteLine(LevelDifficulty);
+			LevelDifficulty = InfinityGen (LevelDifficulty);
+			GC.Collect();
+		}
+		
+		private Vector3 RandomVector()
+		{
+			Vector3 v = Vector3.Zero;
+			
+			v.X = rnd.Next(100, Graphics.Screen.Rectangle.Width + 20);
+			v.Y = rnd.Next(100, Graphics.Screen.Rectangle.Height + 20);
+			
+			return v;
+		}
+		
+		public int InfinityGen (int diff)
+		{
+			int startDiff = diff;
+			int currDiff = 0;
+			Random rand = new Random ();
+			Enemy e;
+			do {
+				int x = rand.Next (0, 12);
+				switch (x) {
+				case 0:
+					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 1:
+					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 2:
+					e = new Zombie (Graphics,RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 3:
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 4:
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 5:
+					e = new Blade (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+					
+				case 6:
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 7:
+					e = new Blade (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 8:
+					e = new ZombieBoss (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 9:
+					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 10:
+					e = new Blade (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				case 11:
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				default:
+					e = new BoomerBoss (Graphics, RandomVector(), Collide, Difficulty);
+					e.CurrentLevel = this;
+					break;
+				}
+				Collide.AddEnemy = e;
+				currDiff += SumDiff ();
+			}
+			while (currDiff < startDiff);
+			return (int)(currDiff * 1.1);
+		}
+			
+		private int SumDiff ()
+		{
+			int sum = 0;
+			foreach (Enemy e in Collide.Enemies) {
+				sum += e.LiteralDifficulty;
+			}
+			return sum;
 		}
 	}
 }

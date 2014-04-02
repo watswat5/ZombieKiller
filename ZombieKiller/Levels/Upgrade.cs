@@ -125,6 +125,9 @@ namespace ZombieKiller
 		
 		public void Render()
 		{
+			if(currentWeapon >= plr.Weapons.Count || currentWeapon < 0)
+				currentWeapon = 0;
+			
 			weapon = new Sprite(graphics, plr.Weapons[currentWeapon].UpgradeTexture);
 			weapon.Position = position;
 			weapon.Scale = plr.Weapons[currentWeapon].UpgradeScale;

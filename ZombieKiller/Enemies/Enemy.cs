@@ -45,7 +45,14 @@ namespace ZombieKiller
 			get { return diff;}
 			set { diff = value;}
 		}
+		
+		private int litDiff;
 
+		public int LiteralDifficulty {
+			get { return litDiff;}
+			set { litDiff = value;}
+		}
+		
 		private int dmg;
 
 		public int Damage {
@@ -115,6 +122,7 @@ namespace ZombieKiller
 			//Death sprite
 			this.explode = new Explosion (gc, position, col, explode);
 			alpha = .3f;
+			Player = col.P;
 		}
 		
 		public virtual void Drop ()
