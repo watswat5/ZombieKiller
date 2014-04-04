@@ -21,7 +21,7 @@ namespace ZombieKiller
 		
 		private int bulletsPerShot;
 		private float dmgUp;
-		
+		private float bpsUp;
 		//Fires five bullets in a spread out pattern
 		public Shotgun (GraphicsContext g, Collisions col, Vector3 position, float rot) : base(g, col, position, rot, new Sound("/Application/Assets/Sounds/shotgun.wav"), new Texture2D("/Application/Assets/Weapons/shotgun.png", false), new Texture2D("/Application/Assets/Weapons/shotgunammo.png", false))
 		{
@@ -58,7 +58,7 @@ namespace ZombieKiller
 						+ "Maximum Ammo: " + (MaxAmmo + 1) + "\n"
 						+ "Magazine Capacity: " + MaxBulletsInClip + "\n"
 						+ "Ammo Drop Chance: " + Level.dropRate[7] + "\n"
-						+ "Pellets Per Shot: " + ((bulletsPerShot + 1)*2 + 1) + "\n"
+						+ "Pellets Per Shot: " + ((FutureBPS())*2 + 1) + "\n"
 						+ "Damage: " + FutureDmg();
 			return stats;
 		}
@@ -66,7 +66,7 @@ namespace ZombieKiller
 		//fires five bullets with a set spread
 		public override void FireWeapon ()
 		{
-			float spread = .25f;
+			float spread = .5f;
 			
 			Vector3 newPos = p.Position;
 			
@@ -74,7 +74,7 @@ namespace ZombieKiller
 			newPos -= new Vector3(0, (float)Math.Cos (p.Rotation) * RunSpeed, 0);
 			
 			for (int i = -bulletsPerShot; i <= bulletsPerShot; i++) {
-				float newRot = (float)((p.Rotation) + Math.PI * i * spread / 12);
+				float newRot = (float)((p.Rotation) + Math.PI * i * spread / (12 * bulletsPerShot));
 				b = new RubberBullet (Graphics, newPos, newRot, Collide, (int)RunSpeed, Damage);
 				b.Texture = new Texture2D ("/Application/Assets/Bullets/shotgunpellet.png", false);
 				b.Scale = new Vector2 (0.2f, 0.2f);
@@ -90,10 +90,11 @@ namespace ZombieKiller
 				ReloadTime = (int)(ReloadTime * 0.9);
 				MaxAmmo += 4;
 				CurrentAmmo = MaxAmmo;	
-				bulletsPerShot += 1;
 				Collide.P.Money -= Cost;
 				dmgUp += .3f;
+				bpsUp += .3f;
 				Damage = Dmg ();
+				bulletsPerShot = BPS ();
 				Cost += 20;
 			} else {
 			}
@@ -117,6 +118,25 @@ namespace ZombieKiller
 				return Damage + 1;
 			}
 			return Damage;
+		}
+		
+		private int BPS()
+		{
+			if(bpsUp > 1.0f)
+			{
+				bpsUp = 0f;
+				return bulletsPerShot + 1;
+			}
+			return bulletsPerShot;
+		}
+		
+		private int FutureBPS()
+		{
+			if(bpsUp + 0.35f > 1.0f)
+			{
+				return bulletsPerShot + 1;
+			}
+			return bulletsPerShot;
 		}
 		
 		public override void Render ()

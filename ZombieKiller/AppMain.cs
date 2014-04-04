@@ -107,7 +107,7 @@ namespace ZombieKiller
 			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/paused.png", false));
 			menu = new Sprite (graphics, new Texture2D ("/Application/Assets/title.png", false));
 			dead = new Sprite (graphics, new Texture2D ("/Application/Assets/deadscreen.png", false));
-			winner = new Sprite (graphics, new Texture2D ("/Application/Assets/winner.png", false));
+			winner = new Sprite (graphics, new Texture2D ("/Application/Assets/newhighscore.png", false));
 			controls = new Sprite (graphics, new Texture2D ("/Application/Assets/controls.png", false));
 			
 			paused.Height = Height;
@@ -263,12 +263,26 @@ namespace ZombieKiller
 				bgMusic.Volume = 0.1f;
 			}
 			if (lvlMan.Health <= 0) {
-				bgMusic.Dispose ();
-				bgMusic = death.CreatePlayer ();
-				bgMusic.Volume = 0.3f;
-				bgMusic.Loop = true;
-				bgMusic.Play ();
-				currentState = GameState.Dead;
+				highScores.Sort();
+				Console.WriteLine(highScores[0]);
+				if(Plr.Score <= highScores[0].Score)
+				{
+					bgMusic.Dispose ();
+					bgMusic = death.CreatePlayer ();
+					bgMusic.Volume = 0.3f;
+					bgMusic.Loop = true;
+					bgMusic.Play ();
+					currentState = GameState.Dead;
+				}
+				else
+				{
+					bgMusic.Dispose ();
+					bgMusic = win.CreatePlayer ();
+					bgMusic.Volume = 0.1f;
+					bgMusic.Loop = true;
+					bgMusic.Play ();
+					currentState = GameState.Winner;	
+				}
 			}
 		}
 		
@@ -285,16 +299,13 @@ namespace ZombieKiller
 		public static void UpdateDead (GamePadData gamePadData)
 		{
 			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
-				bgMusic.Dispose ();
-				bgMusic = bgm.CreatePlayer ();
-				bgMusic.Volume = 0.1f;
-				bgMusic.Loop = true;
-				bgMusic.Play ();
+//				bgMusic.Dispose ();
+//				bgMusic = bgm.CreatePlayer ();
+//				bgMusic.Volume = 0.1f;
+//				bgMusic.Loop = true;
+//				bgMusic.Play ();
 				highScores.Sort();
-				if(Plr.Score < highScores[0].Score)
-					currentState = GameState.HighScoreView;
-				else
-					currentState = GameState.HighScoreEntry;
+				currentState = GameState.HighScoreView;
 			}
 		}
 		

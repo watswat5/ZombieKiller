@@ -1,20 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Levels\RandomLevel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\AppMain.cs">
     <Files>
-      <File FileName="ZombieKiller\Enemies\Blade.cs" Line="83" Column="26" />
-      <File FileName="ZombieKiller\Enemies\Boomer.cs" Line="20" Column="4" />
-      <File FileName="ZombieKiller\Enemies\BoomerBoss.cs" Line="12" Column="23" />
-      <File FileName="ZombieKiller\Enemies\Zombie.cs" Line="112" Column="26" />
-      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="22" Column="26" />
-      <File FileName="ZombieKiller\Levels\Level.cs" Line="82" Column="61" />
-      <File FileName="ZombieKiller\LevelManager.cs" Line="92" Column="24" />
-      <File FileName="ZombieKiller\Enemies\Enemy.cs" Line="125" Column="19" />
-      <File FileName="ZombieKiller\AppMain.cs" Line="535" Column="48" />
-      <File FileName="ZombieKiller\Levels\RandomLevel.cs" Line="221" Column="2" />
-      <File FileName="c:\Users\Christopher\Documents\GitHub\ZombieKiller\ZombieKiller\Levels\Upgrade.cs" Line="130" Column="4" />
-      <File FileName="c:\Users\Christopher\Documents\GitHub\ZombieKiller\ZombieKiller\Keyboard.cs" Line="97" Column="49" />
-      <File FileName="c:\Users\Christopher\Documents\GitHub\ZombieKiller\ZombieKiller\Player.cs" Line="110" Column="1" />
+      <File FileName="ZombieKiller\AppMain.cs" Line="171" Column="33" />
+      <File FileName="ZombieKiller\Keyboard.cs" Line="93" Column="35" />
+      <File FileName="ZombieKiller\LevelManager.cs" Line="81" Column="19" />
+      <File FileName="ZombieKiller\Enemies\BoomerBoss.cs" Line="28" Column="38" />
+      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="54" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -22,15 +14,14 @@
           <Option id="ShowVersionControlOverlays" value="True" />
           <Option id="ShowAllFiles" value="False" />
           <Node name="ZombieKiller" expanded="True">
-            <Node name="Assets" expanded="True" />
             <Node name="bin" expanded="True">
               <Node name="Debug" expanded="True" />
             </Node>
             <Node name="Bullets" expanded="True" />
             <Node name="Enemies" expanded="True" />
-            <Node name="Levels" expanded="True">
-              <Node name="RandomLevel.cs" selected="True" />
-            </Node>
+            <Node name="Levels" expanded="True" />
+            <Node name="Weapons" expanded="True" />
+            <Node name="AppMain.cs" selected="True" />
           </Node>
         </State>
       </Pad>

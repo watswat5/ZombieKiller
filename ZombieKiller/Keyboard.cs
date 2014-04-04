@@ -84,12 +84,15 @@ namespace ZombieKiller
 			
 			maxLetters = 20;
 			
+			UIFont newfont = new UIFont("/Documents/gypsycurse.ttf",60,FontStyle.Regular);
+			
 			l.Y = height/2 - 35;
 			l.X = 10;
 			l.Width = 780;
 			l.Height = 200;
-			l.TextColor = new UIColor(0,0,0,1);
-			l.Font.Size = 60;
+			l.TextColor = new UIColor(0.68f,0,0,1);
+			l.Font = newfont;
+			
 			keyboard = new Sprite(graphics, new Texture2D("/Application/Assets/Keyboard.png", false)); 
 			keyboard.Position.Y += height;
 			key = new Sprite(graphics, new Texture2D("/Application/Assets/key.png", false));

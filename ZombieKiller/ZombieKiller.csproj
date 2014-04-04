@@ -179,6 +179,7 @@
     <Content Include="Assets\Sounds\boid.wav" />
     <Content Include="Assets\hsscreen.png" />
     <Content Include="Assets\Enemies\health.png" />
+    <Content Include="Assets\newhighscore.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Font\gypsycurse.ttf" />

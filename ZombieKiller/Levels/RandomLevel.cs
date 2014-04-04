@@ -160,7 +160,7 @@ namespace ZombieKiller
 			
 			Collide.AddItem = mgo;
 			
-			mgo = new MGObject (Graphics, new Vector3 (rnd.Next (0, Graphics.Screen.Rectangle.Width), rnd.Next (0, Graphics.Screen.Rectangle.Height), 0), Collide);
+			mgo = new ShotObject (Graphics, new Vector3 (rnd.Next (0, Graphics.Screen.Rectangle.Width), rnd.Next (0, Graphics.Screen.Rectangle.Height), 0), Collide);
 			Collide.AddItem = mgo;
 			
 			Plr.Position = new Vector3(20, 20, 0);
