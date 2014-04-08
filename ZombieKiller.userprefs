@@ -1,12 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\AppMain.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieKiller\Levels\RandomLevel.cs">
     <Files>
-      <File FileName="ZombieKiller\AppMain.cs" Line="171" Column="33" />
+      <File FileName="ZombieKiller\AppMain.cs" Line="64" Column="18" />
       <File FileName="ZombieKiller\Keyboard.cs" Line="93" Column="35" />
       <File FileName="ZombieKiller\LevelManager.cs" Line="81" Column="19" />
       <File FileName="ZombieKiller\Enemies\BoomerBoss.cs" Line="28" Column="38" />
-      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="54" Column="4" />
+      <File FileName="ZombieKiller\Enemies\ZombieBoss.cs" Line="21" Column="19" />
+      <File FileName="ZombieKiller\Weapons\Shotgun.cs" Line="99" Column="12" />
+      <File FileName="ZombieKiller\Levels\RandomLevel.cs" Line="130" Column="4" />
+      <File FileName="ZombieKiller\Player.cs" Line="223" Column="48" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,14 +17,16 @@
           <Option id="ShowVersionControlOverlays" value="True" />
           <Option id="ShowAllFiles" value="False" />
           <Node name="ZombieKiller" expanded="True">
+            <Node name="Assets" expanded="True" />
             <Node name="bin" expanded="True">
               <Node name="Debug" expanded="True" />
             </Node>
             <Node name="Bullets" expanded="True" />
             <Node name="Enemies" expanded="True" />
-            <Node name="Levels" expanded="True" />
+            <Node name="Levels" expanded="True">
+              <Node name="RandomLevel.cs" selected="True" />
+            </Node>
             <Node name="Weapons" expanded="True" />
-            <Node name="AppMain.cs" selected="True" />
           </Node>
         </State>
       </Pad>

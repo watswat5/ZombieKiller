@@ -22,8 +22,8 @@ namespace ZombieKiller
 			LiteralDifficulty = 10 * Difficulty;
 			RunSpeed = 1;
 			Damage = 2 * Difficulty;
-			Health = 60 * Difficulty;
-			MAX_HEALTH = Health;
+			MAX_HEALTH = 60 * Difficulty;
+			Health = MAX_HEALTH;
 			Value = 20 * Difficulty;
 			FrameDuration = 100;
 			enemyType = Types.Zombie;

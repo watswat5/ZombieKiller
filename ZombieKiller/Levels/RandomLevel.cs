@@ -126,6 +126,7 @@ namespace ZombieKiller
 			default:
 				break;
 			}
+			Console.WriteLine(i);
 			
 		}
 		

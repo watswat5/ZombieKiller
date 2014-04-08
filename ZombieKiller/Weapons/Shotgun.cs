@@ -96,8 +96,7 @@ namespace ZombieKiller
 				Damage = Dmg ();
 				bulletsPerShot = BPS ();
 				Cost += 20;
-			} else {
-			}
+			} else {}
 			
 		}
 		

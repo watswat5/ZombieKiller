@@ -15,6 +15,7 @@ namespace ZombieKiller
 	//Main player object.
 	public class Player : Creature
 	{
+		#region
 		private float turnSpeed;
 		private int health;
 		public int MAX_HEALTH = 10;
@@ -87,7 +88,8 @@ namespace ZombieKiller
 			get { return s;}
 		}
 		private Label moneyL;
-		
+		private Label scoreL;
+		#endregion
 		public Player (GraphicsContext gc, Vector3 position, Collisions col) : base(gc, position, new Texture2D("/Application/Assets/Player/player.png", false), col)
 		{
 			//Basic movement values
@@ -95,13 +97,19 @@ namespace ZombieKiller
 			turnSpeed = 3;
 			
 			Money = 0;
+			
 			s = new Scene();
+			
 			moneyL = new Label();
 			moneyL.SetPosition(Graphics.Screen.Rectangle.Width - 470, 5);
 			moneyL.TextColor = new UIColor(.68f, 0, 0, 1);
 			
-			s.RootWidget.AddChildLast(moneyL);
+			scoreL = new Label();
+			scoreL.SetPosition(Graphics.Screen.Rectangle.Width - 600, 5);
+			scoreL.TextColor = new UIColor(.68f, 0, 0, 1);
 			
+			s.RootWidget.AddChildLast(moneyL);
+			s.RootWidget.AddChildLast(scoreL);
 			//Played when the player is hurt
 			hurt = new Sound("/Application/Assets/Sounds/hurt.wav");
 			hurtPlayer = hurt.CreatePlayer();
@@ -119,6 +127,7 @@ namespace ZombieKiller
 			healthEmpty.Scale = new Vector2(0.15f, 0.15f);
 			healthEmpty.Position = new Vector3(gc.Screen.Rectangle.Width - 400, 0f, 0f);
 			
+			//Red damage effect
 			tex = new Texture2D("/Application/Assets/damage.png", false);
 			DamageScreen = new Sprite(Graphics, tex);
 			DamageScreen.SetColor(1,1,1,0);
@@ -225,7 +234,8 @@ namespace ZombieKiller
 			Alpha -= .003f;
 			DamageScreen.SetColor(1,1,1, alpha);
 			
-			moneyL.Text = "$" + Money;
+			//moneyL.Text = "$" + Money;
+			scoreL.Text = "Score: " + score + " $" + Money;
 		}
 		
 		public override void Render()
