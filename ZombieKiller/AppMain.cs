@@ -9,6 +9,7 @@ using Sce.PlayStation.Core.Environment;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.Core.Audio;
+using Sce.PlayStation.Core.Imaging;
 using Sce.PlayStation.HighLevel.UI;
 
 //Chris Antepenko & C. Blake Becker
@@ -59,6 +60,16 @@ namespace ZombieKiller
 		private static Scene s;
 		private static Label hScores;
 		
+		//Interface Buttons
+		private static Button hSb;//High Score button
+		
+		private static List<Button> menuButtons;//For main menu
+		private static Button startGame;
+		private static Button highScoreView;
+		private static Button quit;
+		private static Button control;
+		private static int menuButtonSelect;
+		
 		public static void Main (string[] args)
 		{
 			Initialize ();
@@ -104,11 +115,11 @@ namespace ZombieKiller
 			float Width = graphics.Screen.Rectangle.Width;
 			
 			//Backgrounds for different gamestataes
-			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/paused.png", false));
-			menu = new Sprite (graphics, new Texture2D ("/Application/Assets/title.png", false));
-			dead = new Sprite (graphics, new Texture2D ("/Application/Assets/deadscreen.png", false));
-			winner = new Sprite (graphics, new Texture2D ("/Application/Assets/newhighscore.png", false));
-			controls = new Sprite (graphics, new Texture2D ("/Application/Assets/controls.png", false));
+			paused = new Sprite (graphics, new Texture2D ("/Application/Assets/UI/paused.png", false));
+			menu = new Sprite (graphics, new Texture2D ("/Application/Assets/UI/title.png", false));
+			dead = new Sprite (graphics, new Texture2D ("/Application/Assets/UI/deadscreen.png", false));
+			winner = new Sprite (graphics, new Texture2D ("/Application/Assets/UI/newhighscore.png", false));
+			controls = new Sprite (graphics, new Texture2D ("/Application/Assets/UI/controls.png", false));
 			
 			paused.Height = Height;
 			paused.Width = Width;
@@ -137,8 +148,40 @@ namespace ZombieKiller
 			
 			upgrade = new Upgrade(graphics);
 			
+			hSb = new Button(graphics, new Vector3(100, 400, 0), new Vector2(80, 40), "Done");
+			
+			menuButtons = new List<Button>();
+			
+			Vector4 textCol = new Vector4(1,1,1,1);
+			Vector4 buttonCol = new Vector4(0.41f, 0, 0, 1);
+			UIFont font = new UIFont("/Documents/gypsycurse.ttf",30,FontStyle.Regular);
+			
+			highScoreView = new Button(graphics, new Vector3(graphics.Screen.Rectangle.Width/2, 350, 0), new Vector2(120, 40), "High Scores");
+			startGame = new Button(graphics, new Vector3(graphics.Screen.Rectangle.Width/2, 300, 0), new Vector2(120, 40), "Start Game");
+			quit = new Button(graphics, new Vector3(graphics.Screen.Rectangle.Width/2, 450, 0), new Vector2(120, 40), "Quit");
+			control = new Button(graphics, new Vector3(graphics.Screen.Rectangle.Width/2, 400, 0), new Vector2(120, 40), "Controls");
+			
+			highScoreView.TextColor = textCol;
+			startGame.TextColor = textCol;
+			quit.TextColor = textCol;
+			control.TextColor = textCol;
+			
+			highScoreView.ButtonColor = buttonCol;
+			startGame.ButtonColor = buttonCol;
+			quit.ButtonColor = buttonCol;
+			control.ButtonColor = buttonCol;
+			
+			highScoreView.Font = font;
+			startGame.Font = font;
+			quit.Font = font;
+			control.Font = font;
+			
+			menuButtons.Add (startGame);
+			menuButtons.Add (highScoreView);
+			menuButtons.Add (control);
+			menuButtons.Add (quit);
+			
 			//Set up a new game
-			//NewGame ();
 			NewGame ();
 		}
 		
@@ -312,18 +355,34 @@ namespace ZombieKiller
 		//Update Main Menu
 		public static void UpdateMenu (GamePadData gamePadData)
 		{
+			if((gamePadData.ButtonsDown & GamePadButtons.Down) != 0)
+			{
+				if(menuButtonSelect < menuButtons.Count - 1)
+					menuButtonSelect++;
+			}
+			if((gamePadData.ButtonsDown & GamePadButtons.Up) != 0)
+			{
+				if(menuButtonSelect > 0)
+					menuButtonSelect--;
+			}
+			
+			menuButtons[menuButtonSelect].Update(gamePadData);
+			
 			//Start game
-			if ((gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
+			if (startGame.ButtonDown){//(gamePadData.ButtonsDown & GamePadButtons.Start) != 0) {
 				lvlMan.NewGame (); 
 				currentState = GameState.Playing;
 				bgMusic.Volume = .25f;
 			} 
 			//Load controls
-			else if ((gamePadData.ButtonsDown & GamePadButtons.Square) != 0) {
+			else if (control.ButtonDown){//(gamePadData.ButtonsDown & GamePadButtons.Square) != 0) {
 				currentState = GameState.Controls;
 			} 
+			else if (highScoreView.ButtonDown){//(gamePadData.ButtonsDown & GamePadButtons.Square) != 0) {
+				currentState = GameState.HighScoreView;
+			} 
 			//Quit
-			else if ((gamePadData.ButtonsDown & GamePadButtons.Select) != 0) {
+			else if (quit.ButtonDown){//(gamePadData.ButtonsDown & GamePadButtons.Select) != 0) {
 				bgMusic.Dispose ();
 				Running = false;
 			}
@@ -402,7 +461,8 @@ namespace ZombieKiller
 				hScores.Text = s;
 				hScores.TextColor = new UIColor(1,1,1,1);
 			}
-			if((gp.ButtonsDown & GamePadButtons.Start) != 0)
+			hSb.Update(gp);
+			if(hSb.ButtonDown)//(gp.ButtonsDown & GamePadButtons.Start) != 0)
 			{
 				bgMusic.Dispose ();
 				bgMusic = bgm.CreatePlayer ();
@@ -455,7 +515,9 @@ namespace ZombieKiller
 		public static void RenderMenu ()
 		{
 			//levels [currentLevel].p.Render ();
-			menu.Render ();			
+			menu.Render ();	
+			foreach(Button b in menuButtons)
+				b.Render();
 		}
 		//Render Controls Menu
 		public static void RenderControls ()
@@ -482,12 +544,11 @@ namespace ZombieKiller
 		public static void RenderHighScoreEntry ()
 		{
 			k.Render ();
-//			UISystem.SetScene (s);
-//			UISystem.Render ();
 		}
 		
 		public static void RenderHighScoreView ()
 		{
+			hSb.Render();
 			UISystem.SetScene (s);
 			UISystem.Render ();
 		}

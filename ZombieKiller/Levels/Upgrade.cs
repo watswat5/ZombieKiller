@@ -71,7 +71,7 @@ namespace ZombieKiller
 						
 			position = new Vector3(150, 200, 0);
 			
-			background = new Sprite(graphics, new Texture2D("/Application/Assets/upgrade.png", false));
+			background = new Sprite(graphics, new Texture2D("/Application/Assets/UI/upgrade.png", false));
 			background.Center = new Vector2(0,0);
 			background.Height = graphics.Screen.Rectangle.Height;
 			background.Width = graphics.Screen.Rectangle.Width;

@@ -73,7 +73,7 @@ namespace ZombieKiller
 			graphics = g;
 			UISystem.Initialize(graphics);
 			
-			bg = new Sprite(graphics, new Texture2D("/Application/Assets/hsscreen.png", false));
+			bg = new Sprite(graphics, new Texture2D("/Application/Assets/UI/hsscreen.png", false));
 			                
 			s = new Scene();
 			l = new Label();
@@ -93,9 +93,9 @@ namespace ZombieKiller
 			l.TextColor = new UIColor(0.68f,0,0,1);
 			l.Font = newfont;
 			
-			keyboard = new Sprite(graphics, new Texture2D("/Application/Assets/Keyboard.png", false)); 
+			keyboard = new Sprite(graphics, new Texture2D("/Application/Assets/UI/Keyboard.png", false)); 
 			keyboard.Position.Y += height;
-			key = new Sprite(graphics, new Texture2D("/Application/Assets/key.png", false));
+			key = new Sprite(graphics, new Texture2D("/Application/Assets/UI/key.png", false));
 			
 			keyboard.Width = graphics.Screen.Rectangle.Width;
 			

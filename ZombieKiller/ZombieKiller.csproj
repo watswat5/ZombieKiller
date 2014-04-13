@@ -39,7 +39,6 @@
   <ItemGroup>
     <Compile Include="AppMain.cs" />
     <Compile Include="Collisions.cs" />
-    <Compile Include="Explosion.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Weapons\AdminGun.cs" />
@@ -80,8 +79,10 @@
     <Compile Include="Enemies\BoomerBoss.cs" />
     <Compile Include="HighScore.cs" />
     <Compile Include="Items\BoidObject.cs" />
-    <Compile Include="LevelManager.cs" />
     <Compile Include="Levels\RandomLevel.cs" />
+    <Compile Include="Levels\LevelManager.cs" />
+    <Compile Include="Enemies\Explosion.cs" />
+    <Compile Include="Button.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />
@@ -108,11 +109,9 @@
     <Folder Include="bin\Debug\" />
     <Folder Include="bin\Debug\ZombieKiller-unsigned\" />
     <Folder Include="Assets\Font\" />
+    <Folder Include="Assets\UI\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\paused.png" />
-    <Content Include="Assets\title.png" />
-    <Content Include="Assets\deadscreen.png" />
     <Content Include="Assets\Items\healthpack.png" />
     <Content Include="Assets\Items\machinegunammopack.png" />
     <Content Include="Assets\Items\rifleammopack.png" />
@@ -147,7 +146,6 @@
     <Content Include="Assets\Player\healthempty.png" />
     <Content Include="Assets\Player\player.png" />
     <Content Include="Assets\Player\reloading.png" />
-    <Content Include="Assets\controls.png" />
     <Content Include="Assets\Items\mgobject.png" />
     <Content Include="Assets\Items\shotgunobj.png" />
     <Content Include="Assets\Items\rifleobj.png" />
@@ -162,24 +160,28 @@
     <Content Include="Assets\Items\shieldammo.png" />
     <Content Include="Assets\Weapons\shield.png" />
     <Content Include="Assets\Bullets\boid.png" />
-    <Content Include="Assets\damage.png" />
     <Content Include="Assets\Levels\background.png" />
     <Content Include="Assets\Levels\test.png" />
-    <Content Include="Assets\upgrade.png" />
-    <Content Include="Assets\winner.png" />
     <Content Include="Assets\Sounds\dead.mp3" />
     <Content Include="Assets\Sounds\win.mp3" />
-    <Content Include="Assets\key.png" />
-    <Content Include="Assets\keyboard.png" />
     <Content Include="Assets\Levels\lava.png" />
     <Content Include="Assets\Levels\chess.png" />
     <Content Include="Assets\Levels\grassfield.png" />
     <Content Include="Assets\Levels\lsd.png" />
     <Content Include="Assets\Levels\sandlot.png" />
     <Content Include="Assets\Sounds\boid.wav" />
-    <Content Include="Assets\hsscreen.png" />
     <Content Include="Assets\Enemies\health.png" />
-    <Content Include="Assets\newhighscore.png" />
+    <Content Include="Assets\UI\keyboard.png" />
+    <Content Include="Assets\UI\key.png" />
+    <Content Include="Assets\UI\upgrade.png" />
+    <Content Include="Assets\UI\paused.png" />
+    <Content Include="Assets\UI\title.png" />
+    <Content Include="Assets\UI\deadscreen.png" />
+    <Content Include="Assets\UI\newhighscore.png" />
+    <Content Include="Assets\UI\controls.png" />
+    <Content Include="Assets\Player\damage.png" />
+    <Content Include="Assets\UI\hsscreen.png" />
+    <Content Include="Assets\UI\winner.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Font\gypsycurse.ttf" />

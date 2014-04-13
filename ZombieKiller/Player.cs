@@ -128,7 +128,7 @@ namespace ZombieKiller
 			healthEmpty.Position = new Vector3(gc.Screen.Rectangle.Width - 400, 0f, 0f);
 			
 			//Red damage effect
-			tex = new Texture2D("/Application/Assets/damage.png", false);
+			tex = new Texture2D("/Application/Assets/Player/damage.png", false);
 			DamageScreen = new Sprite(Graphics, tex);
 			DamageScreen.SetColor(1,1,1,0);
 			DamageScreen.Width = Graphics.Screen.Rectangle.Width;
