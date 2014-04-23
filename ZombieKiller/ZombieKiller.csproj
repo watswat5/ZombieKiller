@@ -83,6 +83,8 @@
     <Compile Include="Levels\LevelManager.cs" />
     <Compile Include="Enemies\Explosion.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="Enemies\BladeBoss.cs" />
+    <Compile Include="Enemies\BoidBlade.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Sprite.fcg" />

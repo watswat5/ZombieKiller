@@ -19,7 +19,7 @@ namespace ZombieKiller
 		private const long SPAWN_TIME = 1000;
 		private long spawnTimer;
 		
-		public BoomerBoss (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/boomer.png", false), col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
+		public BoomerBoss (GraphicsContext gc, Vector3 position, Collisions col, int d, Level curL) : base(gc, position, new Texture2D("/Application/Assets/Enemies/boomer.png", false), col, new Texture2D("/Application/Assets/Enemies/explode.png", false), curL)
 		{
 			Difficulty = d;
 			LiteralDifficulty = 30 * Difficulty;
@@ -68,7 +68,7 @@ namespace ZombieKiller
 			
 			//spawnTimer boomer
 			if (spawnTimer > SPAWN_TIME && Collide.enemyCount < CurrentLevel.MaxEnemies) {
-				Boomer b = new Boomer (Graphics, Position, Collide, Difficulty);
+				Boomer b = new Boomer (Graphics, Position, Collide, Difficulty, CurrentLevel);
 				b.CurrentLevel = CurrentLevel;
 				Collide.AddTempEnemy = (b);
 				spawnTimer = 0;

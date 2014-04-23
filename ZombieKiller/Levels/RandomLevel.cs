@@ -34,22 +34,22 @@ namespace ZombieKiller
 				int choice = rnd.Next (0, 6);
 				switch (choice	) {
 				case 0:
-					e = new Blade (Graphics, new Vector3 (400 + rnd.Next (200, 400), 0 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					e = new Blade (Graphics, new Vector3 (400 + rnd.Next (200, 400), 0 + rnd.Next (20, 401), 0), Collide, Difficulty, this);
 					break;
 				case 1:
-					e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty, this);
 					break;
 				case 2:
-					e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty, this);
 					break;
 				case 3:
-					e = new Zombie (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					e = new BladeBoss (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty, this);
 					break;	
 				case 4:
-					e = new Zombie (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					e = new BladeBoss (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty, this);
 					break;	
 				default:
-					e = new Zombie (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty);
+					e = new BladeBoss (Graphics, new Vector3 (400 + rnd.Next (200, 400), 400 + rnd.Next (20, 401), 0), Collide, Difficulty, this);
 					break;
 				}
 				e.Player = Collide.P;
@@ -59,7 +59,9 @@ namespace ZombieKiller
 				
 				EnemyCount++;
 			}
-		}		
+		}	
+		
+		//Called when an enemy dies
 		public override void Drop(Enemy e)
 		{
 			int i = 0;
@@ -130,6 +132,7 @@ namespace ZombieKiller
 			
 		}
 		
+		//Initializes the level
 		public override void NewGame ()
 		{
 			Collide.PurgeAssets ();
@@ -168,7 +171,7 @@ namespace ZombieKiller
 			
 			//Spawn initial enemies
 			EnemyCount = 0;
-			Console.WriteLine(LevelDifficulty + ", " + Difficulty);
+			Console.WriteLine(LevelDifficulty + ", " + Difficulty, this);
 			LevelDifficulty = InfinityGen (LevelDifficulty);
 			GC.Collect();
 		}
@@ -183,6 +186,7 @@ namespace ZombieKiller
 			return v;
 		}
 		
+		//Spawns enemies based on the given difficulty level and max difficulty points
 		public int InfinityGen (int diff)
 		{
 			int startDiff = diff;
@@ -193,56 +197,56 @@ namespace ZombieKiller
 				int x = rand.Next (0, 13);
 				switch (x) {
 				case 0:
-					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 1:
-					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 2:
-					e = new Zombie (Graphics,RandomVector(), Collide, Difficulty);
+					e = new Zombie (Graphics,RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 3:
-					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 4:
-					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 5:
-					e = new Blade (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Blade (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 					
 				case 6:
-					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 7:
-					e = new Blade (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Blade (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 8:
-					e = new ZombieBoss (Graphics, RandomVector(), Collide, Difficulty);
+					e = new ZombieBoss (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 9:
-					e = new Zombie (Graphics, RandomVector(), Collide, Difficulty);
+					e = new BladeBoss (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 10:
-					e = new Blade (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Blade (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				case 11:
-					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty);
+					e = new Boomer (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				default:
-					e = new BoomerBoss (Graphics, RandomVector(), Collide, Difficulty);
+					e = new BoomerBoss (Graphics, RandomVector(), Collide, Difficulty, this);
 					e.CurrentLevel = this;
 					break;
 				}
@@ -256,6 +260,7 @@ namespace ZombieKiller
 			return (int)(currDiff * 1.0);
 		}
 			
+		//Retruns the total difficulty points in the level
 		private int SumDiff ()
 		{
 			int sum = 0;

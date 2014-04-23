@@ -11,16 +11,19 @@ using Sce.PlayStation.Core.Audio;
 
 namespace ZombieKiller
 {
-	//A spinning blade of death and despair
-	public class Blade : Enemy
-	{
+	
+	
+	//A spinning blade boss of death and despair
+	public class BladeBoss : Enemy
+	{		
 		public float rot;
 		private bool turning;
-
-		public Blade (GraphicsContext gc, Vector3 position, Collisions col, int d, Level curL) : base(gc, position, new Texture2D("/Application/Assets/Enemies/blade.png", false), col, new Texture2D("/Application/Assets/Enemies/deadblade.png", false), curL)
+		private int maxE;
+		public BladeBoss (GraphicsContext gc, Vector3 position, Collisions col, int d, Level curL) : base(gc, position, new Texture2D("/Application/Assets/Enemies/blade.png", false), col, new Texture2D("/Application/Assets/Enemies/deadblade.png", false), curL)
 		{
+			maxE = 10;
 			Difficulty = d;
-			LiteralDifficulty = 3 * Difficulty;
+			LiteralDifficulty = (10 + maxE * 3)* Difficulty;
 			RunSpeed = 3;
 			enemyType = Types.Blade;
 			rot = (float)(2 * Math.PI * rnd.NextDouble ());
@@ -28,6 +31,7 @@ namespace ZombieKiller
 			Health = 1 * Difficulty;
 			Value = 2 * Difficulty;
 			Death = new Sound ("/Application/Assets/Sounds/bladehurt.wav");
+			SpawnBaldes();
 		}
 		
 		public override void Update (long ElapsedTime)
@@ -82,6 +86,20 @@ namespace ZombieKiller
 			Player.Money += Value;
 			Player.Score += Value;
 			CurrentLevel.Drop (this);
+		}
+		
+		//Spawns boid blades
+		private void SpawnBaldes()
+		{
+			for (int i = 0; i < maxE; i++) {
+				Vector3 pos = p.Position;
+				float rot = p.Rotation + (float)(Math.PI / (float)maxE) * 2 * i;
+				pos.X += (float)(Math.Sin (rot)) * (RunSpeed + 10);
+				pos.Y -= (float)(Math.Cos (rot)) * (RunSpeed + 10);
+				Enemy e = new BoidBlade (Graphics, pos, Collide, Difficulty, this, CurrentLevel);
+				e.CurrentLevel = CurrentLevel;
+				Collide.AddTempEnemy = e;
+			}
 		}
 		
 		//No sprite sheet, just a rotation.

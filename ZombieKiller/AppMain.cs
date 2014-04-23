@@ -18,6 +18,7 @@ namespace ZombieKiller
 {
 	public class AppMain
 	{
+		#region
 		private enum GameState
 		{
 			Playing,
@@ -69,7 +70,7 @@ namespace ZombieKiller
 		private static Button quit;
 		private static Button control;
 		private static int menuButtonSelect;
-		
+		#endregion
 		public static void Main (string[] args)
 		{
 			Initialize ();
@@ -232,7 +233,7 @@ namespace ZombieKiller
 				{
 					for(int i = 0; i < 5; i++)
 					{
-				  		writer.WriteLine("AAA,000");
+				  		writer.WriteLine("---,000");
 					}
 					writer.Close();
 				}

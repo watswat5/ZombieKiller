@@ -82,7 +82,7 @@ namespace ZombieKiller
 						
 			height = h;
 			
-			maxLetters = 20;
+			maxLetters = 2;
 			
 			UIFont newfont = new UIFont("/Documents/gypsycurse.ttf",60,FontStyle.Regular);
 			
@@ -199,7 +199,8 @@ namespace ZombieKiller
 			}
 			if((gp.ButtonsDown & GamePadButtons.Start) != 0)
 			{
-				finished = true;
+				if(selections.Count == maxLetters + 1)
+					finished = true;
 			}
 			if((gp.ButtonsDown & GamePadButtons.Cross) != 0 && selections.Count <= maxLetters)
 			{

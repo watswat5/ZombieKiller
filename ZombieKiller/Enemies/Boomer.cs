@@ -16,7 +16,7 @@ namespace ZombieKiller
 	{
 		private static Texture2D tex = new Texture2D ("/Application/Assets/Enemies/boomer.png", false);
 
-		public Boomer (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, tex, col, new Texture2D("/Application/Assets/Enemies/explode.png", false))
+		public Boomer (GraphicsContext gc, Vector3 position, Collisions col, int d, Level curL) : base(gc, position, tex, col, new Texture2D("/Application/Assets/Enemies/explode.png", false), curL)
 		{
 			Difficulty = d;
 			LiteralDifficulty = 2 * Difficulty;

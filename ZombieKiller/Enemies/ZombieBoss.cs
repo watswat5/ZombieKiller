@@ -16,7 +16,7 @@ namespace ZombieKiller
 		private Sprite healthBar;
 		private int MAX_HEALTH;
 		
-		public ZombieBoss (GraphicsContext gc, Vector3 position, Collisions col, int d) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false))
+		public ZombieBoss (GraphicsContext gc, Vector3 position, Collisions col, int d, Level curL) : base(gc, position, new Texture2D("/Application/Assets/Enemies/zombie.png", false), col, new Texture2D("/Application/Assets/Enemies/deadzombie.png", false), curL)
 		{
 			Difficulty = d;
 			LiteralDifficulty = 10 * Difficulty;

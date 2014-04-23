@@ -30,7 +30,7 @@ namespace ZombieKiller
 		{
 			for (int i = 0; i < MaxEnemies; i++) {
 				Enemy e;
-				e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), Collide, Difficulty);
+				e = new Boomer (Graphics, new Vector3 (400 + rnd.Next (200, 400), 450 + rnd.Next (-400, 401), 0), Collide, Difficulty, this);
 				e.Player = Collide.P;
 				e.CurrentLevel = this;
 				//e.Difficulty = Difficulty;

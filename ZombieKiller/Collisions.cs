@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Environment;
@@ -26,6 +27,7 @@ namespace ZombieKiller
 		//private long DeltaTime;
 		private long hurtTimer;
 		
+		private long TimeChange;
 		//Player
 		private Player player;
 
@@ -124,8 +126,9 @@ namespace ZombieKiller
 			}
 		}
 		
-		public void Update (long TimeChange, GamePadData gp)
+		public void Update (long tChange, GamePadData gp)
 		{
+			TimeChange = tChange;
 			tempBullets = new List<Bullet> ();
 			NeedCleanUp = false;
 			
@@ -166,29 +169,27 @@ namespace ZombieKiller
 			}
 			
 			//Collision detection between Player and Items
-			foreach (Item i in items) {
-				if (IsColliding (i, player)) {
-					i.PlayerCollide (player);
-					NeedCleanUp = true;
+			if((gp.ButtonsDown & GamePadButtons.Circle) != 0)
+			{
+				foreach (Item i in items) {
+					if (IsColliding (i, player)) {
+						i.PlayerCollide (player);
+						NeedCleanUp = true;
+					}
 				}
 			}
 			
-			foreach (Enemy e in enemies) {
-				if (e.IsAlive == false) {
-					NeedCleanUp = true;
-					break;
-				}
-			}
+//			foreach (Enemy e in enemies) {
+//				if (e.IsAlive == false) {
+//					NeedCleanUp = true;
+//					break;
+//				}
+//			}
 						
-			foreach (Bullet b in bullets) {
-				b.Update (TimeChange);
-			}	
-			foreach (Explosion e in explosions) {
-				e.Update (TimeChange);
-			}
-			foreach (Enemy e in enemies) {
-				e.Update (TimeChange);
-			}
+			UpdateBullets ();
+			UpdateEnemies ();
+			UpdateExplosions ();
+			
 			player.Update (TimeChange, gp);
 			
 			//Add the new enemies
@@ -225,6 +226,26 @@ namespace ZombieKiller
 			tempEnemies = new List<Enemy> ();
 		}
 		
+		private void UpdateEnemies ()
+		{
+			foreach (Enemy e in enemies) {
+				e.Update (TimeChange);
+			}
+		}
+
+		private void UpdateBullets ()
+		{
+			foreach (Bullet e in bullets) {
+				e.Update (TimeChange);
+			}
+		}
+
+		private void UpdateExplosions ()
+		{
+			foreach (Explosion e in explosions) {
+				e.Update (TimeChange);
+			}
+		}
 		//Screen edge detection
 		public bool IsOnScreen (Creature obj)
 		{

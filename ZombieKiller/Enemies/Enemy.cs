@@ -117,12 +117,13 @@ namespace ZombieKiller
 			set { currentLevel = value;}
 		}
 		
-		public Enemy (GraphicsContext gc, Vector3 position, Texture2D tex, Collisions col, Texture2D explode) : base(gc, position, tex, col)
+		public Enemy (GraphicsContext gc, Vector3 position, Texture2D tex, Collisions col, Texture2D explode, Level curL) : base(gc, position, tex, col)
 		{
 			//Death sprite
 			this.explode = new Explosion (gc, position, col, explode);
 			alpha = .3f;
 			Player = col.P;
+			CurrentLevel = curL;
 		}
 		
 		public virtual void Drop ()
